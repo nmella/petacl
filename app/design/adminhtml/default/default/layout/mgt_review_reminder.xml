@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+   <adminhtml_dashboard_index>
+        <reference name="content">
+            <reference name="dashboard">
+                <block type="mgt_review_reminder_adminhtml/review_tab" name="dashboard_review_tab" />
+            </reference>
+        </reference>
+    </adminhtml_dashboard_index>
+
+    <mgtreviewreminder_adminhtml_reminder_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>mgt_review_reminder.css</name></action>
+        </reference>
+    </mgtreviewreminder_adminhtml_reminder_index>
+</layout>

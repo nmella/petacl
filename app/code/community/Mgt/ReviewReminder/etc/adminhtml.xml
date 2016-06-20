@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <newsletter>
+            <children>
+                <mgt-commerce_review_reminder translate="title" module="mgt_review_reminder">
+                    <title>Mgt Review Reminder</title>
+                    <sort_order>210</sort_order>
+                    <children>
+                        <reminders translate="title" module="mgt_review_reminder">
+                            <title>Reminders</title>
+                            <action>mgtreviewreminder/adminhtml_reminder</action>
+                        </reminders>
+                        <history translate="title" module="mgt_review_reminder">
+                            <title>History</title>
+                            <action>mgtreviewreminder/adminhtml_history</action>
+                        </history>
+                    </children>
+                </mgt-commerce_review_reminder>
+            </children>
+        </newsletter>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <newsletter>
+                        <children>
+                            <mgt-commerce_review_reminder translate="title">
+                                <title>Mgt-Commerce Review Reminder</title>
+                                <sort_order>110</sort_order>
+                                    <children>
+                                        <reminders translate="title" module="mgt_review_reminder">
+                                            <title>Reminders</title>
+                                        </reminders>
+                                        <history translate="title" module="mgt_review_reminder">
+                                            <title>History</title>
+                                        </history>
+                                    </children>
+                            </mgt-commerce_review_reminder>
+                        </children>
+                    </newsletter>
+                </children>
+            </admin>
+        </resources>
+    </acl> 
+</config>

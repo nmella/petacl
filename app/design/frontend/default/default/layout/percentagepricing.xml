@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <percentagepricing_index_index>
+        <reference name="content">
+            <block type="percentagepricing/percentagepricing" name="percentagepricing" template="percentagepricing/percentagepricing.phtml" />
+        </reference>
+    </percentagepricing_index_index>
+</layout> 

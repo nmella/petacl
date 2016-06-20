@@ -1,0 +1,50 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Pquestion2
+ * @version    2.1.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+$_element = $this->getElement();
+$_note    = $_element->getNote();
+$_trId    = $_element->getHtmlContainerId();
+$_class   = $_element->getFieldsetHtmlClass();
+?>
+<?php if (!$_element->getNoDisplay()): ?>
+    <tr<?php if($_trId): ?> id="<?php echo $_trId ?>"<?php endif; ?>>
+        <?php if ($_element->getType()=='hidden'): ?>
+            <td colspan="2" class="hidden"><?php echo trim($_element->getElementHtml()) ?></td>
+        <?php else: ?>
+            <?php
+                $label = trim($_element->getLabelHtml());
+                if(!empty($label)): ?>
+            <td class="label<?php echo $_class ? " {$_class}-label" : ''?>"><?php echo trim($_element->getLabelHtml()) ?></td>
+            <?php endif;?>
+            <td <?php if(empty($label)):?>colspan="2"<?php endif;?> class="<?php echo $_element->hasValueClass() ? $_element->getValueClass() : 'value' ?><?php echo $_class ? " {$_class}-value" : ''?>">
+                <?php echo trim($_element->getElementHtml()) ?>
+                <?php if ($_note): ?>
+                    <p class="note<?php echo $_class ? " {$_class}-note" : ''?>" id="note_<?php echo $_element->getId()?>"><span><?php echo $_note ?></span></p>
+                <?php endif ?>
+            </td>
+        <?php endif; ?>
+    </tr>
+<?php endif; ?>

@@ -1,0 +1,60 @@
+-
+    customer: 1 #real db id with answers
+    is_customer_model: false
+    expectation:
+        collection_item_count: 1
+-
+    customer: 1 #real db id with answers
+    is_customer_model: true # as model
+    expectation:
+        collection_item_count: 1
+-
+    customer: 2 #real db id without answers
+    is_customer_model: false
+    expectation:
+        collection_item_count: 0
+-
+    customer: 2 #real db id without answers
+    is_customer_model: true # as model
+    expectation:
+        collection_item_count: 0
+-
+    customer: 9999 #no real db id
+    is_customer_model: false
+    expectation:
+        collection_item_count: 0
+-
+    customer: 9999 #no real db id
+    is_customer_model: true # as model
+    expectation:
+        collection_item_count: 0
+-
+    customer: null #new object
+    is_customer_model: false
+    expectation:
+        collection_item_count: 0
+-
+    customer: null #new object
+    is_customer_model: true # as model
+    expectation:
+        collection_item_count: 0
+-
+    customer: "1" #real db id with answers as string
+    is_customer_model: false
+    expectation:
+        collection_item_count: 0
+-
+    customer: "customer@example.com" #real db author_email with customer_id != 0
+    is_customer_model: false
+    expectation:
+        collection_item_count: 1
+-
+    customer: "guest@example.com" #real db author_email with customer_id = 0
+    is_customer_model: false
+    expectation:
+        collection_item_count: 1
+-
+    customer: "fake@example.com" #no real db author_email
+    is_customer_model: false
+    expectation:
+        collection_item_count: 0

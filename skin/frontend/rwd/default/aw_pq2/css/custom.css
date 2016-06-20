@@ -1,0 +1,50 @@
+.aw-pq2-form__input-box {
+    display: block;
+}
+
+.aw-pq2-form__field_position_left {
+    float: none;
+}
+
+.aw-pq2-form__field_position_right {
+    float: none
+}
+
+.aw-pq2-form__field {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.aw-pq2-question-title h2{
+    display: block !important;
+}
+
+.aw-pq2-question-sort.pager {
+    float: none!important;
+    text-align: center;
+}
+
+.aw-pq2-question-sort.pager .limiter {
+    float: right;
+}
+
+.aw-pq2-question-sort.pager .limiter select {
+    vertical-align: middle;
+}
+
+.aw-pq2-question-sort.pager .limiter img {
+    display: inline;
+}
+
+@media only screen and (max-width: 550px) {
+    .aw-pq2-list__question {
+        max-width: 70%;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .aw-pq2-list__question {
+        max-width: 60%;
+    }
+}

@@ -1,0 +1,151 @@
+-   #check null + 1
+    answer_id: 1
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: 1
+    expectation:
+        answer_helpfulness: 11
+        summary_answer: 1
+        exception: false
+-   #check null - 1
+    answer_id: 1
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: -1
+    expectation:
+        answer_helpfulness: 9
+        summary_answer: -1
+        exception: false
+-   #check -1 + 1
+    answer_id: 2
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: 1
+    expectation:
+        answer_helpfulness: 11
+        summary_answer: 0
+        exception: false
+-   #check -1 - 1
+    answer_id: 2
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: -1
+    expectation:
+        answer_helpfulness: 10
+        summary_answer: -1
+        exception: true
+-   #check -1 + 2
+    answer_id: 2
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: 2
+    expectation:
+        answer_helpfulness: 12
+        summary_answer: 1
+        exception: false
+-   #check 0 + 2
+    answer_id: 3
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: 2
+    expectation:
+        answer_helpfulness: 10
+        summary_answer: 0
+        exception: true
+-   #check 0 - 2
+    answer_id: 3
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: -2
+    expectation:
+        answer_helpfulness: 10
+        summary_answer: 0
+        exception: true
+-   #check 0 + 1
+    answer_id: 3
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: 1
+    expectation:
+        answer_helpfulness: 11
+        summary_answer: 1
+        exception: false
+-   #check 0 - 1
+    answer_id: 3
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: -1
+    expectation:
+        answer_helpfulness: 9
+        summary_answer: -1
+        exception: false
+-   #check 1 + 1
+    answer_id: 4
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: 1
+    expectation:
+        answer_helpfulness: 10
+        summary_answer: 1
+        exception: true
+-   #check 1 - 1
+    answer_id: 4
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: -1
+    expectation:
+        answer_helpfulness: 9
+        summary_answer: 0
+        exception: false
+-   #check 1 - 2
+    answer_id: 4
+    customer_id: 1
+    visitor_id: null
+    visitor_data: {}
+    value: -2
+    expectation:
+        answer_helpfulness: 8
+        summary_answer: -1
+        exception: false
+-   #check voteself (null + 1)
+    answer_id: 5
+    customer_id: 1 #customer_id = question->customer_id
+    visitor_id: null
+    visitor_data: {}
+    value: 1
+    expectation:
+        answer_helpfulness: 1
+        summary_answer: 1
+        exception: false
+-   #check visitor load
+    answer_id: 6
+    customer_id: null
+    visitor_id: 1
+    visitor_data: {}
+    value: 1
+    expectation:
+        answer_helpfulness: 1
+        summary_answer: 1
+        exception: true
+-   #check get customer_id from visitor model
+    answer_id: 6
+    customer_id: null
+    visitor_id: 2
+    visitor_data:
+        customer_id: 2
+    value: 1
+    expectation:
+        answer_helpfulness: 1
+        summary_answer: 1
+        exception: true

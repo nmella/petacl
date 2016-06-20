@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<adminhtml>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ordermanager>
+                                        <title>Fooman OrderManager</title>
+                                    </ordermanager>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <fooman_ordermanager>
+                        <title>Fooman OrderManager - Mass Actions</title>
+                        <children>
+                            <order>
+                                <title translate="title">Orders</title>
+                                <children>
+                                    <actions>
+                                        <title>Mass Actions</title>
+                                        <children>
+                                            <invoiceall translate="title">
+                                                <title>Invoice Selected</title>
+                                            </invoiceall>
+                                            <shipall translate="title">
+                                                <title>Ship Selected</title>
+                                            </shipall>
+                                            <statusall translate="title">
+                                                <title>Mass Status Update</title>
+                                            </statusall>
+                                            <invoiceandshipall translate="title">
+                                                <title>Invoice + Ship Selected</title>
+                                            </invoiceandshipall>
+                                            <emailinvoiceall translate="title">
+                                                <title>Send Invoice Email</title>
+                                            </emailinvoiceall>
+                                            <shipandsendinvoiceemailall translate="title">
+                                                <title>Send Invoice Email + Ship Selected</title>
+                                            </shipandsendinvoiceemailall>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </order>
+                        </children>
+                    </fooman_ordermanager>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</adminhtml>

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+	    <ewcore translate="title" module="ewpagecache">
+			<title>Extendware</title>
+			<sort_order>89</sort_order>
+			<resource>extendware/ewcore</resource>
+			<class>ewcore-main</class>
+	        <children>
+	            <quickaccess translate="title" module="ewpagecache">
+	                <title>Manage Extensions</title>
+	                <sort_order>1</sort_order>
+	                <resource>extendware/ewpagecache</resource>
+	                <children>
+	                	<ewpagecache translate="title" module="ewpagecache">
+			                <title>Page Cache</title>
+			                <sort_order>51339</sort_order>
+			                <resource>extendware/ewpagecache</resource>
+			                <children>
+								<configure translate="title" module="ewpagecache">
+									<title>Configure</title>
+									<sort_order>9999999</sort_order>
+									<action>adminhtml/ewpagecache_config/index</action>
+									<resource>extendware/ewpagecache/configure</resource>
+								</configure>
+			                </children>
+			            </ewpagecache>
+	                </children>
+	            </quickaccess>
+	            <userguides translate="title" module="ewpagecache">
+	                <title>User Guides / Help</title>
+	                <sort_order>9</sort_order>
+	                <action>adminhtml/ewpagecache_config/gotoExtendwareUserguides</action>
+	                <resource>extendware/ewcore/redirect/userguide</resource>
+	                <class>ewcore-extendware-userguide</class>
+	            </userguides>
+	            <storelink translate="title" module="ewpagecache">
+		            <title>Improve Your Store</title>
+		            <sort_order>9999</sort_order>
+		            <action>adminhtml/ewpagecache_config/gotoExtendware</action>
+		            <resource>extendware/ewcore/redirect/extendware</resource>
+		            <class>ewcore-extendware-link</class>
+		        </storelink>
+	        </children>
+	    </ewcore>
+	</menu>
+	<acl>
+		<resources>
+            <admin>
+                <children>
+                    <extendware translate="title" module="ewpagecache">
+                    	<title>Extendware</title>
+                    	<sort_order>0</sort_order>
+                        <children>
+                        	<ewpagecache translate="title" module="ewpagecache">
+                        		<title>Page Cache</title>
+                        		<children>
+                        			<settings translate="title">
+                        				<title>Settings</title>
+                        				<children>
+				                            <main translate="title">
+				                                <title>Main</title>
+				                                <children>
+					                                <ewpagecache translate="title">
+						                                <title>General</title>
+						                            </ewpagecache>
+					                            </children>
+				                            </main>
+			                            </children>
+			            			</settings>
+			            		</children>
+			            	</ewpagecache>
+                        </children>
+                    </extendware>
+                </children>
+            </admin>
+        </resources>
+	</acl>
+</config>

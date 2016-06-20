@@ -1,0 +1,125 @@
+<?php
+
+class Mage_Payment_Model_Puntopagos extends Mage_Payment_Model_Method_Abstract
+{       
+    protected $medio_pago;                  
+    protected $_isInitializeNeeded  = true;
+    protected $_formBlockType = 'payment/puntopagos_form';    
+    
+    public function getCheckout()
+    {
+        return Mage::getSingleton('checkout/session');
+    }
+
+    public function getQuote()
+    {
+        return $this->getCheckout()->getQuote();
+    }
+
+    public function getOrderPlaceRedirectUrl()
+    {                                          
+        return $this->create_redirect($this->getQuote()->getGrandTotal());      
+    }
+
+    public function initialize($paymentAction, $stateObject)
+    {        
+        $stateObject->setState('payment_is_closed');
+        $stateObject->setStatus('payment_is_closed');
+        $stateObject->setIsNotified(false);
+    }
+      
+    
+    public function create_redirect($amount)
+    {                            
+        if ($amount <= 0) {
+            Mage::throwException(Mage::helper('paygate')->__('Invalid amount for authorization.'));
+        }                
+
+        $funcion = 'transaccion/crear';
+        $monto_str = number_format(round($amount), 2, '.', '');                       
+
+        $trx_id = $this->getQuote()->getReservedOrderId();
+        $this->getQuote()->reserveOrderId()->save();
+         
+        if ($this->medio_pago)
+          $data = '{"trx_id":'.$trx_id.',"medio_pago":'.$this->medio_pago.',"monto":'.$monto_str.'}'; 
+        else        
+          $data = '{"trx_id":' . $trx_id . ',"monto":' . $monto_str . '}';
+                                                      
+        $header_array = $this->TraerHeader($funcion, $trx_id, $monto_str);
+
+        $res  = $this->ExecuteCommand($this->getConfigData('cgi_url').'/'.$funcion, $header_array, $data);
+        
+        $respuesta = json_decode($res);
+        
+        if ($respuesta->{'token'} != null)
+        {
+            $url = $this->getConfigData('cgi_url')."/transaccion/procesar/".$respuesta->{'token'};          
+            return $url;          
+        }                                 
+    }
+          
+
+    public function FirmarMensaje($str) {
+        $signature = base64_encode(hash_hmac('sha1', $str, $this->getConfigData('secrete_key'), true));
+        return "PP ".$this->getConfigData('keyid').":".$signature;
+    }
+
+    public function TraerHeader($funcion, $trx_id, $monto_str)
+    {
+        $fecha = date("D, d M Y H:i:s", time())." GMT";
+        $mensaje = $funcion."\n".$trx_id."\n".$monto_str."\n".$fecha;
+        $firma = $this->FirmarMensaje($mensaje);
+        $header_array = array('Accept: application/json',
+                              "Content-Type: application/json; charset=utf-8",
+                              'Accept-Charset: utf-8',
+                              'Fecha: '. $fecha,
+                              'Autorizacion:'.$firma);
+        return $header_array;
+    }
+
+    public function ExecuteCommand($url, $header_array, $data) {
+               
+        try {
+            // $ssl_array = array('version' => HttpRequest::SSL_VERSION_SSLv3);
+            // $options = array('headers' => $header_array,
+            //                  'protocol' => HTTP_VERSION_1_1,
+            //                  'ssl' => $ssl_array);
+
+            // $r = new HttpRequest($url, HTTP_METH_POST, $options);
+            // $r->setContentType("application/json; charset=utf-8");
+            // $r->setRawPostData($data);
+            // return $r->send()->getBody();
+            $ch = curl_init();
+            curl_setopt($ch, CURL_VERSION_SSL,"SSL_VERSION_SSLv3"); //optativo
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header_array);
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_USERAGENT, 'PuntoPagos-curl');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            //execute post
+            $result = curl_exec($ch);
+            $error =  curl_error($ch);
+            curl_close($ch);
+            if($result){
+                return $result;
+            }
+            else{
+                throw new Exception($error);
+            }
+        } catch (HttpException $ex) {
+            Mage::throwException($this->_wrapGatewayError($ex));
+        } catch (Exception $e) {
+            Mage::throwException($this->_wrapGatewayError($e));
+        }
+                               
+    }
+    
+    public function _wrapGatewayError($text)
+    {
+        return Mage::helper('payment')->__('Gateway error: %s', $text);
+    }
+
+}

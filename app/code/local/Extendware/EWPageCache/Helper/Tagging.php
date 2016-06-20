@@ -1,0 +1,24 @@
+<?php /*obfv1*/
+// Copyright © 2016 Extendware
+// Are you trying to customize your extension? Contact us (http://www.extendware.com/contacts/) and we can help!
+// Please note, not all files are encoded and different extensions have different levels of encoding.
+// We are always happy to provide guideance if you are experiencing an issue!
+
+
+
+/**
+ * Below are methods found in this class
+ *
+ * @method mixed public processCatalogInventoryStockItemUpdate(Varien_Object $item, $clearCache = null)
+ * @method mixed public processCatalogRuleApply(array $productIds, $trigger, $clearCache = null)
+ * @method mixed public processCategoryUpdate($category, $trigger, $clearCache = null)
+ * @method mixed public processCmsPageUpdate(Mage_Cms_Model_Page $page, $trigger, $clearCache = null)
+ * @method mixed public processProductDelete(Mage_Catalog_Model_Product $product, $trigger, $clearCache = null)
+ * @method mixed public processProductMassAction(array $productIds = null, $trigger, $clearCache = null)
+ * @method mixed public processProductUpdate($product, $trigger, $clearCache = null)
+ * @method mixed public processReviewDelete(Varien_Object $review, $trigger, $clearCache = null)
+ * @method mixed public processReviewUpdate($review, $trigger, $clearCache = null)
+ *
+ */
+
+$_F=__FILE__;$_X="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";$_D=strrev("edoced" . "_46esab");eval(gzuncompress($_D($_X)));

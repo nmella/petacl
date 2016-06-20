@@ -1,0 +1,66 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Pquestion2
+ * @version    2.1.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php /** @var AW_Pquestion2_Block_Customer_Question_Grid $this */ ?>
+<h4><?php echo $this->__('Your Questions');?></h4>
+<?php $questionCollection = $this->getCollection(); ?>
+<?php echo $this->getPagerHtml(); ?>
+<?php if ($questionCollection->getSize()) : ?>
+    <table class="data-table" id="aw-pq2-customer-questions-table">
+        <col width="150" />
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+            <tr>
+                <th><span class="nobr"><?php echo $this->__('Product'); ?></span></th>
+                <th><span class="nobr"><?php echo $this->__('Question'); ?></span></th>
+                <th><span class="nobr"><?php echo $this->__('Status'); ?></span></th>
+                <th><span class="nobr"><?php echo $this->__('Is Answered?'); ?></span></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($questionCollection as $question) : ?>
+            <tr>
+                <td>
+                    <a href="<?php echo $this->getProductUrlByQuestion($question);?>" title="<?php echo $this->getProductNameByQuestion($question);?>">
+                        <?php echo $this->getProductNameByQuestion($question);?>
+                    </a>
+                </td>
+                <td title="<?php echo $this->escapeHtml($question->getContent());?>">
+                    <?php echo $this->helper('core/string')->truncate($this->escapeHtml($question->getContent()), 300);?>
+                </td>
+                <td><?php echo $this->getStatusLabelByQuestion($question); ?></td>
+                <td><span class="nobr"><?php echo $this->getIsAnsweredLabelForQuestion($question); ?></span></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('aw-pq2-customer-questions-table');</script>
+    <?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('There are no questions yet.'); ?></p>
+<?php endif ?>
+<br />

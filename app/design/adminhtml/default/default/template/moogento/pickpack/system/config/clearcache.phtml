@@ -1,0 +1,25 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function clearCachePickpack() {
+	
+	var r = confirm("Are you sure you want to clear all cached images in pickPack ?");
+        if (r == true) {
+                  new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+                        method:     'get',
+                        onSuccess: function(transport){
+ 
+                         if (transport.responseText){
+                             alert(transport.responseText);
+                      }
+                 else
+                    arlert('Can\'t clear cached images in pickPack at the moment.');
+                 }
+            });
+       } else {      
+   	    x = "Cancelled Reset";
+      } 		  	
+    }
+    //]]>
+</script>
+ 
+<?php echo $this->getButtonHtml() ?>

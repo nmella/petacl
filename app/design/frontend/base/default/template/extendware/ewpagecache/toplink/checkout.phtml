@@ -1,0 +1,12 @@
+<?php
+$text = $url = '';
+$text = $this->__('Checkout');
+$url = Mage::helper('checkout/url')->getCheckoutUrl() ;
+?>
+<a href="<?php echo $url; ?>" title="<?php echo $url; ?>" class="top-link-checkout"><?php echo $text; ?></a>
+<?php if (Mage::getDesign()->getPackageName() == 'rwd'): ?>
+	<?php if (!$this->getIsLoggedIn()): ?>
+	</li><li>
+	<a href="<?php echo Mage::helper("customer")->getRegisterUrl(); ?>" title="<?php echo $this->__('Register'); ?>"><?php echo $this->__('Register'); ?></a>
+	<?php endif; ?>
+<?php endif; ?>

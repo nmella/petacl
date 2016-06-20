@@ -1,0 +1,70 @@
+<?php 
+/** 
+* Moogento
+* 
+* SOFTWARE LICENSE
+* 
+* This source file is covered by the Moogento End User License Agreement
+* that is bundled with this extension in the file License.html
+* It is also available online here:
+* https://moogento.com/License.html
+* 
+* NOTICE
+* 
+* If you customize this file please remember that it will be overwrtitten
+* with any future upgrade installs. 
+* If you'd like to add a feature which is not in this software, get in touch
+* at www.moogento.com for a quote.
+* 
+* ID          pe+sMEDTrtCzNq3pehW9DJ0lnYtgqva4i4Z=
+* File        buttons.phtml
+* @category   Moogento
+* @package    pickPack
+* @copyright  Copyright (c) 2016 Moogento <info@moogento.com> / All rights reserved.
+* @license    https://moogento.com/License.html
+*/ 
+
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $_order = $this->getOrder() ?>
+<?php if ($this->helper('rss/order')->isStatusNotificationAllow()): ?>
+    <a href="<?php echo $this->helper('rss/order')->getStatusHistoryRssUrl($_order) ?>"
+       class="link-rss f-none"><?php echo $this->__('Subscribe to Order Status') ?></a>
+    <span class="separator">|</span>
+<?php endif; ?>
+<?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+    <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+    <span class="separator">|</span>
+<?php endif ?>
+<?php if (Mage::getStoreConfig('pickpack_options/button_invoice/frontend_change_order_pdf_button') == 1) { ?>
+    <a href="<?php echo $this->getUrl('pickpack/order/mooorderinvoice/order_id/' . $_order->getId()) ?>"
+       class="link-pdf-invoice"><?php echo $this->__('PDF Invoice') ?></a>
+<?php } else { ?>
+    <a href="<?php echo $this->getPrintUrl($_order) ?>" class="link-print"
+       onclick="this.target='_blank';"><?php echo $this->__('Print Order') ?></a>
+<?php } ?>
+<?php echo $this->getChildHtml(); ?>

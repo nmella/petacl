@@ -1,0 +1,68 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Pquestion2
+ * @version    2.1.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php /** @var AW_Pquestion2_Block_Customer_Answer_Grid $this */ ?>
+<h4><?php echo $this->__('Your Answers');?></h4>
+<?php $answerCollection = $this->getCollection(); ?>
+<?php echo $this->getPagerHtml(); ?>
+<?php if ($answerCollection->getSize()) : ?>
+    <table class="data-table" id="aw-pq2-customer-answers-table">
+        <col width="150" />
+        <col width="220" />
+        <col width="220"/>
+        <col width="1" />
+        <thead>
+        <tr>
+            <th><span class="nobr"><?php echo $this->__('Product'); ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Question'); ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Answer'); ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Status'); ?></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($answerCollection as $answer) : ?>
+            <tr>
+                <td>
+                    <a href="<?php echo $this->getProductUrlByAnswer($answer);?>" title="<?php echo $this->getProductNameByAnswer($answer);?>">
+                        <?php echo $this->getProductNameByAnswer($answer);?>
+                    </a>
+                </td>
+                <td title="<?php echo $answer->getQuestion()->getContent();?>">
+                    <?php echo $this->helper('core/string')->truncate($this->escapeHtml($answer->getQuestion()->getContent()), 150);?>
+                </td>
+                <td title="<?php echo $answer->getContent();?>">
+                    <?php echo $this->helper('core/string')->truncate($this->escapeHtml($answer->getContent()), 150);?>
+                </td>
+                <td><?php echo $this->getStatusLabelByAnswer($answer); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('aw-pq2-customer-answers-table');</script>
+    <?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('There are no answers yet.'); ?></p>
+<?php endif ?>
+<br />

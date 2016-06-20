@@ -1,0 +1,15 @@
+IDCOMERCIO     = 597030906268
+MEDCOM         = 2
+PARAMVERIFCOM  = 1
+URLCGICOM      = http://www.peta.cl/cgi-bin/tbk_bp_resultado.cgi
+SERVERCOM      = 186.67.26.178
+PORTCOM        = 80
+WHITELISTCOM   = ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789./:=&?_-
+HOST           = 127.0.0.1
+WPORT          = 80
+URLCGITRA      = /cgi-bin/bp_revision.cgi
+URLCGIMEDTRA   = /cgi-bin/bp_validacion.cgi
+SERVERTRA      = https://webpay.transbank.cl
+PORTTRA        = 443
+PREFIJO_CONF_TR = HTML_
+HTML_TR_NORMAL = http://www.peta.cl/webpay/webpay_tx_compra.php

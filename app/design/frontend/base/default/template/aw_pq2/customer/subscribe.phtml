@@ -1,0 +1,48 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Pquestion2
+ * @version    2.1.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php /** @var AW_Pquestion2_Block_Customer_Subscribe $this */ ?>
+<h4><?php echo $this->__('Subscribe to:');?></h4>
+<?php $notificationTypes = $this->getNotificationTypes(); ?>
+<?php if (count($notificationTypes) > 0): ?>
+    <form action="<?php echo $this->getActionUrl()?>" method="POST">
+        <p>
+            <ul>
+            <?php foreach ($notificationTypes as $type): ?>
+                <li>
+                    <input type="checkbox" id="aw_pq2_customer_subscribe_to_<?php echo $type['value']?>"
+                           name="aw_pq2_customer_subscribe_to[]" value="<?php echo $type['value']?>"
+                           <?php echo $type['checked']?'checked':'';?>
+                        />
+                    <label for="aw_pq2_customer_subscribe_to_<?php echo $type['value']?>"><?php echo $type['label'];?></label>
+                </li>
+            <?php endforeach;?>
+            </ul>
+        </p>
+        <button type="submit" title="<?php echo $this->__('Save');?>" class="button">
+            <span><span><?php echo $this->__('Save');?></span></span>
+        </button>
+    </form>
+<?php endif;?>

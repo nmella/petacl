@@ -1,0 +1,20 @@
+-
+    question_id: 1 #real db id with votes
+    expectation:
+        collection_item_count: 2
+-
+    question_id: 2 #real db id without votes
+    expectation:
+        collection_item_count: 0
+-
+    question_id: 9999 #no real db id
+    expectation:
+        collection_item_count: 0
+-
+    question_id: null #new object
+    expectation:
+        collection_item_count: 0
+-
+    question_id: "1" #real db id (as string) with votes
+    expectation:
+        collection_item_count: 2

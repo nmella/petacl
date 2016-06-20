@@ -1,0 +1,84 @@
+<?php
+
+class Mage_Webpay_StandardController extends Mage_Core_Controller_Front_Action{
+
+ protected $_order;
+
+ public function getOrder(){
+  if ($this->_order == null){ }
+  return $this->_order;
+ }
+
+
+ protected function _expireAjax(){
+  if (!Mage::getSingleton('checkout/session')->getQuote()->hasItems()) {
+   $this->getResponse()->setHeader('HTTP/1.1','403 Session Expired');
+   exit;
+  }
+ }
+
+ public function getStandard(){
+  return Mage::getSingleton('Webpay/standard');
+ }
+
+ public function redirectAction(){
+  $session = Mage::getSingleton('checkout/session');
+  $session->setWebpayStandardQuoteId($session->getQuoteId());
+  $this->getResponse()->setBody($this->getLayout()->createBlock('Webpay/standard_redirect')->toHtml());
+  $session->unsQuoteId();
+ }
+
+ public function cancelAction(){
+  $session = Mage::getSingleton('checkout/session');
+  $session->setQuoteId($session->getWebpayStandardQuoteId(true));
+  
+		if ($session->getLastRealOrderId()) {
+   $order = Mage::getModel('sales/order')->loadByIncrementId($session->getLastRealOrderId());
+   if ($order->getId()) {
+     $order->cancel();
+				 $order->save();
+    }
+   }
+  $this->_redirect('checkout/cart');
+ }
+
+ public function  successAction(){
+  $session = Mage::getSingleton('checkout/session');
+  $session->setQuoteId($session->getWebpayStandardQuoteId(true));
+		if ($session->getLastRealOrderId()) {
+      
+      
+      
+      
+      /*validacion de webpay   */
+      $id=intval($_POST['TBK_ORDEN_COMPRA']);
+      include("/home/petacl/peta.cl/html/webpay/includes_webpay/configuration.php");
+			include("/home/petacl/peta.cl/html/webpay/includes_webpay/database.php");
+			$database = new database( $mosConfig_host, $mosConfig_user, $mosConfig_password, $mosConfig_db, $mosConfig_dbprefix );
+			$query_RS_Busca = "select * from webpay where Tbk_orden_compra='".$id."' and Tbk_respuesta ='0' limit 0,1"; 
+			$database->setQuery( $query_RS_Busca );
+			$rows = $database->loadObjectList();
+			
+			if (count($rows)==0) {
+				$this->_redirect('webpay/webpay_fracaso.php');
+			}else{
+					//solo si esta pagado genera pedido 
+				$order = Mage::getModel('sales/order')->loadByIncrementId($session->getLastRealOrderId());
+			  $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true,'Pago aceptado por Webpay ');
+				$order->sendNewOrderEmail();
+	 	 		$order->setEmailSent(true);
+				$order->save();
+				$this->_redirect('checkout/onepage/success');
+				//$this->_redirect('webpay/webpay_exito.php?Token=DASDGASDVARG43sdvasgadf4r4tf245dfvadsfvASDF$VFvgaSDVfghdsfgsdgfdfvsdffgfg&id='.$session->getLastRealOrderId()."&valid=".$id);
+			
+			}
+
+      
+      
+      /*fin */
+      
+			
+  }
+ }
+}
+?>

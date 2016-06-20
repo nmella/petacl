@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function resetToDefaultValues() {
+        //Bk
+        // new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+        new Ajax.Request('<?php echo $this->getAjaxPresetUrl() ?>', {
+            method:     'get',
+            onSuccess: function(transport){
+ 
+            if (transport.responseText){
+                history.go(0)
+            }
+            else
+                arlert('Can not reset to default values now. Please contact support from Moogento. Thanks.');
+            }
+        });
+    }
+
+    function setDefaultValues(selectedValue) {
+        new Ajax.Request('<?php echo $this->getAjaxPresetUrl() ?>', {
+            method:     'get',
+            parameters: {selected: selectedValue},
+            onSuccess: function(transport){
+ 
+            if (transport.responseText){
+                history.go(0)
+            }
+            else
+                arlert('Can not reset to default values now. Please contact support from Moogento. Thanks.');
+            }
+        });
+    }
+
+    
+    //]]>
+</script>
+ 
+<?php echo $this->getButtonHtml() ?>

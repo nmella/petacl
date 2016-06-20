@@ -1,0 +1,68 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Pquestion2
+ * @version    2.1.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><form id="aw-pq2-answer-popup-form" class="aw-pq2-form" action="<?php echo $this->getAddAnswerUrl(); ?>" method="post">
+    <div class="aw-pq2-form__field-wrapper">
+        <div class="aw-pq2-form__field aw-pq2-form__field_size_wide">
+            <div class="aw-pq2-form__label-box aw-pq2-form__label-box_type_popup ">
+                <label for="author_name" class="aw-pq2-form__label"><?php echo $this->__('Name'); ?><em class="aw-pq2-form__label__asterisk">*</em></label>
+            </div>
+            <div class="aw-pq2-form__input-box aw-pq2-form__input-box_type_popup">
+                <input class="aw-pq2-form__input input-text required-entry" type="text" id="author_name" name="author_name" value="<?php echo trim($this->getCustomerName()); ?>" title="<?php echo $this->__('Name'); ?>" maxlength="255">
+            </div>
+        </div>
+        <div class="aw-pq2-form__field-clear"></div>
+    </div>
+    <div>
+        <div class="aw-pq2-form__label-box aw-pq2-form__label-box_type_popup ">
+            <label for="content" class="aw-pq2-form__label"><?php echo $this->__('Answer'); ?><em class="aw-pq2-form__label__asterisk">*</em></label>
+        </div>
+        <textarea class="aw-pq2-form__textarea input-text required-entry" name="content" id="content" title="<?php echo $this->__('Answer Content'); ?>"></textarea>
+    </div>
+    <div class="aw-pq2-form__button-set">
+        <button type="submit" class="button aw-pq2-form__button aw-pq2-form__button_position_left" title="<?php echo $this->__('Send Answer'); ?>"><span><span><?php echo $this->__('Send Answer'); ?></span></span></button>
+        <div class="aw-pq2-form__note-wrapper">
+            <?php foreach ($this->getAllInfoMessages() as $message):?>
+                <p class="aw-pq2-form__button-note aw-pq2-form__button-note_size_small"><?php echo $message; ?></p>
+            <?php endforeach;?>
+        </div>
+        <div class="aw-pq2-form__field-clear"></div>
+    </div>
+    <input type="hidden" name="author_email" value="<?php echo $this->getCustomerEmail(); ?>" />
+    <input type="hidden" name="question_id" value="<?php echo $this->getQuestionId(); ?>" />
+    <?php if ($this->getPointsForAnswer() > 0) :?>
+        <div class="aw-pq2-form__points">
+            <?php echo $this->__('You will be rewarded with %s point(s) for your answer', $this->getPointsForAnswer());?>
+        </div>
+    <?php endif;?>
+</form>
+<script type="text/javascript">
+    var formKeyElement = new Element('input');
+    formKeyElement.setAttribute('type', 'hidden');
+    formKeyElement.setAttribute('name', 'form_key');
+    formKeyElement.setAttribute('value', '<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>');
+    $('aw-pq2-answer-popup-form').appendChild(formKeyElement);
+    var addQuestionForm = new VarienForm($('aw-pq2-answer-popup-form'));
+</script>

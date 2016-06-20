@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <aw_pq2 translate="label" module="aw_pq2">
+            <label>Product Questions 2</label>
+            <tab>awall</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>120</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_enabled translate="label">
+                            <label>Enable Product Questions 2</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </is_enabled>
+                        <allow_guest_to_ask_question translate="label">
+                            <label>Who Can Ask Questions from Product Page</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_whoCanAskQuestion</source_model>
+                        </allow_guest_to_ask_question>
+                        <allow_customer_to_add_answer_from_product_page translate="label">
+                            <label>Who Can Answer Questions from Product Page</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_productPageCustomerAllowOptions</source_model>
+                        </allow_customer_to_add_answer_from_product_page>
+                        <require_moderate_customer_answer translate="label">
+                            <label>Approve Answers Automatically</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </require_moderate_customer_answer>
+                        <bought_product_days_ago translate="label">
+                            <label>Do not send "Ask Customers" emails to the customers who bought product more than X days ago</label>
+                            <comment><![CDATA[Leave 0 to disable this option]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </bought_product_days_ago>
+                        <allow_guest_rate_helpfulness translate="label">
+                            <label>Guests can rate helpfulness</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allow_guest_rate_helpfulness>
+                        <allow_subscribe_to_notification_automatically translate="label">
+                            <label>Subscribe customers to Product Questions emails automatically</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allow_subscribe_to_notification_automatically>
+                        <allow_customer_defined_question_visibility translate="label">
+                            <label>Customer-defined question visibility (Private or Public)</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allow_customer_defined_question_visibility>
+                    </fields>
+                </general>
+                <interface translate="label">
+                    <label>Interface Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <number_questions_to_display translate="label">
+                            <label>Number of questions to display</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number_questions_to_display>
+                        <number_answers_to_display translate="label">
+                            <label>Number of answers to display</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number_answers_to_display>
+                        <allow_display_url_as_link translate="label">
+                            <label>Display URLs as links</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </allow_display_url_as_link>
+                        <default_questions_sort_by translate="label">
+                            <label>Default questions sort by</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_question_sorting</source_model>
+                        </default_questions_sort_by>
+                        <default_sort_order translate="label">
+                            <label>Default sort order</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_question_sorting_dir</source_model>
+                        </default_sort_order>
+                    </fields>
+                </interface>
+                <notification traslate="label">
+                    <label>Notification Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <send_notification_new_question_to translate="label">
+                            <label>Send admin notifications to this email address</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </send_notification_new_question_to>
+                        <email_sender translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_sender>
+                        <new_question_to_admin_template translate="label">
+                            <label>Admin notifications about new question</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                        </new_question_to_admin_template>
+                        <new_answer_to_admin_template translate="label">
+                            <label>Admin notifications about new answers</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                        </new_answer_to_admin_template>
+                        <new_reply_on_question_to_customer_template translate="label">
+                            <label>Customer notifications about new replies to their questions</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                        </new_reply_on_question_to_customer_template>
+                        <question_status_change_to_customer_template translate="label">
+                            <label>Customer notifications about the questions status change</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                        </question_status_change_to_customer_template>
+                        <answer_status_change_to_customer_template translate="label">
+                            <label>Customer notifications about the answer status change</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                        </answer_status_change_to_customer_template>
+                        <ask_customer_template_to_customer translate="label">
+                            <label>Email inviting customer to answer a question ("Ask Customers")</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ask_customer_template_to_customer>
+                        <auto_responder_question_template translate="label">
+                            <label>Auto-Responder to customer about his new question</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                        </auto_responder_question_template>
+                        <auto_responder_answer_template translate="label">
+                            <label>Auto-Responder to customer about his new answer</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>aw_pq2/source_email_template</source_model>
+                        </auto_responder_answer_template>
+                        <stored_emails_lifetime>
+                            <label>Remove the web copies of the emails older than X days</label>
+                            <comment><![CDATA[Leave 0 to disable this option]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </stored_emails_lifetime>
+                    </fields>
+                </notification>
+            </groups>
+        </aw_pq2>
+    </sections>
+</config>

@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AW_Pquestion2>
+            <version>2.1.4</version><platform>ce</platform>
+        </AW_Pquestion2>
+    </modules>
+    <global>
+        <resources>
+            <aw_pq2_setup>
+                <setup>
+                    <module>AW_Pquestion2</module>
+                </setup>
+            </aw_pq2_setup>
+            <aw_pq2_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </aw_pq2_write>
+            <aw_pq2_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </aw_pq2_read>
+        </resources>
+        <models>
+            <aw_pq2>
+                <class>AW_Pquestion2_Model</class>
+                <resourceModel>aw_pq2_resource</resourceModel>
+            </aw_pq2>
+            <aw_pq2_resource>
+                <class>AW_Pquestion2_Model_Resource</class>
+                <entities>
+                    <question>
+                        <table>aw_pquestion2_question</table>
+                    </question>
+                    <answer>
+                        <table>aw_pquestion2_answer</table>
+                    </answer>
+                    <summary_question>
+                        <table>aw_pquestion2_summary_question</table>
+                    </summary_question>
+                    <notification_subscriber>
+                        <table>aw_pquestion2_notification_subscriber</table>
+                    </notification_subscriber>
+                    <notification_queue>
+                        <table>aw_pquestion2_notification_queue</table>
+                    </notification_queue>
+                    <summary_answer>
+                        <table>aw_pquestion2_summary_answer</table>
+                    </summary_answer>
+                </entities>
+            </aw_pq2_resource>
+        </models>
+        <blocks>
+            <aw_pq2>
+                <class>AW_Pquestion2_Block</class>
+            </aw_pq2>
+        </blocks>
+        <models>
+            <aw_pq2>
+                <class>AW_Pquestion2_Model</class>
+            </aw_pq2>
+        </models>
+        <helpers>
+            <aw_pq2>
+                <class>AW_Pquestion2_Helper</class>
+            </aw_pq2>
+        </helpers>
+        <template>
+            <email>
+                <aw_pq2_notification_new_question_to_admin_template translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: New Question To Admin</label>
+                    <file>aw_pq2_new_question_to_admin.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_new_question_to_admin_template>
+                <aw_pq2_notification_new_answer_to_admin_template translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: New Answer To Admin</label>
+                    <file>aw_pq2_new_answer_to_admin.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_new_answer_to_admin_template>
+                <aw_pq2_notification_question_status_change_to_customer_template translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: Question Status Change To Customer</label>
+                    <file>aw_pq2_question_status_change_to_customer.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_question_status_change_to_customer_template>
+                <aw_pq2_notification_answer_status_change_to_customer_template translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: Answer Status Change To Customer</label>
+                    <file>aw_pq2_answer_status_change_to_customer.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_answer_status_change_to_customer_template>
+                <aw_pq2_notification_new_reply_on_question_to_customer_template translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: New Reply On Question To Customer</label>
+                    <file>aw_pq2_new_reply_on_question_to_customer.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_new_reply_on_question_to_customer_template>
+                <aw_pq2_notification_ask_customer_template_to_customer translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: Ask Customer Template To Customer</label>
+                    <file>aw_pq2_ask_customer_template_to_customer.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_ask_customer_template_to_customer>
+                <aw_pq2_notification_auto_responder_question_template translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: Auto Responder Template (Question)</label>
+                    <file>aw_pq2_auto_responder_question_template.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_auto_responder_question_template>
+                <aw_pq2_notification_auto_responder_answer_template translate="label" module="aw_pq2">
+                    <label>AW_Pquestion2: Auto Responder Template (Answer)</label>
+                    <file>aw_pq2_auto_responder_answer_template.html</file>
+                    <type>html</type>
+                </aw_pq2_notification_auto_responder_answer_template>
+            </email>
+        </template>
+        <events>
+            <aw_pq2_question_save_after>
+                <observers>
+                    <aw_pq2_question_save_after>
+                        <class>aw_pq2/observer</class>
+                        <method>questionSaveAfter</method>
+                    </aw_pq2_question_save_after>
+                </observers>
+            </aw_pq2_question_save_after>
+            <aw_pq2_answer_save_after>
+                <observers>
+                    <aw_pq2_answer_save_after>
+                        <class>aw_pq2/observer</class>
+                        <method>answerSaveAfter</method>
+                    </aw_pq2_answer_save_after>
+                </observers>
+            </aw_pq2_answer_save_after>
+            <adminhtml_customer_save_after>
+                <observers>
+                    <aw_pq2_adminhtml_customer_save_after>
+                        <class>aw_pq2/observer_adminhtml</class>
+                        <method>adminhtmlCustomerSaveAfter</method>
+                    </aw_pq2_adminhtml_customer_save_after>
+                </observers>
+            </adminhtml_customer_save_after>
+        </events>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <awpq2 after="Mage_Adminhtml">AW_Pquestion2_Adminhtml</awpq2>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <catalog>
+                <children>
+                    <aw_pq2>
+                        <title>Product Questions</title>
+                        <sort_order>200</sort_order>
+                        <children>
+                            <pending_questions module="aw_pq2">
+                                <title>Pending Questions</title>
+                                <sort_order>1</sort_order>
+                                <action>adminhtml/awpq2_question/listPending</action>
+                            </pending_questions>
+                            <all_questions module="aw_pq2">
+                                <title>All Questions</title>
+                                <sort_order>2</sort_order>
+                                <action>adminhtml/awpq2_question/list</action>
+                            </all_questions>
+                            <settings module="aw_pq2">
+                                <title>Settings</title>
+                                <sort_order>3</sort_order>
+                                <action>adminhtml/system_config/edit/section/aw_pq2</action>
+                            </settings>
+                        </children>
+                    </aw_pq2>
+                </children>
+            </catalog>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <catalog>
+                            <children>
+                                <aw_pq2 translate="title" module="aw_pq2">
+                                    <title>Product Questions</title>
+                                    <sort_order>200</sort_order>
+                                    <children>
+                                        <pending_questions module="aw_pq2">
+                                            <title>Pending Questions</title>
+                                            <sort_order>1</sort_order>
+                                            <action>aw_pq2/adminhtml_question/listPending</action>
+                                        </pending_questions>
+                                        <all_questions module="aw_pq2">
+                                            <title>All Questions</title>
+                                            <sort_order>2</sort_order>
+                                            <action>aw_pq2/adminhtml_question/list</action>
+                                        </all_questions>
+                                        <settings module="aw_pq2">
+                                            <title>Settings</title>
+                                            <sort_order>3</sort_order>
+                                            <action>adminhtml/system_config/edit/section/aw_pq2</action>
+                                        </settings>
+                                    </children>
+                                </aw_pq2>
+                            </children>
+                        </catalog>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <aw_pq2>
+                                            <title>aheadWorks - Product Questions 2 Section</title>
+                                        </aw_pq2>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <aw_pq2 module="AW_Pquestion2">
+                    <file>aw_pq2.xml</file>
+                </aw_pq2>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <AW_Pquestion2>
+                    <files>
+                        <default>AW_Pquestion2.csv</default>
+                    </files>
+                </AW_Pquestion2>
+            </modules>
+        </translate>
+    </adminhtml>
+    <frontend>
+        <routers>
+            <aw_pq2>
+                <use>standard</use>
+                <args>
+                    <module>AW_Pquestion2</module>
+                    <frontName>productquestion</frontName>
+                </args>
+            </aw_pq2>
+        </routers>
+        <layout>
+            <updates>
+                <aw_pq2 module="AW_Pquestion2">
+                    <file>aw_pq2.xml</file>
+                </aw_pq2>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <AW_Pquestion2>
+                    <files>
+                        <default>AW_Pquestion2.csv</default>
+                    </files>
+                </AW_Pquestion2>
+            </modules>
+        </translate>
+    </frontend>
+    <phpunit>
+        <suite>
+            <modules>
+                <AW_Pquestion2/>
+            </modules>
+        </suite>
+    </phpunit>
+    <default>
+        <aw_pq2>
+            <general>
+                <is_enabled>0</is_enabled>
+                <allow_guest_to_ask_question>1</allow_guest_to_ask_question>
+                <allow_customer_to_add_answer_from_product_page>0</allow_customer_to_add_answer_from_product_page>
+                <require_moderate_customer_answer>0</require_moderate_customer_answer>
+                <bought_product_days_ago>0</bought_product_days_ago>
+                <allow_guest_rate_helpfulness>1</allow_guest_rate_helpfulness>
+                <allow_subscribe_to_notification_automatically>1</allow_subscribe_to_notification_automatically>
+                <allow_customer_defined_question_visibility>1</allow_customer_defined_question_visibility>
+            </general>
+            <interface>
+                <number_questions_to_display>5</number_questions_to_display>
+                <number_answers_to_display>5</number_answers_to_display>
+                <allow_display_url_as_link>1</allow_display_url_as_link>
+                <default_questions_sort_by>2</default_questions_sort_by>
+                <default_sort_order>DESC</default_sort_order>
+            </interface>
+            <notification>
+                <send_notification_new_question_to></send_notification_new_question_to>
+                <email_sender>general</email_sender>
+                <new_question_to_admin_template>aw_pq2_notification_new_question_to_admin_template</new_question_to_admin_template>
+                <new_answer_to_admin_template>aw_pq2_notification_new_answer_to_admin_template</new_answer_to_admin_template>
+                <new_reply_on_question_to_customer_template>aw_pq2_notification_new_reply_on_question_to_customer_template</new_reply_on_question_to_customer_template>
+                <question_status_change_to_customer_template>aw_pq2_notification_question_status_change_to_customer_template</question_status_change_to_customer_template>
+                <answer_status_change_to_customer_template>aw_pq2_notification_answer_status_change_to_customer_template</answer_status_change_to_customer_template>
+                <ask_customer_template_to_customer>aw_pq2_notification_ask_customer_template_to_customer</ask_customer_template_to_customer>
+                <auto_responder_question_template></auto_responder_question_template>
+                <auto_responder_answer_template></auto_responder_answer_template>
+                <stored_emails_lifetime>0</stored_emails_lifetime>
+            </notification>
+        </aw_pq2>
+    </default>
+    <crontab>
+        <jobs>
+            <send_queue>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>aw_pq2/notification_cron::sendQueue</model>
+                </run>
+            </send_queue>
+            <remove_old_emails>
+                <schedule>
+                    <cron_expr>0 1 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>aw_pq2/notification_cron::removeOldStoredEmails</model>
+                </run>
+            </remove_old_emails>
+        </jobs>
+    </crontab>
+</config>

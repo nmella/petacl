@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+  Moogento
+  
+  SOFTWARE LICENSE
+  
+  This source file is covered by the Moogento End User License Agreement
+  that is bundled with this extension in the file License.html
+  It is also available online here:
+  https://moogento.com/License.html
+  
+  NOTICE
+  
+  If you customize this file please remember that it will be overwrtitten
+  with any future upgrade installs. 
+  If you'd like to add a feature which is not in this software, get in touch
+  at www.moogento.com for a quote.
+  
+  ID          pe+sMEDTrtCzNq3pehW9DJ0lnYtgqva4i4Z=
+  File        pickpack.xml
+  @category   Moogento
+  @package    pickPack
+  @copyright  Copyright (c) 2016 Moogento <info@moogento.com> / All rights reserved.
+  @license    https://moogento.com/License.html
+-->
+
+<layout version="0.1.0">
+    <!-- <default>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/moogento/pickpack.css</name>
+            </action>
+        </reference>
+    </default> -->
+    <customer_account_index>
+        <!-- Mage_Sales -->
+        <!--remove name="customer_account_dashboard_top"/-->
+        <reference name="head">
+            <action method="addItem" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <type>skin_css</type>
+                <name>css/moogento/pickpack.css</name>
+            </action>
+        </reference>
+        <reference name="customer_account_dashboard_top">
+            <action method="setTemplate" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <template>moogento/pickpack/sales/order/recent.phtml</template>
+            </action>
+        </reference>
+    </customer_account_index>
+
+    <sales_order_history>
+        <reference name="head">
+            <action method="addItem" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <type>skin_css</type>
+                <name>css/moogento/pickpack.css</name>
+            </action>
+        </reference>
+        <reference name="sales.order.history">
+            <action method="setTemplate" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <template>moogento/pickpack/sales/order/history.phtml</template>
+            </action>
+        </reference>
+    </sales_order_history>
+
+    <!-- <sales_order_invoice translate="label">
+        <label>Customer My Account Order Invoice View</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="addItem" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <type>skin_css</type>
+                <name>css/moogento/pickpack.css</name>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="sales/order_info" as="info" name="sales.order.info">
+                <block type="sales/order_info_buttons" as="buttons" name="sales.order.info.buttons"/>
+            </block>
+            
+            <block type="sales/order_invoice" name="sales.order.invoice">
+                <block type="sales/order_invoice_items" name="invoice_items" template = "sales/order/invoice/items.phtml">
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>sales/order/invoice/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>sales/order/invoice/items/renderer/default.phtml</template>
+                    </action>
+                    <block type="sales/order_invoice_totals" name="invoice_totals" template="sales/order/totals.phtml">
+                        <action method="setLabelProperties">
+                            <value>colspan="4" class="a-right"</value>
+                        </action>
+                        <action method="setValueProperties">
+                            <value>class="last a-right"</value>
+                        </action>
+                        <block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml"/>
+                    </block>
+                    <block type="sales/order_comments" name="invoice_comments" template="sales/order/comments.phtml"/>
+                </block>
+            </block>
+            <reference name="sales.order.invoice">
+                 <reference name="invoice_items">
+                    <action method="setTemplate" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                        <template>moogento/pickpack/sales/order/invoice/items.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+
+        </reference>
+        <reference name="sales.order.info">
+            <action method="addLink" translate="label" module="sales" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <name>view</name>
+                <path>*/*/view</path>
+                <label>Order Information</label>
+            </action>
+            <action method="addLink" translate="label" module="sales" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <name>invoice</name>
+                <path></path>
+                <label>Invoices</label>
+            </action>
+            <action method="addLink" translate="label" module="sales" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <name>shipment</name>
+                <path>*/*/shipment</path>
+                <label>Shipments</label>
+            </action>
+            <action method="addLink" translate="label" module="sales" ifconfig="pickpack_options/button_invoice/turn_on_front_end_feature">
+                <name>creditmemo</name>
+                <path>*/*/creditmemo</path>
+                <label>Refunds</label>
+            </action>
+        </reference>
+        <block type="core/text_list" name="additional.product.info"/>
+    </sales_order_invoice> -->
+
+</layout> 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <placeholders>
+        <aw_pq2_question_list>
+            <block>aw_pq2/question_list</block>
+            <name>aw_pq2_question_list</name>
+            <template>aw_pq2/catalog/product/view/list.phtml</template>
+            <placeholder>AWPquestion2ModelCachingBlockQuestionList</placeholder>
+            <container>AW_Pquestion2_Model_Caching_Block_Question_List</container>
+            <cache_lifetime>86400</cache_lifetime>
+        </aw_pq2_question_list>
+    </placeholders>
+</config>

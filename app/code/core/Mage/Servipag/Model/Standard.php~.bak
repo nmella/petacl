@@ -1,0 +1,161 @@
+<?php
+
+class Mage_Dineromail_Model_Standard extends Mage_Payment_Model_Method_Abstract{
+
+ protected $_code  = 'dineromail_standard';
+ protected $_formBlockType = 'dineromail/standard_form';
+	
+ public function getDineromailCurrency(){
+	 $currency_code = $this->getQuote()->getBaseCurrencyCode();
+	 $DineromailCurrency['AR'] = array('ARS' => 1, 'USD' => 2);
+	 $DineromailCurrency['BR'] = array('BRL' => 1);
+	 $DineromailCurrency['CL'] = array('CLP' => 1, 'USD' => 2);
+	 $DineromailCurrency['MX'] = array('MXN' => 1, 'USD' => 2);
+	 return @$DineromailCurrency[Mage::getStoreConfig('dineromail/wps/country')][$currency_code];
+ }
+	
+ public function getDineromailUrl(){
+  $DineromailAction = array (
+   'AR' => 'https://argentina.dineromail.com/Shop/Shop_Ingreso.asp', 
+   'BR' => 'https://brasil.dineromail.com/dinero-tools/login/shop/shop_ingreso.asp',
+   'CL' => 'https://chile.dineromail.com/Shop/Shop_Ingreso.asp',
+   'MX' => 'https://mexico.dineromail.com/Shop/Shop_Ingreso.asp'
+  );
+  $url = $DineromailAction[Mage::getStoreConfig('dineromail/wps/country')];
+  return $url;
+ }
+			
+ public function getSession(){
+  return Mage::getSingleton('dineromail/session');
+ }
+
+ public function getCheckout(){
+  return Mage::getSingleton('checkout/session');
+ }
+
+ public function getQuote(){
+  return $this->getCheckout()->getQuote();
+ }
+
+ public function canUseInternal(){
+  return false;
+ }
+
+ public function canUseForMultishipping(){
+  return false;
+ }
+
+ public function createFormBlock($name){
+  $block = $this->getLayout()->createBlock('dineromail/standard_form', $name)
+   ->setMethod('dineromail_standard')
+   ->setPayment($this->getPayment())
+   ->setTemplate('Dineromail/standard/form.phtml');
+  return $block;
+ }
+
+ public function validate(){
+  parent::validate();
+  $currency_code = $this->getQuote()->getBaseCurrencyCode();
+	 if(!$this->getDineromailCurrency()){
+   Mage::throwException(Mage::helper('dineromail')->__('Selected currency code ('.$currency_code.') is not compatabile with Dineromail('. Mage::getStoreConfig('dineromail/wps/country') .')'));
+  }
+  return $this;
+ }
+
+ public function onOrderValidate(Mage_Sales_Model_Order_Payment $payment){
+  return $this;
+ }
+
+ public function onInvoiceCreate(Mage_Sales_Model_Invoice_Payment $payment){
+	
+ }
+
+ public function canCapture(){
+  return true;
+ }
+
+ public function getOrderPlaceRedirectUrl(){
+  return Mage::getUrl('dineromail/standard/redirect', array('_secure' => true));
+ }
+
+	public function getStandardCheckoutFormFields(){
+
+		if ($this->getQuote()->getIsVirtual()) {
+			$a = $this->getQuote()->getBillingAddress();
+			$b = $this->getQuote()->getShippingAddress();
+		}else{
+			$a = $this->getQuote()->getShippingAddress();
+			$b = $this->getQuote()->getBillingAddress();
+		}
+
+		$currency_code = $this->getDineromailCurrency();
+		$businessName = Mage::getStoreConfig('dineromail/wps/business_name');
+		$storeName = Mage::getStoreConfig('store/system/name');
+		$amount = $a->getBaseGrandTotal(); 
+									
+		$NombreItem = '';
+		$items = $this->getQuote()->getAllItems();
+		if($items){
+			foreach($items as $x){
+				$NombreItem .= $x->getName() .' (x '. $x->getQty() . ') ';
+			}
+		}
+
+		$sArr = array(
+			'E_Comercio' => Mage::getStoreConfig('dineromail/wps/business_account'),
+			'NombreItem' => $NombreItem? $NombreItem : $businessName,
+			'PrecioItem' => sprintf('%.2f', $amount),
+			'NroItem' => $this->getCheckout()->getLastOrderId(),
+			'TipoMoneda' => $currency_code,
+			'trx_id' => $this->getCheckout()->getLastOrderId(),
+			'DireccionExito' => Mage::getUrl('dineromail/standard/success',array('_secure' => true)),
+			'DireccionFracaso' => Mage::getUrl('dineromail/standard/cancel',array('_secure' => false)),
+			'usr_nombre' => $a->getFirstname(),
+			'usr_apellido' => $a->getLastname(),
+			'usr_email' => $a->getEmail(),
+			'usr_tel_numero' => $a->getTelephone(),
+			'Mensaje' => 0,
+			'DireccionEnvio' => 0,
+		);
+
+	$logoUrl = Mage::getStoreConfig('dineromail/wps/logo_url');
+	if($logoUrl){
+		$sArr = array_merge($sArr, array(
+			'image_url' => $logoUrl
+			));
+		}
+
+	$sReq = '';
+	$rArr = array();
+	foreach ($sArr as $k=>$v) {
+		$value =  str_replace("&","and",$v);
+		$rArr[$k] =  $value;
+		$sReq .= '&'.$k.'='.$value;
+	}
+	
+	if ($this->getDebug() && $sReq) {
+		$sReq = substr($sReq, 1);
+		$debug = Mage::getModel('dineromail/api_debug')
+		->setApiEndpoint($this->getDineromailUrl())
+		->setRequestBody($sReq)
+		->save();
+	}
+	
+	 return $rArr;
+ }
+
+ public function getDebug(){
+  return Mage::getStoreConfig('dineromail/wps/debug_flag');
+ }
+
+ public function isInitializeNeeded(){
+  return true;
+ }
+
+ public function initialize($paymentAction, $stateObject){
+  $state = Mage_Sales_Model_Order::STATE_PENDING_PAYMENT;
+  $stateObject->setState($state);
+  $stateObject->setStatus(Mage::getSingleton('sales/order_config')->getStateDefaultStatus($state));
+  $stateObject->setIsNotified(false);
+ }
+}

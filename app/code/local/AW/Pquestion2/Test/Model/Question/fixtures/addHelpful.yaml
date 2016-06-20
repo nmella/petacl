@@ -1,0 +1,153 @@
+aliases:
+    question: &question
+        entity_id: 1
+        title: Title
+        author_name: Name
+        author_email: email@example.com
+        customer_id: 0
+        created_at: "2014-01-01 10:00:00"
+        content: Content
+        product_id: 1
+        store_id: 1
+        show_in_store_ids: 1
+        status: 1
+        visibility: 1
+        sharing_type: 1
+        sharing_value: 1
+        helpfulness: 0
+    summary_question: &summary_question
+        entity_id: 1
+        question_id: 1
+        customer_id: 1
+        visitor_id: null
+        helpful: 0
+    log_visitor: &log_visitor
+        visitor_id: 1
+        session_id: 4bdc76dfaafa6d05049bb08f12e148f0
+        first_visit_at: "2011-08-11 13:07:05"
+        last_visited_at: "2011-09-11 13:07:05"
+        last_url_id: 105
+        store_id: 1
+    eav_customer: &eav_customer
+        entity_id: 13
+        entity_type_id: 1
+        attribute_set_id: 0
+        website_id: 1
+        email: example@example.com
+        group_id: 1
+        store_id: 1
+        is_active: 1
+        firstname: John
+        lastname: Smith
+
+tables:
+    aw_pq2/question:
+      -
+        <<: *question
+        entity_id: 1
+        customer_id: 0
+        helpfulness: 10 #helpfulness edited by admin
+      -
+        <<: *question
+        entity_id: 2
+        customer_id: 0
+        helpfulness: 10 #helpfulness edited by admin
+      -
+        <<: *question
+        entity_id: 3
+        customer_id: 0
+        helpfulness: 10 #helpfulness edited by admin
+      -
+        <<: *question
+        entity_id: 4
+        customer_id: 0
+        helpfulness: 10 #helpfulness edited by admin
+      -
+        <<: *question
+        entity_id: 5
+        customer_id: 1
+        helpfulness: 0
+      -
+        <<: *question
+        entity_id: 6
+        customer_id: 0
+        helpfulness: 1
+
+    aw_pq2/summary_question:
+      -
+        <<: *summary_question
+        entity_id: 1
+        question_id: 2
+        customer_id: 1
+        helpful: -1
+      -
+        <<: *summary_question
+        entity_id: 2
+        question_id: 3
+        customer_id: 1
+        helpful: 0
+      -
+        <<: *summary_question
+        entity_id: 3
+        question_id: 4
+        customer_id: 1
+        helpful: 1
+      -
+        <<: *summary_question
+        entity_id: 4
+        question_id: 6
+        customer_id: 0
+        visitor_id: 1
+        helpful: 1
+      -
+        <<: *summary_question
+        entity_id: 5
+        question_id: 6
+        customer_id: 2
+        visitor_id: null
+        helpful: 1
+
+    log/visitor:
+      -
+        <<: *log_visitor
+        visitor_id: 1 #guest
+      -
+        <<: *log_visitor
+        visitor_id: 2 #customer
+
+scope:
+    website:
+      -
+        website_id: 1
+        code: main
+        name: Main Website
+        default_group_id: 1
+    group:
+      -
+        group_id: 1
+        website_id: 1
+        name: Main Website Store
+        root_category_id: 2
+        default_store_id: 1
+    store:
+      -
+        store_id: 1
+        code: default
+        website_id: 1
+        group_id: 1
+        name: Default Store View
+        is_active: 1
+eav:
+    customer:
+      -
+        <<: *eav_customer
+        entity_id: 1
+        firstname: John
+        lastname: Smith
+        email: example1@example.com
+      -
+        <<: *eav_customer
+        entity_id: 2
+        firstname: John
+        lastname: Smith
+        email: example2@example.com

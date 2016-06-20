@@ -1,0 +1,33 @@
+-   #real db id without data set
+    answer_id: 1
+    answer_data: {}
+    expectation:
+        exception_on_save: false
+-   #real db id with data set
+    answer_id: 1
+    answer_data:
+        created_at: "2014-01-01 09:00:00"
+    expectation:
+        exception_on_save: false
+-   #no real db id without date set
+    answer_id: 9999
+    answer_data: {}
+    expectation:
+        exception_on_save: false
+-   #no real db id with date set
+    answer_id: 9999
+    answer_data:
+        created_at: "2014-01-01 09:00:00"
+    expectation:
+        exception_on_save: true
+-   #new object without data set
+    answer_id: null
+    answer_data: {}
+    expectation:
+        exception_on_save: false
+-   #new object with data set
+    answer_id: null
+    answer_data:
+        created_at: "2014-01-01 09:00:00"
+    expectation:
+        exception_on_save: true

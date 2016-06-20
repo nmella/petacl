@@ -1,0 +1,18 @@
+<?php 
+
+$link = $this->getLink();
+
+?>
+
+<table style="margin-bottom:3px;border:1px solid #efefef;" border="0" cellpadding="10" cellspacing="0" style="margin-bottom:3px;" width="100%">
+  <tr>
+    <td valign="top" width="140" style="border-right:1px solid #efefef;">
+        <a href="<?php echo $link; ?>"><?php echo $this->getThumbnailHtml(); ?></a>
+    </td>
+    <td valign="top" width="395">
+        <a href="<?php echo $link; ?>"><?php echo $this->getName(); ?></a> <br />
+        <br /><br /><br />
+        <a style="color:#FFFFFF;font-weight:bold;border-radius:5px 5px 5px 5px;font-size:12px;text-decoration:none;background:#f73c43;padding: 5px 25px;" href="<?php echo $link; ?>" title="<?php echo $this->__('Write a Review of this Product'); ?>"><?php echo $this->__('Write a Review of this Product'); ?></a>
+    </td>
+  </tr>
+</table>

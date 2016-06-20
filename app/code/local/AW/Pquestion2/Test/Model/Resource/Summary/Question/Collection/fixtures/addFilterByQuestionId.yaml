@@ -1,0 +1,44 @@
+aliases:
+    question: &question
+        entity_id: 1
+        title: Title
+        author_name: Name
+        author_email: email@example.com
+        customer_id: 0
+        created_at: "2014-01-01 10:00:00"
+        content: Content
+        product_id: 1
+        store_id: 1
+        show_in_store_ids: 1
+        status: 1
+        visibility: 1
+        sharing_type: 1
+        sharing_value: 1
+        helpfulness: 0
+    summary_question: &summary_question
+        entity_id: 1
+        question_id: 1
+        customer_id: 1
+        visitor_id: null
+        helpful: 1
+
+tables:
+    aw_pq2/question:
+      -
+        <<: *question
+        entity_id: 1
+      -
+        <<: *question
+        entity_id: 2
+
+    aw_pq2/summary_question:
+      -
+        <<: *summary_question
+        entity_id: 1
+        question_id: 1
+        customer_id: 1
+      -
+        <<: *summary_question
+        entity_id: 2
+        question_id: 1
+        customer_id: 2

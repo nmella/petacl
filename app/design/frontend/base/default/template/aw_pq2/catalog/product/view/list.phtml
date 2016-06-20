@@ -1,0 +1,185 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Pquestion2
+ * @version    2.1.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php $this->getVoteMap(); ?>
+<?php /* @var $this AW_Pquestion2_Block_Question_List */ ?>
+<?php if ($this->canShow()) : ?>
+<?php $questionCollection = $this->getQuestionCollection(); ?>
+<div class="box-collateral aw-pq2-question-list-wrapper">
+    <div class="aw-pq2-question-title box-title">
+        <?php if ($this->canAskQuestion()) : ?>
+            <button type="button" class="button aw-pq2-list__add-question-button aw-pq2-list__button_position_right" title="<?php echo $this->__('Ask Question'); ?>" ><span><span><?php echo $this->__('Ask Question'); ?></span></span></button>
+        <?php else : ?>
+            <div class="aw-pq2-list__please-login-note"><?php echo $this->__('You must be <a href="%s">logged in</a> to ask questions.', $this->getLoginUrl()); ?></div>
+        <?php endif; ?>
+        <h2><?php echo $this->__('Product Questions'); ?></h2>
+    </div>
+    <?php if ($this->canAskQuestion()) : ?>
+    <div class="aw-pq2-question-form__wrapper aw-pq2-question-form" style="display: none;">
+        <?php echo $this->getChildHtml('aw_pq2_ask_question_form'); ?>
+    </div>
+    <?php endif; ?>
+    <?php if ($questionCollection->getSize() > 1) : ?>
+    <div class="aw-pq2-question-sort pager">
+        <?php echo $this->getChildHtml('aw_pq2_question_sort'); ?>
+    </div>
+    <?php endif; ?>
+    <div class="aw-pq2-list box-content">
+        <?php if ($questionCollection->getSize() > 0) : ?>
+            <?php foreach ($questionCollection as $question): ?>
+                <div class="aw-pq2-list__question-item aw-pq2-list__question-item_hidden">
+                    <div class="aw-pq2-list__question-wrapper">
+                        <div class="aw-pq2-list__question-expand aw-pq2-list__question-expand_arrow_right" data-question-id="<?php echo $question->getId();?>"></div>
+                        <div class="aw-pq2-list__question">
+                            <div class="aw-pq2-list__question-content"><?php echo $this->getQuestionContent($question); ?></div>
+                        </div>
+                        <div class="aw-pq2-list__helpfulness">
+                            <div class="aw-pq2-list__helpfulness-layout">
+                                <div class="aw-pq2-list__helpfulness-layout-unit">
+                                    <a title="<?php echo $this->getTitleForQuestionVote();?>" class="aw-pq2-list__helpfulness-icon aw-pq2-list__helpfulness-icon_like<?php if ($this->isCustomerLikeQuestion($question->getId())) : ?> aw-pq2-list__helpfulness-icon_like_voted<?php endif; ?><?php if (!$this->isCustomerCanVoteQuestion()) : ?> aw-pq2-list__helpfulness-icon_state_disabled<?php endif;?>" href="<?php echo $this->getLikeQuestionUrl($question); ?>"></a>
+                                </div>
+                                <div class="aw-pq2-list__helpfulness-layout-unit aw-pq2-list__helpfulness-layout-unit_position_center">
+                                    <span class="aw-pq2-list__helpfulness-value"><?php echo $question->getHelpfulness(); ?></span>
+                                    <span class="aw-pq2-list__helpfulness-progress" style="display:none;"></span>
+                                </div>
+                                <div class="aw-pq2-list__helpfulness-layout-unit">
+                                    <a title="<?php echo $this->getTitleForQuestionVote();?>" class="aw-pq2-list__helpfulness-icon aw-pq2-list__helpfulness-icon_dislike<?php if ($this->isCustomerDislikeQuestion($question->getId())) : ?> aw-pq2-list__helpfulness-icon_dislike_voted<?php endif; ?><?php if (!$this->isCustomerCanVoteQuestion()) : ?> aw-pq2-list__helpfulness-icon_state_disabled<?php endif;?>" href="<?php echo $this->getDislikeQuestionUrl($question); ?>"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aw-pq2-list__answer-list" style="display: none;">
+                        <div class="aw-pq2-list__question-date"><?php echo $this->__('Question by: %s on %s', $this->escapeHtml($question->getAuthorName()), $this->formatDate($question->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM, true)); ?></div>
+                        <?php $answerCollection = $this->getAnswerCollectionForQuestion($question); ?>
+                        <?php if ($answerCollection->getSize() > 0) : ?>
+                            <?php foreach ($answerCollection as $answer) : ?>
+                                <div class="aw-pq2-list__answer-item aw-pq2-list__answer-item_hidden<?php if ($answer->getIsAdmin()): ?> aw-pq2-list__answer-item_type_admin<?php endif; ?>">
+                                    <div class="aw-pq2-list__answer-wrapper">
+                                        <div class="aw-pq2-list__answer">
+                                            <div class="aw-pq2-list__answer-content"><?php echo $this->getAnswerContent($answer); ?></div>
+                                            <?php $authorName = $this->escapeHtml($answer->getAuthorName()); ?>
+                                            <?php if ($answer->getIsAdmin()) : ?>
+                                                <?php $authorName = '<span class="aw-pq2-list__admin-name">' . $authorName . ' ' . $this->__('(Admin)') . '</span>'; ?>
+                                            <?php endif; ?>
+                                            <div class="aw-pq2-list__answer-date"><?php echo $this->__('Answer by: %s on %s', $authorName, $this->formatDate($answer->getCreatedAt(), Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM, true)); ?></div>
+                                        </div>
+                                        <div class="aw-pq2-list__helpfulness">
+                                            <div class="aw-pq2-list__helpfulness-layout">
+                                                <div class="aw-pq2-list__helpfulness-layout-unit">
+                                                    <a title="<?php echo $this->getTitleForAnswerVote();?>" class="aw-pq2-list__helpfulness-icon aw-pq2-list__helpfulness-icon_like<?php if ($this->isCustomerLikeAnswer($answer->getId())) : ?> aw-pq2-list__helpfulness-icon_like_voted<?php endif; ?><?php if (!$this->isCustomerCanVoteAnswer()) : ?> aw-pq2-list__helpfulness-icon_state_disabled<?php endif;?>" href="<?php echo $this->getLikeAnswerUrl($answer); ?>"></a>
+                                                </div>
+                                                <div class="aw-pq2-list__helpfulness-layout-unit aw-pq2-list__helpfulness-layout-unit_position_center">
+                                                    <span class="aw-pq2-list__helpfulness-value"><?php echo $answer->getHelpfulness(); ?></span>
+                                                    <span class="aw-pq2-list__helpfulness-progress" style="display:none;"></span>
+                                                </div>
+                                                <div class="aw-pq2-list__helpfulness-layout-unit">
+                                                    <a title="<?php echo $this->getTitleForAnswerVote();?>" class="aw-pq2-list__helpfulness-icon aw-pq2-list__helpfulness-icon_dislike<?php if ($this->isCustomerDislikeAnswer($answer->getId())) : ?> aw-pq2-list__helpfulness-icon_dislike_voted<?php endif; ?><?php if (!$this->isCustomerCanVoteAnswer()) : ?> aw-pq2-list__helpfulness-icon_state_disabled<?php endif;?>" href="<?php echo $this->getDislikeAnswerUrl($answer); ?>"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <div class="aw-pq2-list__no-answers"><?php echo $this->__('No answers yet. Be the first to answer the question!'); ?></div>
+                        <?php endif; ?>
+                        <div class="aw-pq2-list__answer-action-bar">
+                            <div class="aw-pq2-list__next-answer-wrapper" >
+                                <p class="aw-pq2-list__next-answer" style="display:none;">
+                                    <a href="javascript:void(0)"><?php echo $this->__('Next Answers'); ?></a>
+                                </p>
+                            </div>
+                            <div class="aw-pq2-list__add-answer-button-wrapper">
+                                <?php if ($this->canAnswerQuestion()) : ?>
+                                    <button type="button" class="button aw_pq2__add-answer-button" title="<?php echo $this->__('Add Answer'); ?>"><span><span><?php echo $this->__('Add Answer'); ?></span></span></button>
+                                <?php else : ?>
+                                    <?php echo $this->getAnswerMessage(); ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="aw-pq2-question-form__wrapper aw-pq2-answer-form" style="display: none;">
+                                <?php echo $this->getChild('aw_pq2_add_answer_form')->setQuestionId($question->getId())->toHtml(); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div class="aw-pq2-list__question-action-bar">
+                <div class="aw-pq2-list__next-question-wrapper" >
+                    <p class="aw-pq2-list__next-question" style="display:none;">
+                        <a href="javascript:void(0)"><?php echo $this->__('Next Questions'); ?></a>
+                    </p>
+                </div>
+            </div>
+        <?php else : ?>
+            <div class="aw-pq2-list__no-questions"><?php echo $this->__('No questions yet. Be the first to ask the question!'); ?></div>
+        <?php endif; ?>
+        <script type="text/javascript">
+            var config = {
+                'addQuestionButtonSelector'                 : '.aw-pq2-list__add-question-button',
+                'addQuestionButtonTextContainerSelector'    : 'span span',
+                'addQuestionButtonText'                     : {
+                    'inactive'  : <?php echo Zend_Json::encode($this->__('Ask Question'));?>,
+                    'active'    : <?php echo Zend_Json::encode($this->__('Hide Question Form'));?>
+                },
+                'questionFormSelector'                      : '.aw-pq2-question-form',
+                'questionContentSelector'                   : '.aw-pq2-list__question-content',
+                'questionExpandSelector'                    : '.aw-pq2-list__question-expand',
+                'questionExpandStatus'                      : {
+                    'activeClassName'   : 'aw-pq2-list__question-expand_arrow_right',
+                    'inactiveClassName' : 'aw-pq2-list__question-expand_arrow_down'
+                },
+                'questionItemContainerSelector'             : '.aw-pq2-list__question-item',
+                'questionItemHiddenClass'                   : 'aw-pq2-list__question-item_hidden',
+                'nextQuestionsSelector'                     : '.aw-pq2-list__next-question',
+                'questionPageSize'                          : <?php echo $this->getQuestionPageSize();?>,
+                'answerItemHiddenClass'                     : 'aw-pq2-list__answer-item_hidden',
+                'answerListContainerSelector'               : '.aw-pq2-list__answer-list',
+                'addAnswerButtonSelector'                   : '.aw_pq2__add-answer-button',
+                'addAnswerButtonTextContainerSelector'      : 'span span',
+                'addAnswerButtonText'                     : {
+                    'inactive'  : <?php echo Zend_Json::encode($this->__('Add Answer'));?>,
+                    'active'    : <?php echo Zend_Json::encode($this->__('Hide Answer Form'));?>
+                },
+                'nextAnswersSelector'                       : '.aw-pq2-list__next-answer',
+                'answerFormSelector'                        : '.aw-pq2-answer-form',
+                'answerPageSize'                            : <?php echo $this->getAnswerPageSize();?>
+            };
+            var _awPq2ItemManager = new awPq2ItemManager(config);
+
+            var voterManagerConfig = {
+                'voterContainerSelector': '.aw-pq2-list__helpfulness',
+                'likeSelector': '.aw-pq2-list__helpfulness-icon_like',
+                'disabledClass': 'aw-pq2-list__helpfulness-icon_state_disabled',
+                'votedLikeClass': 'aw-pq2-list__helpfulness-icon_like_voted',
+                'dislikeSelector': '.aw-pq2-list__helpfulness-icon_dislike',
+                'votedDislikeClass': 'aw-pq2-list__helpfulness-icon_dislike_voted',
+                'valueSelector': '.aw-pq2-list__helpfulness-value',
+                'progressSelector': '.aw-pq2-list__helpfulness-progress'
+            };
+            var _awPq2VoteManager = new awPq2VoteManager(voterManagerConfig);
+        </script>
+    </div>
+</div>
+<?php endif; ?>

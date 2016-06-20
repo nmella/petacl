@@ -1,0 +1,32 @@
+<?php 
+    $_items = $this->getItems();
+?>
+<div class="entry-edit">
+  <div class="entry-edit-head">
+    <h4 class="icon-head head-products"><?php echo $this->__('Items'); ?></h4>
+  </div>
+</div>
+<div class="grid np">
+  <div class="hor-scroll">
+    <table cellspacing="0" class="data order-item-table">
+        <thead>
+            <tr class="headings">
+                <th><?php echo $this->__('Image') ?></th>
+                <th><?php echo $this->__('Name') ?></th>
+                <th><?php echo $this->__('Reviewed') ?></th>
+            </tr>
+        </thead>
+        <?php $i=0; foreach ($_items as $_item):?>
+            <?php $i++;?>
+            <tbody class="odd">
+                <tr class="border">
+                  <td width="75"><?php echo $_item->getThumbnailHtml(65); ?></td>
+                  <td><small><?php echo $_item->getName(); ?></small></td>
+                  <td width="10"><small><?php echo ($_item->getIsReviewed() ? $this->__('Yes') : $this->__('No')); ?></small></td>
+                </tr>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+  </div>
+</div>
+<br />

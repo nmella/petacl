@@ -1,0 +1,6 @@
+<?php if (Mage::getDesign()->getPackageName() == 'rwd'): ?>
+	<?php if (!$this->getIsLoggedIn()): ?>
+	<?php endif; ?>
+<?php else: ?>
+	<a href="<?php echo Mage::helper("customer")->getRegisterUrl(); ?>" title="<?php echo $this->__('Register'); ?>"><?php echo $this->__('Register'); ?></a>
+<?php endif; ?>

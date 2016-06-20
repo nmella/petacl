@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Stockstatus>
+            <version>3.8.1</version>
+        </Amasty_Stockstatus>
+    </modules>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Stockstatus before="Mage_Adminhtml">Amasty_Stockstatus_Adminhtml</Amasty_Stockstatus>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Amasty_Stockstatus>
+                    <files>
+                        <default>Amasty_Stockstatus.csv</default>
+                    </files>
+                </Amasty_Stockstatus>
+            </modules>
+        </translate>
+        
+        
+        <product>
+            <collection>
+                <attributes>
+                    <custom_stock_status />
+                    <hide_default_stock_status />
+                    <custom_stock_status_quantity_based />
+                    <custom_stock_status_qty_based />
+                </attributes>
+            </collection>
+        </product>
+	
+	<layout>
+            <updates>
+                <amstockstatus>
+                    <file>amasty/amstockstatus.xml</file>
+                </amstockstatus>
+            </updates>
+        </layout>
+        
+        
+    </frontend>
+    
+    
+    
+    
+    <adminhtml>
+
+        <translate>
+            <modules>
+                <Amasty_Stockstatus>
+                    <files>
+                        <default>Amasty_Stockstatus.csv</default>
+                    </files>
+                </Amasty_Stockstatus>
+            </modules>
+        </translate>
+		
+		<events>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <amstockstatus_core_block_abstract_to_html_before>
+                        <class>amstockstatus/observer</class>
+                        <method>onCoreBlockAbstractToHtmlBefore</method>
+                    </amstockstatus_core_block_abstract_to_html_before>
+                </observers>
+            </core_block_abstract_to_html_before>
+       </events>
+        
+    </adminhtml>
+    
+    
+    
+    
+    <global>
+    
+        <models>
+            <amstockstatus>
+                <class>Amasty_Stockstatus_Model</class>
+                <resourceModel>amstockstatus_mysql4</resourceModel>
+            </amstockstatus>
+            <amstockstatus_mysql4>
+                <class>Amasty_Stockstatus_Model_Mysql4</class>
+                <entities>
+                    <range>
+                        <table>amasty_stockstatus_quantityranges</table>
+                    </range>
+                    <history>
+                        <table>amasty_stockstatus_history</table>
+                    </history>
+                </entities>
+            </amstockstatus_mysql4>
+            
+            <sales>
+                <rewrite>
+                    <quote_item>Amasty_Stockstatus_Model_Rewrite_Sales_Quote_Item</quote_item>
+                </rewrite>
+            </sales>
+            <catalog>
+                <rewrite>
+                    <product_type_configurable>Amasty_Stockstatus_Model_Rewrite_Catalog_Product_Type_Configurable</product_type_configurable>
+                </rewrite>
+            </catalog>
+        </models>
+        
+		<resources>
+             <amstockstatus_setup>
+                <setup>
+                    <module>Amasty_Stockstatus</module>
+                    <class>Amasty_Stockstatus_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amstockstatus_setup>
+		    <amstockstatus_write>
+		        <connection><use>core_write</use></connection>
+		    </amstockstatus_write>
+		    <amstockstatus_read>
+		        <connection><use>core_read</use></connection>
+		    </amstockstatus_read>
+		</resources>
+		  
+        <blocks>
+            <amstockstatus>
+                <class>Amasty_Stockstatus_Block</class>
+            </amstockstatus>
+            
+            <catalog>
+                <rewrite>
+                    <product_view_type_configurable>Amasty_Stockstatus_Block_Rewrite_Product_View_Type_Configurable</product_view_type_configurable>
+                    <product_view_type_grouped>Amasty_Stockstatus_Block_Rewrite_Product_View_Type_Grouped</product_view_type_grouped>
+                </rewrite>
+            </catalog>
+            
+            <checkout>
+                <rewrite>
+                    <cart_item_renderer>Amasty_Stockstatus_Block_Rewrite_Checkout_Cart_Item_Renderer</cart_item_renderer>
+		            <cart_item_renderer_configurable>Amasty_Stockstatus_Block_Rewrite_Checkout_Cart_Item_Renderer_Configurable</cart_item_renderer_configurable>
+                </rewrite>
+            </checkout>
+            
+            <bundle>
+                <rewrite>
+		            <checkout_cart_item_renderer>Amasty_Stockstatus_Block_Bundle_Checkout_Cart_Item_Renderer</checkout_cart_item_renderer>
+                    <catalog_product_view_type_bundle_option_checkbox>Amasty_Stockstatus_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Checkbox</catalog_product_view_type_bundle_option_checkbox>
+                    <catalog_product_view_type_bundle_option_multi>Amasty_Stockstatus_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Multi</catalog_product_view_type_bundle_option_multi>
+                    <catalog_product_view_type_bundle_option_radio>Amasty_Stockstatus_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Radio</catalog_product_view_type_bundle_option_radio>
+                    <catalog_product_view_type_bundle_option_select>Amasty_Stockstatus_Block_Bundle_Catalog_Product_View_Type_Bundle_Option_Select</catalog_product_view_type_bundle_option_select>
+                </rewrite>
+            </bundle>           
+        </blocks>
+        <helpers>
+            <amstockstatus>
+                <class>Amasty_Stockstatus_Helper</class>
+            </amstockstatus>
+        </helpers>
+        
+        
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <amstockstatus_sales_order_load_before>
+                        <class>amstockstatus/observer</class>
+                        <method>salesOrderLoadBefore</method>
+                    </amstockstatus_sales_order_load_before>
+                </observers>
+            </sales_order_save_after>
+            <sales_order_item_collection_load_after>
+                <observers>
+                    <amstockstatus_sales_order_item_collection_load_after>
+                        <class>amstockstatus/observer</class>
+                        <method>salesOrderItemCollectionLoadAfter</method>
+                    </amstockstatus_sales_order_item_collection_load_after>
+                </observers>
+            </sales_order_item_collection_load_after>
+
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <amstockstatus7>
+                        <class>amstockstatus/observer</class>
+                        <method>coreBlockAbstractToHtmlBefore</method>
+                    </amstockstatus7>
+                </observers>
+            </core_block_abstract_to_html_before>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <amstockstatus1>
+                        <class>amstockstatus/observer</class>
+                        <method>onListBlockHtmlBefore</method>
+                    </amstockstatus1>
+                </observers>
+            </core_block_abstract_to_html_after>
+            
+            <model_save_before>
+                <observers>
+                    <amstockstatus2>
+                        <type>singleton</type>
+                        <class>amstockstatus/observer</class>
+                        <method>onModelSaveBefore</method>
+                    </amstockstatus2>
+                </observers>
+            </model_save_before>
+            
+            <catalog_product_is_salable_after>
+                <observers>
+                    <amstockstatus3>
+                        <type>singleton</type>
+                        <class>amstockstatus/observer</class>
+                        <method>onCatalogProductIsSalableAfter</method>
+                    </amstockstatus3>
+                </observers>
+            </catalog_product_is_salable_after>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <amstockstatus4>
+                        <class>amstockstatus/observer</class>
+                        <method>onProductBlockHtmlBefore</method>
+                    </amstockstatus4>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </global>
+    
+    
+    <default>
+        <amstockstatus>
+            <general translate="alt_text">
+                <displayforoutonly>0</displayforoutonly>
+                <displayincart>1</displayincart>
+                <displayinemail>1</displayinemail>
+                <display_at_categoty>0</display_at_categoty>
+                <userangesonly>0</userangesonly>
+                <use_range_rules>0</use_range_rules>
+                <icononly>0</icononly>
+                <stockalert>1</stockalert>
+                <outofstock>1</outofstock>
+                <alt_text>{qty} left in stock.</alt_text>
+                <alt_text_loggedin>0</alt_text_loggedin>
+                <change_custom_configurable_status>0</change_custom_configurable_status>
+            </general>
+        </amstockstatus>
+    </default>
+    
+</config>

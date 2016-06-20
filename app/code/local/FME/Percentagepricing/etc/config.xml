@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   FME
+ * @package    FME_Percentagepricing
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+
+ <config>
+	<modules>
+		<FME_Percentagepricing>
+            <version>0.1.0</version>
+        </FME_Percentagepricing>
+    </modules>
+    <frontend>
+        <routers>
+            <percentagepricing>
+                <use>standard</use>
+                <args>
+                    <module>FME_Percentagepricing</module>
+                    <frontName>percentagepricing</frontName>
+                </args>
+            </percentagepricing>
+        </routers>
+		<translate>
+            <modules>
+                <FME_Percentagepricing>
+                    <files>
+                        <default>FME_Percentagepricing.csv</default>
+                    </files>
+                </FME_Percentagepricing>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <percentagepricing>
+                    <file>percentagepricing.xml</file>
+                </percentagepricing>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<percentagepricing>
+				<use>admin</use>
+				<args>
+					<module>FME_Percentagepricing</module>
+					<frontName>percentagepricing</frontName>
+				</args>
+			</percentagepricing>
+        </routers>
+    </admin>
+    <adminhtml>
+
+		<translate>
+            <modules>
+                <FME_Percentagepricing>
+                    <files>
+                        <default>FME_Percentagepricing.csv</default>
+                    </files>
+                </FME_Percentagepricing>
+            </modules>
+        </translate>
+		<layout>
+			<updates>
+				<percentagepricing>
+					<file>percentagepricing.xml</file>
+				</percentagepricing>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <percentagepricing>
+                <class>FME_Percentagepricing_Model</class>
+                <resourceModel>percentagepricing_mysql4</resourceModel>
+            </percentagepricing>
+            <percentagepricing_mysql4>
+                <class>FME_Percentagepricing_Model_Mysql4</class>
+                <entities>
+                    <percentagepricing>
+                        <table>percentagepricing</table>
+                    </percentagepricing>
+                </entities>
+            </percentagepricing_mysql4>
+			<catalog>
+				<rewrite>
+					<product_type_price>FME_Percentagepricing_Model_Price</product_type_price>
+				</rewrite>
+			</catalog>
+        </models>
+        <resources>
+            <percentagepricing_setup>
+                <setup>
+                    <module>FME_Percentagepricing</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </percentagepricing_setup>
+            <percentagepricing_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </percentagepricing_write>
+            <percentagepricing_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </percentagepricing_read>
+        </resources>
+        <blocks>
+            <percentagepricing>
+                <class>FME_Percentagepricing_Block</class>
+            </percentagepricing>
+        </blocks>
+        <helpers>
+            <percentagepricing>
+                <class>FME_Percentagepricing_Helper</class>
+            </percentagepricing>
+        </helpers>
+
+
+
+    </global>
+</config>

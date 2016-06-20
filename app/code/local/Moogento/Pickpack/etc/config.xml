@@ -1,0 +1,1565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Moogento
+  
+  SOFTWARE LICENSE
+  
+  This source file is covered by the Moogento End User License Agreement
+  that is bundled with this extension in the file License.html
+  It is also available online here:
+  https://moogento.com/License.html
+  
+  NOTICE
+  
+  If you customize this file please remember that it will be overwrtitten
+  with any future upgrade installs. 
+  If you'd like to add a feature which is not in this software, get in touch
+  at www.moogento.com for a quote.
+  
+  ID          pe+sMEDTrtCzNq3pehW9DJ0lnYtgqva4i4Z=
+  File        config.xml
+  @category   Moogento
+  @package    pickPack
+  @copyright  Copyright (c) 2016 Moogento <info@moogento.com> / All rights reserved.
+  @license    https://moogento.com/License.html
+-->
+<config>
+    <modules>
+        <Moogento_Pickpack>
+            <version>4.0.0</version>
+        </Moogento_Pickpack>
+    </modules>
+    <default>
+        <moogento>
+            <general>
+                <url>https://moogento.com/</url>
+            </general>
+        </moogento>
+        <pickpack_options>
+
+            <general>
+				<shipment_details_bold_label>1</shipment_details_bold_label>
+				<filter_virtual_products_yn>0</filter_virtual_products_yn>
+                <pickpack_tickbox>pickpack</pickpack_tickbox>
+                <page_size>a4</page_size>
+                <address_format>{if company}{company},|{/if}
+{if name}{name},|{/if}
+{if street}{street},|{/if}
+{if city}{city},{/if} {if region}{region}{/if} {if postcode} {postcode}|{/if}
+{if country}{country}|{/if}</address_format>
+                <override_address_format_yn>1</override_address_format_yn>
+                <address_countryskip></address_countryskip>
+                <capitalize_label_yn>0</capitalize_label_yn>
+                <customer_email_yn>yesdetails</customer_email_yn>
+                <customer_phone_yn>yes</customer_phone_yn>
+                <date_format>M j, Y</date_format>
+                <pickpack_split_supplier_options>pickpack</pickpack_split_supplier_options>
+                <pickpack_supplier_login>admin:all;</pickpack_supplier_login>
+				<custom_fonts_yn>0</custom_fonts_yn>
+				<callout_color>#8AC371</callout_color>
+                <background_color_subtitles>#8AC371</background_color_subtitles>
+				<titlebar_padding_top>0</titlebar_padding_top>
+				<titlebar_padding_bot>0</titlebar_padding_bot>
+                <font_color_subtitles>#111111</font_color_subtitles>
+                <font_family_subtitles>opensans</font_family_subtitles>
+                <font_style_subtitles>regular</font_style_subtitles>
+				<font_custom_subtitles></font_custom_subtitles>
+                <font_size_subtitles>15</font_size_subtitles>
+                <font_color_company>#111111</font_color_company>
+                <font_family_company>opensans</font_family_company>
+                <font_style_company>regular</font_style_company>
+                <font_size_company>8</font_size_company>
+                <line_width_company>1</line_width_company>
+                <font_color_header>#556b2f</font_color_header>
+                <font_family_header>opensans</font_family_header>
+                <font_style_header>regular</font_style_header>
+                <font_size_header>16</font_size_header>
+                <font_color_body>#111111</font_color_body>
+                <font_family_body>opensans</font_family_body>
+                <font_style_body>regular</font_style_body>
+                <font_size_body>10</font_size_body>
+                <font_size_options>8</font_size_options>
+                <background_color_product>#FFFFFF</background_color_product>
+                <font_color_message>#111111</font_color_message>
+                <font_family_message>opensans</font_family_message>
+                <font_style_message>regular</font_style_message>
+                <font_size_message>10</font_size_message>
+                <bkg_color_message>#87CEEB</bkg_color_message>
+                <font_color_comments>#111111</font_color_comments>
+                <font_family_comments>opensans</font_family_comments>
+                <font_style_comments>regular</font_style_comments>
+                <font_size_comments>10</font_size_comments>
+                <bkg_color_comments>#87CEEB</bkg_color_comments>
+                <font_color_gift_message>#111111</font_color_gift_message>
+                <font_family_gift_message>opensans</font_family_gift_message>
+                <font_style_gift_message>regular</font_style_gift_message>
+                <font_size_gift_message>10</font_size_gift_message>
+                <bkg_color_gift_message>#111111</bkg_color_gift_message>
+				<fill_bkg_gift_message_yn>0</fill_bkg_gift_message_yn>
+				<gift_override_yn>1</gift_override_yn>
+                <font_family_gift_override>droid</font_family_gift_override>
+                <font_style_gift_override>regular</font_style_gift_override>
+                <font_size_gift_override>13</font_size_gift_override>
+                <non_standard_characters>0</non_standard_characters>
+				<shelvingpos>col</shelvingpos>
+                <sort_packing_yn>1</sort_packing_yn>
+                <sort_packing>sku</sort_packing>
+                <sort_packing_order>ascending</sort_packing_order>
+                <sort_packing_attribute></sort_packing_attribute>
+                <second_page_start>top</second_page_start>
+                <trim_names_yn>1</trim_names_yn>
+                <combined_orders_grouped_by_id_yn>0</combined_orders_grouped_by_id_yn>
+                <font_style_shipping_billing_title>bold</font_style_shipping_billing_title>
+                <font_family_barcode>code128</font_family_barcode>
+                <font_size_barcode_order>11</font_size_barcode_order>
+                <font_size_barcode_product>11</font_size_barcode_product>
+				<fillbar_padding>6,4</fillbar_padding>
+				<bottom_line_width>4,1</bottom_line_width>
+				<fill_bars_subtitles>1</fill_bars_subtitles>
+				<bold_address_format_yn>1</bold_address_format_yn>
+				<bold_topaddress_format_yn>0</bold_topaddress_format_yn>
+				<remove_accents_from_chars_yn>0</remove_accents_from_chars_yn>
+                <pickpack_supplier_attribute>supplier</pickpack_supplier_attribute>
+				<gift_image_yn>1</gift_image_yn>
+				<gift_image></gift_image>
+				<gift_image_nudge></gift_image_nudge>
+            </general>
+			<general_csv>
+				<csv_field_separator>,</csv_field_separator>
+	            <csv_quote_values_yn>1</csv_quote_values_yn>
+				<csv_strip_linebreaks_yn>1</csv_strip_linebreaks_yn>
+				<csv_encoding>ansi</csv_encoding>
+            </general_csv>
+            <messages>
+                <pickpack_pickproductbarcode_combined_X_Pos>200</pickpack_pickproductbarcode_combined_X_Pos>
+                <pickpack_pickproductbarcode_combined_bottom_font_size>8
+                </pickpack_pickproductbarcode_combined_bottom_font_size>
+                <pickpack_count>1</pickpack_count>
+                <order_count_yn>1</order_count_yn>
+                <pickpack_packprint>1</pickpack_packprint>
+                <pickpack_currency>USD</pickpack_currency>
+                <combined_sku_yn>1</combined_sku_yn>
+                <combined_total_product_paid_options>0</combined_total_product_paid_options>
+                <pickpack_namenudge_combined>250</pickpack_namenudge_combined>
+                <pickpack_configname_combined>configurable</pickpack_configname_combined>
+                <pickpack_configname_attribute_combined></pickpack_configname_attribute_combined>
+                <pickpack_shelving_yn>0</pickpack_shelving_yn>
+                <pickpack_shelving></pickpack_shelving>
+                <pickpack_shelving_nudge>200</pickpack_shelving_nudge>
+                <pickpack_extra_yn>0</pickpack_extra_yn>
+                <pickpack_extra_nudge>250</pickpack_extra_nudge>
+                <pickpack_sku_nudge>50</pickpack_sku_nudge>
+                <pickpack_options_yn>inline</pickpack_options_yn>
+                <pickpack_options_filter_yn>0</pickpack_options_filter_yn>
+                <pickpack_options_filter></pickpack_options_filter>
+                <pickpack_options_count_filter></pickpack_options_count_filter>
+                <col_title_position_qty>Qty,65</col_title_position_qty>
+                <col_title_position_sku>SKU,95</col_title_position_sku>
+                <col_total_paid_position_sku>Paid,450</col_total_paid_position_sku>
+                <col_title_position_weight>Weight (1),200</col_title_position_weight>
+                <col_title_position_name>Name,200</col_title_position_name>
+                <col_title_position_stock>Stock Alert,460</col_title_position_stock>
+                <col_title_position_attr1>Shelf,380</col_title_position_attr1>
+                <col_title_position_attr2>Color,410</col_title_position_attr2>
+                <col_title_position_attr2>Size,300</col_title_position_attr2>
+                <alternate_row_color>#DDDDDD</alternate_row_color>
+                <shipping_subtotal_yn>0</shipping_subtotal_yn>
+                <total_paid_subtotal_yn>0</total_paid_subtotal_yn>
+                <sort_packing_yn>1</sort_packing_yn>
+                <sort_packing>sku</sort_packing>
+                <sort_packing_order>ascending</sort_packing_order>
+                <sort_packing_attribute></sort_packing_attribute>
+                <auto_processing>0</auto_processing>
+                <enable_auto_processing>0</enable_auto_processing>
+                <auto_processing_send_to></auto_processing_send_to>
+                <auto_processing_subject>Auto Generated Packing Sheet PDF</auto_processing_subject>
+                <auto_processing_body><![CDATA[Please see Packing Sheet PDF attached.]]></auto_processing_body>
+                <auto_processing_sender>sales</auto_processing_sender>
+                <auto_processing_export_path><![CDATA[var/pickPack]]></auto_processing_export_path>
+                <auto_processing_ftp_port>21</auto_processing_ftp_port>
+                <auto_processing_set_flag>1</auto_processing_set_flag>
+                <auto_processing_additional_action>0</auto_processing_additional_action>
+                <auto_processing_condition_status>processing</auto_processing_condition_status>
+                <auto_processing_groupping>1</auto_processing_groupping>
+                <product_images_yn>0</product_images_yn>
+                <product_images_source>image</product_images_source>
+                <product_images_maxdimensions>25,25</product_images_maxdimensions>
+                <product_images_border_color>#FFFFFF</product_images_border_color>
+                <parent_image_yn>1</parent_image_yn>
+                <product_images_y_nudge>10</product_images_y_nudge>
+                <col_title_product_images>,40</col_title_product_images>
+                <combined_weight_yn>0</combined_weight_yn>
+                <combined_weight_rounding>2</combined_weight_rounding>
+                <combined_total_weight_yn>0</combined_total_weight_yn>
+				<pickpack_name_yn_combined>1</pickpack_name_yn_combined>
+                <combined_tickbox_yn>1</combined_tickbox_yn>
+				<product_qty_upsize_yn>1</product_qty_upsize_yn>
+				<auto_processing_ftp_remote_path>var/export/pickPack</auto_processing_ftp_remote_path>
+                <auto_processing_ftp_remote_path_2nd>var/export/pickPack</auto_processing_ftp_remote_path_2nd>
+                <auto_processing_ftp_remote_path_3rd>var/export/pickPack</auto_processing_ftp_remote_path_3rd>
+            </messages>
+
+            <button_invoice>
+            	<turn_on_front_end_feature>1</turn_on_front_end_feature>
+                <order_pdf_invoice_button>1</order_pdf_invoice_button>
+                <order_pdf_packing_sheet_button>1</order_pdf_packing_sheet_button>
+                <frontend_order_pdf_invoice_button>0</frontend_order_pdf_invoice_button>
+                <frontend_order_pdf_packing_sheet_button>0</frontend_order_pdf_packing_sheet_button>
+                <frontend_change_order_pdf_button>0</frontend_change_order_pdf_button>
+                <frontend_change_order_pdf_invoice_button>0</frontend_change_order_pdf_invoice_button>
+				<order_pdf_invoice_and_packing_sheet_button>0</order_pdf_invoice_and_packing_sheet_button>
+                <order_pdf_zebra_label_button>0</order_pdf_zebra_label_button>
+            </button_invoice>
+
+            <trolleybox_picklist>
+                <trolleybox_yn>1</trolleybox_yn>
+                <show_orderid_with_trolleyboxid_yn>1</show_orderid_with_trolleyboxid_yn>
+                <show_bundle_parent_yn>0</show_bundle_parent_yn>
+                <qty_yn>0</qty_yn>
+                <trolleybox_max>6</trolleybox_max>
+                <pickpack_count>1</pickpack_count>
+                <order_count_yn>1</order_count_yn>
+                <pickpack_packprint>1</pickpack_packprint>
+                <pickpack_currency>USD</pickpack_currency>
+                <combined_sku_yn>1</combined_sku_yn>
+                <pickpack_namenudge_combined>250</pickpack_namenudge_combined>
+                <pickpack_configname_combined>configurable</pickpack_configname_combined>
+                <pickpack_configname_attribute_combined></pickpack_configname_attribute_combined>
+                <pickpack_shelving_yn>0</pickpack_shelving_yn>
+                <pickpack_shelving></pickpack_shelving>
+                <pickpack_shelving_nudge>200</pickpack_shelving_nudge>
+                <pickpack_extra_yn>0</pickpack_extra_yn>
+                <pickpack_extra_nudge>250</pickpack_extra_nudge>
+                <pickpack_sku_nudge>50</pickpack_sku_nudge>
+                <pickpack_options_yn>inline</pickpack_options_yn>
+                <pickpack_options_filter_yn>0</pickpack_options_filter_yn>
+                <pickpack_options_filter></pickpack_options_filter>
+                <pickpack_options_count_filter></pickpack_options_count_filter>
+                <col_title_position_qty>Qty,10</col_title_position_qty>
+                <col_title_position_sku>SKU,80</col_title_position_sku>
+                <col_title_position_name>Name,250</col_title_position_name>
+                <col_title_position_stock>Stock Alert,460</col_title_position_stock>
+                <col_title_position_attr1>Shelf,380</col_title_position_attr1>
+                <col_title_position_attr2>Color,410</col_title_position_attr2>
+                <col_title_position_attr2>Size,300</col_title_position_attr2>
+                <alternate_row_color>#DDDDDD</alternate_row_color>
+                <shipping_subtotal_yn>0</shipping_subtotal_yn>
+                <total_paid_subtotal_yn>0</total_paid_subtotal_yn>
+                <sort_packing_yn>1</sort_packing_yn>
+                <sort_packing>sku</sort_packing>
+                <sort_packing_order>ascending</sort_packing_order>
+                <sort_packing_attribute></sort_packing_attribute>
+                <auto_processing>0</auto_processing>
+                <enable_auto_processing>0</enable_auto_processing>
+                <auto_processing_send_to></auto_processing_send_to>
+                <auto_processing_subject>Auto Generated Packing Sheet PDF</auto_processing_subject>
+                <auto_processing_body><![CDATA[Please see Packing Sheet PDF attached.]]></auto_processing_body>
+                <auto_processing_sender>sales</auto_processing_sender>
+                <auto_processing_export_path><![CDATA[var/pickPack]]></auto_processing_export_path>
+                <auto_processing_ftp_port>21</auto_processing_ftp_port>
+                <auto_processing_set_flag>1</auto_processing_set_flag>
+                <auto_processing_additional_action>0</auto_processing_additional_action>
+                <auto_processing_condition_status>processing</auto_processing_condition_status>
+                <auto_processing_groupping>1</auto_processing_groupping>
+                <product_images_yn>0</product_images_yn>
+                <product_images_source>image</product_images_source>
+                <product_images_maxdimensions>25,25</product_images_maxdimensions>
+                <product_images_border_color>#FFFFFF</product_images_border_color>
+                <parent_image_yn>1</parent_image_yn>
+                <product_images_y_nudge>10</product_images_y_nudge>
+                <col_title_product_images>,40</col_title_product_images>
+            </trolleybox_picklist>
+            
+            <picks>
+                <pickpack_pickproductbarcode_X_Pos>185</pickpack_pickproductbarcode_X_Pos>
+                <pickpack_pickproductbarcode_bottom_font_size>8</pickpack_pickproductbarcode_bottom_font_size>
+                <auto_processing>0</auto_processing>
+                <enable_auto_processing>0</enable_auto_processing>
+                <auto_processing_send_to></auto_processing_send_to>
+                <auto_processing_subject>Auto Generated Packing Sheet PDF</auto_processing_subject>
+                <auto_processing_body><![CDATA[Please see Packing Sheet PDF attached.]]></auto_processing_body>
+                <auto_processing_sender>sales</auto_processing_sender>
+                <auto_processing_export_path><![CDATA[var/pickPack]]></auto_processing_export_path>
+                <auto_processing_ftp_port>21</auto_processing_ftp_port>
+                <auto_processing_set_flag>1</auto_processing_set_flag>
+                <auto_processing_additional_action>0</auto_processing_additional_action>
+                <auto_processing_condition_status>processing</auto_processing_condition_status>
+                <auto_processing_groupping>1</auto_processing_groupping>
+                <pickpack_shipmethod>1</pickpack_shipmethod>
+                <separated_options_yn>1</separated_options_yn>
+                <pickpack_sku_yn_separated>1</pickpack_sku_yn_separated>
+                <pickpack_skunudge_separated>67</pickpack_skunudge_separated>
+                <pickpack_name_yn_separated>1</pickpack_name_yn_separated>
+                <pickpack_namenudge_separated>250</pickpack_namenudge_separated>
+                <pickpack_configname_separated>configurable</pickpack_configname_separated>
+                <pickpack_configname_attribute_separated></pickpack_configname_attribute_separated>
+				<pickpack_order_address_yn>1</pickpack_order_address_yn>
+				<pickpack_order_billing_address_yn>0</pickpack_order_billing_address_yn>
+                <product_images_yn>0</product_images_yn>
+                <product_images_border_color>#FFFFFF</product_images_border_color>
+                <parent_image_yn>1</parent_image_yn>
+                <product_images_y_nudge>10</product_images_y_nudge>
+                <product_images_source>thumbnail</product_images_source>
+                <product_images_maxdimensions>25,25</product_images_maxdimensions>
+                <col_title_product_images>50,50</col_title_product_images>
+                <pickpack_tickbox_yn_separated>1</pickpack_tickbox_yn_separated>
+                <pickpack_tickboxnudge_separated>27</pickpack_tickboxnudge_separated>
+				<product_qty_upsize_yn>1</product_qty_upsize_yn>
+				<address_label_yn>0</address_label_yn>
+				<auto_processing_ftp_remote_path>var/export/pickPack</auto_processing_ftp_remote_path>
+                <auto_processing_ftp_remote_path_2nd>var/export/pickPack</auto_processing_ftp_remote_path_2nd>
+                <auto_processing_ftp_remote_path_3rd>var/export/pickPack</auto_processing_ftp_remote_path_3rd>
+            </picks>
+            
+			<picks2>
+                <pickpack_order_number_yn>1</pickpack_order_number_yn>
+                <pickpack_pickproductbarcode_X_Pos>185</pickpack_pickproductbarcode_X_Pos>
+                <pickpack_pickproductbarcode_bottom_font_size>8</pickpack_pickproductbarcode_bottom_font_size>
+                <auto_processing>0</auto_processing>
+                <enable_auto_processing>0</enable_auto_processing>
+                <auto_processing_send_to></auto_processing_send_to>
+                <auto_processing_subject>Auto Generated Packing Sheet PDF</auto_processing_subject>
+                <auto_processing_body><![CDATA[Please see Packing Sheet PDF attached.]]></auto_processing_body>
+                <auto_processing_sender>sales</auto_processing_sender>
+                <auto_processing_export_path><![CDATA[var/pickPack]]></auto_processing_export_path>
+                <auto_processing_ftp_port>21</auto_processing_ftp_port>
+                <auto_processing_set_flag>1</auto_processing_set_flag>
+                <auto_processing_additional_action>0</auto_processing_additional_action>
+                <auto_processing_condition_status>processing</auto_processing_condition_status>
+                <auto_processing_groupping>1</auto_processing_groupping>
+                <pickpack_shipmethod>1</pickpack_shipmethod>
+                <separated_options_yn>1</separated_options_yn>
+                <pickpack_sku_yn_separated>1</pickpack_sku_yn_separated>
+                <pickpack_skunudge_separated>67</pickpack_skunudge_separated>
+                <pickpack_name_yn_separated>1</pickpack_name_yn_separated>
+                <pickpack_namenudge_separated>250</pickpack_namenudge_separated>
+                <pickpack_configname_separated>configurable</pickpack_configname_separated>
+                <pickpack_configname_attribute_separated></pickpack_configname_attribute_separated>
+                <pickpack_order_address_yn>1</pickpack_order_address_yn>
+                <pickpack_order_billing_address_yn>0</pickpack_order_billing_address_yn>
+                <product_images_yn>0</product_images_yn>
+                <product_images_border_color>#FFFFFF</product_images_border_color>
+                <parent_image_yn>1</parent_image_yn>
+                <product_images_y_nudge>10</product_images_y_nudge>
+                <product_images_source>thumbnail</product_images_source>
+                <product_images_maxdimensions>25,25</product_images_maxdimensions>
+                <col_title_product_images>50,50</col_title_product_images>
+				<pickpack_price_tax>1</pickpack_price_tax>
+				<pickpack_priceshipping_incltax>1</pickpack_priceshipping_incltax>
+				<packed_by_text>Packed by: ____</packed_by_text>
+                <show_product_total>1</show_product_total>
+                <show_product_tax_total>1</show_product_tax_total>
+                <show_product_grand_total>1</show_product_grand_total>
+                <show_ship_total>1</show_ship_total>
+                <show_ship_tax_total>1</show_ship_tax_total>
+                <show_ship_grand_total>1</show_ship_grand_total>
+                <show_order_total>1</show_order_total>
+                <show_order_tax_total>1</show_order_tax_total>
+                <show_order_grand_total>1</show_order_grand_total>
+				<show_total_order>1</show_total_order>
+				<pickpack_order_date_yn>1</pickpack_order_date_yn>
+				<pickpack_invoiced_date_yn>1</pickpack_invoiced_date_yn>
+				<pickpack_price_yn_separated>1</pickpack_price_yn_separated>
+				<pickpack_pricenudge_separated>480</pickpack_pricenudge_separated>
+				<separated_options_yn_base>1</separated_options_yn_base>
+				<show_sheet_total>1</show_sheet_total>
+                <pickpack_tickbox_yn_separated>1</pickpack_tickbox_yn_separated>
+				<pickpack_tickboxnudge_separated>28</pickpack_tickboxnudge_separated>
+				<product_qty_upsize_yn>1</product_qty_upsize_yn>
+                <product_total_column_yn>0</product_total_column_yn>
+                <total_column_Xpos>520</total_column_Xpos>
+            </picks2>
+			
+            <wonder>
+                <additional_action>1</additional_action>
+                <address_pad>0,0,0</address_pad>
+                <auto_processing_additional_action>0</auto_processing_additional_action>
+                <auto_processing_body><![CDATA[Please see Packing Sheet PDF attached.]]></auto_processing_body>
+                <auto_processing_condition_status>processing</auto_processing_condition_status>
+                <auto_processing_export_path><![CDATA[var/pickPack]]></auto_processing_export_path>
+                <auto_processing_ftp_port>21</auto_processing_ftp_port>
+                <auto_processing_ftp_remote_path_2nd>var/export/pickPack</auto_processing_ftp_remote_path_2nd>
+                <auto_processing_ftp_remote_path_3rd>var/export/pickPack</auto_processing_ftp_remote_path_3rd>
+				<auto_processing_ftp_remote_path>var/export/pickPack</auto_processing_ftp_remote_path>
+                <auto_processing_groupping>1</auto_processing_groupping>
+                <auto_processing_send_to></auto_processing_send_to>
+                <auto_processing_sender>sales</auto_processing_sender>
+                <auto_processing_set_flag>1</auto_processing_set_flag>
+                <auto_processing_subject>Auto Generated Packing Sheet PDF</auto_processing_subject>
+                <auto_processing>0</auto_processing>
+				<billing_address_with_gift_yn>0</billing_address_with_gift_yn>
+                <billing_details_position>0</billing_details_position>
+                <billing_tax_details_title>Customer VAT #:</billing_tax_details_title>
+                <billing_tax_details_yn>0</billing_tax_details_yn>
+                <bundle_children_yn>1</bundle_children_yn>
+                <capitalize_label_yn>1</capitalize_label_yn>
+                <center_value_qty>1</center_value_qty>
+                <color_attribute_name>color</color_attribute_name>
+                <combine_custom_attribute_Xpos>434</combine_custom_attribute_Xpos>
+				<courierrules_method_yn>0</courierrules_method_yn>
+				<custom_message_fixed>0</custom_message_fixed>
+                <custom_message_image_line_yn>1</custom_message_image_line_yn>
+                <custom_message_image_locked_yn>1</custom_message_image_locked_yn>
+                <custom_message_image_nudge>0,0</custom_message_image_nudge>
+                <custom_message_nudge>300,200</custom_message_nudge>
+                <custom_message_yn>no</custom_message_yn>
+				<custom_round_yn>0</custom_round_yn>
+                <customer_custom_attribute_yn>0</customer_custom_attribute_yn>
+                <doubleline_yn>0</doubleline_yn>
+                <enable_auto_processing>0</enable_auto_processing>
+                <enable_auto_processing>0</enable_auto_processing>
+                <fill_product_header_yn>1</fill_product_header_yn>
+				<filter_items_by_status>0</filter_items_by_status>
+                <float_top_address_yn>1</float_top_address_yn>
+                <footer_customer_id>106,47</footer_customer_id>
+                <footer_order_id>106,76</footer_order_id>
+                <images_title></images_title>
+                <individual_product_gift_message_xpos>30</individual_product_gift_message_xpos>
+                <items_title>items</items_title>
+				<letterhead>1</letterhead>
+				<manual_processing_print_flag>0</manual_processing_print_flag>
+                <non_store_pickup_showdatetime>1</non_store_pickup_showdatetime>
+                <notes_filter_options>yesfrontend</notes_filter_options>
+                <notes_filter>captured amount</notes_filter>
+                <notes_position>yesshipping</notes_position>
+                <notes_title>Order Comments</notes_title>
+                <notes_yn>0</notes_yn>
+                <numbered_product_list_bundle_children_xpos>21</numbered_product_list_bundle_children_xpos>
+                <numbered_product_list_bundle_children_yn>0</numbered_product_list_bundle_children_yn>
+                <numbered_product_list_xpos>17</numbered_product_list_xpos>
+                <numbered_product_list_yn>0</numbered_product_list_yn>
+                <orderorinvoice>order</orderorinvoice>
+                <orderorinvoicedate>order</orderorinvoicedate>
+                <pack_barcode>450,800</pack_barcode>
+                <pack_cid>390,705</pack_cid>
+                <pack_color>400</pack_color>
+                <pack_column>570</pack_column>
+                <pack_customer>130,648</pack_customer>
+                <pack_customeraddress>130,633</pack_customeraddress>
+                <pack_noofitems>10</pack_noofitems>
+                <pack_noofitems>10</pack_noofitems>
+                <pack_oid>390,730</pack_oid>
+                <pack_order>390,755</pack_order>
+                <pack_price>505</pack_price>
+                <pack_product>230</pack_product>
+                <pack_qty>40</pack_qty>
+                <pack_size>450</pack_size>
+                <pack_sku>90</pack_sku>
+                <packed_by_text>Packed by: ____</packed_by_text>
+                <page_1_products_y_cutoff>0</page_1_products_y_cutoff>
+                <page_background_position>center_prolist</page_background_position>
+                <page_pad>0,0</page_pad>
+                <parent_image_yn>1</parent_image_yn>
+                <pickpack_bottom_shipping_address_id_yn>1</pickpack_bottom_shipping_address_id_yn>
+                <pickpack_bottom_shipping_address_yn_xtra>0</pickpack_bottom_shipping_address_yn_xtra>
+                <pickpack_bottom_shipping_address_yn>1</pickpack_bottom_shipping_address_yn>
+				<shipping_address_background_yn>0</shipping_address_background_yn>
+				<pickpack_second_bottom_shipping_address_yn>0</pickpack_second_bottom_shipping_address_yn>
+                <pickpack_company_address_yn>0</pickpack_company_address_yn>
+                <pickpack_fontsizeoverall>9</pickpack_fontsizeoverall>
+                <pickpack_fontsizeproductline>9</pickpack_fontsizeproductline>
+				<pickpack_headerbar_yn>1</pickpack_headerbar_yn>
+                <pickpack_logo_dimension>100</pickpack_logo_dimension>
+                <pickpack_logo_position>left</pickpack_logo_position>
+                <pickpack_packbarcode>1</pickpack_packbarcode>
+				<show_order_id>0</show_order_id>
+				<font_size_orderid>8</font_size_orderid>
+                <pickpack_packlogo>0</pickpack_packlogo>
+                <pickpack_return_address_yn>0</pickpack_return_address_yn>
+                <pickpack_returnfont>9</pickpack_returnfont>
+                <pickpack_returnlogo_shipping>0</pickpack_returnlogo_shipping>
+                <pickpack_returnlogo>0</pickpack_returnlogo>
+                <pickpack_shipaddress_maxpoints>250</pickpack_shipaddress_maxpoints>
+                <pickpack_shipfont_xtra>8</pickpack_shipfont_xtra>
+                <pickpack_shipfont>15</pickpack_shipfont>
+                <pickpack_title_2_yn>0</pickpack_title_2_yn>
+                <pickpack_title_pattern>Packing sheet     Order #{{order_id}}{{if order_date}}   {{order_date}}{{endif order_date}}</pickpack_title_pattern>
+                <pickpack_title_yn>0</pickpack_title_yn>
+                <pickpack_title>Packing Sheet #:</pickpack_title>
+				<positional_message_box_fixed_position>250,100</positional_message_box_fixed_position>
+                <prices_options>0</prices_options>
+                <prices_qtybackorderedX>400</prices_qtybackorderedX>
+                <prices_yn>0</prices_yn>
+				<currency_codes_or_symbols>magento</currency_codes_or_symbols>
+				<currency_symbol_position>auto</currency_symbol_position>
+                <pricesN_images_priceX>50</pricesN_images_priceX>
+                <pricesN_productX>200</pricesN_productX>
+                <pricesN_qty_priceX>40</pricesN_qty_priceX>
+                <pricesN_shelf2X>454</pricesN_shelf2X>
+                <pricesN_shelf3X>444</pricesN_shelf3X>
+                <pricesN_shelfX>434</pricesN_shelfX>
+                <pricesN_skuX>80</pricesN_skuX>
+                <pricesN_stockqtyX>530</pricesN_stockqtyX>
+                <pricesT_images_priceX>50</pricesT_images_priceX>
+                <pricesT_item_priceX>404</pricesT_item_priceX>
+                <pricesT_priceX>530</pricesT_priceX>
+                <pricesT_productX>40</pricesT_productX>
+                <pricesT_qty_priceX>350</pricesT_qty_priceX>
+                <pricesT_shelf2X>340</pricesT_shelf2X>
+                <pricesT_shelf3X>350</pricesT_shelf3X>
+                <pricesT_shelfX>330</pricesT_shelfX>
+                <pricesT_skuX>230</pricesT_skuX>
+                <pricesT_stockqtyX>530</pricesT_stockqtyX>
+                <pricesY_images_priceX>50</pricesY_images_priceX>
+                <pricesY_productX>40</pricesY_productX>
+                <pricesY_qty_priceX>410</pricesY_qty_priceX>
+                <pricesY_shelf2X>370</pricesY_shelf2X>
+                <pricesY_shelf3X>350</pricesY_shelf3X>
+                <pricesY_shelfX>350</pricesY_shelfX>
+                <pricesY_skuX>230</pricesY_skuX>
+                <pricesY_stockqtyX>530</pricesY_stockqtyX>
+                <product_images_border_color>#FFFFFF</product_images_border_color>
+                <product_images_line_nudge>0</product_images_line_nudge>
+                <product_images_maxdimensions>25,25</product_images_maxdimensions>
+                <product_images_source>image</product_images_source>
+                <product_images_y_nudge>10</product_images_y_nudge>
+                <product_images_yn>0</product_images_yn>
+				<product_name_bold_yn>0</product_name_bold_yn>
+                <product_options_title>options</product_options_title>
+                <product_options_yn>yes</product_options_yn>
+                <product_qty_backordered_title>backordered</product_qty_backordered_title>
+                <product_qty_upsize_yn>1</product_qty_upsize_yn>
+                <product_sku_barcode_yn>0</product_sku_barcode_yn>
+                <product_sku_yn>1</product_sku_yn>
+                <product_sku_trim_yn>0</product_sku_trim_yn>
+                <product_stock_qty_title>stock</product_stock_qty_title>
+                <product_stock_qty_yn>0</product_stock_qty_yn>
+                <product_warehouse_title>warehouse</product_warehouse_title>
+                <qty_title>qty</qty_title>
+                <shelving_2_title></shelving_2_title>
+                <shelving_2_trim_content_yn>1</shelving_2_trim_content_yn>
+                <shelving_2_yn>0</shelving_2_yn>
+                <shelving_2></shelving_2>
+                <shelving_real_title></shelving_real_title>
+                <shelving_real_trim_content_yn>1</shelving_real_trim_content_yn>
+                <shelving_title></shelving_title>
+                <shelving_trim_content_yn>1</shelving_trim_content_yn>
+                <shift_bundle_children_xpos>0</shift_bundle_children_xpos>
+                <shipaddress_packbarcode_yn>1</shipaddress_packbarcode_yn>
+                <shipaddress_title></shipaddress_title>
+				<shipeasy_flag_yn>0</shipeasy_flag_yn>
+				<shipeasyflagselect>0</shipeasyflagselect>
+                <shipment_details_boxes_weightsplit>45</shipment_details_boxes_weightsplit>
+                <shipment_details_boxes_yn>0</shipment_details_boxes_yn>
+                <shipment_details_cardinfo>0</shipment_details_cardinfo>
+                <shipment_details_carrier>1</shipment_details_carrier>
+                <shipment_details_count>1</shipment_details_count>
+                <shipment_details_custgroup_filter>not logged in, general</shipment_details_custgroup_filter>
+                <shipment_details_custgroup>0</shipment_details_custgroup>
+                <shipment_details_custom_attribute_2_yn>0</shipment_details_custom_attribute_2_yn>
+                <shipment_details_custom_attribute_yn>0</shipment_details_custom_attribute_yn>
+                <shipment_details_customer_id>0</shipment_details_customer_id>
+                <shipment_details_deadline_days>3</shipment_details_deadline_days>
+                <shipment_details_deadline_text>Payment due</shipment_details_deadline_text>
+				<shipment_details_deadline_date_type>printing</shipment_details_deadline_date_type>
+                <shipment_details_deadline_yn>0</shipment_details_deadline_yn>
+                <shipment_details_dispatch_date>0</shipment_details_dispatch_date>
+                <shipment_details_pallet_weight>200</shipment_details_pallet_weight>
+                <shipment_details_payment>0</shipment_details_payment>
+                <shipment_details_purchase_order>0</shipment_details_purchase_order>
+                <shipment_details_weight_unit>lb</shipment_details_weight_unit>
+                <shipment_details_weight>0</shipment_details_weight>
+				<shipment_details_weight_addon_yn>0</shipment_details_weight_addon_yn>
+                <shipment_details_yn>1</shipment_details_yn>
+				<shipment_temando_comment_yn>1</shipment_temando_comment_yn>
+                <shipping_billing_title_position>above</shipping_billing_title_position>
+                <shipping_details_yn>1</shipping_details_yn>
+                <show_courierrules_shipping_label_dimension>250,182</show_courierrules_shipping_label_dimension>
+                <show_courierrules_shipping_label_nudge>0,0</show_courierrules_shipping_label_nudge>
+                <show_courierrules_shipping_label>0</show_courierrules_shipping_label>
+                <show_gift_wrap_top_right>1</show_gift_wrap_top_right>
+                <show_individual_product_gift_message>1</show_individual_product_gift_message>
+				<show_product_name>1</show_product_name>
+                <show_wsa_storepickup_no_pickup_text_yn>0</show_wsa_storepickup_no_pickup_text_yn>
+				<show_wsa_storepickup>0</show_wsa_storepickup>
+                <size_attribute_name>size</size_attribute_name>
+                <sku_barcode_title></sku_barcode_title>
+                <sku_title>codes</sku_title>
+				<store_pickup_hide_shipping_yn>1</store_pickup_hide_shipping_yn>
+                <szy_attribute_to_update>custom_attribute3</szy_attribute_to_update>
+                <szy_custom_value3>Printed</szy_custom_value3>
+                <tax_bands_yn>0</tax_bands_yn>
+                <tickbox_2_yn>0</tickbox_2_yn>
+                <tickbox_width>7</tickbox_width>
+                <tickbox_yn>1</tickbox_yn>
+				<tickbox2_width>7</tickbox2_width>
+                <tickbox2X>30</tickbox2X>
+                <tickboxX>21</tickboxX>
+                <title_date_xpos>350</title_date_xpos>
+				<tracking_number_barcode_yn>0</tracking_number_barcode_yn>
+				<tracking_number_yn>1</tracking_number_yn>
+                <trim_product_name_yn>1</trim_product_name_yn>
+				<new_pdf_per_name_yn>0</new_pdf_per_name_yn>
+				<product_name_bold_yn>0</product_name_bold_yn>
+                <wsa_pickup_location_model_default></wsa_pickup_location_model_default>
+                <product_line_prices_yn>1</product_line_prices_yn>
+                <product_line_prices_title>price</product_line_prices_title>
+                <product_line_prices_title_xpos>350</product_line_prices_title_xpos>
+                <product_line_prices_with_tax_yn>0</product_line_prices_with_tax_yn>
+                <product_line_prices_with_discount_yn>0</product_line_prices_with_discount_yn>
+                <product_line_discount_yn>0</product_line_discount_yn>
+                <product_line_discount_title>discount</product_line_discount_title>
+                <product_line_discount_title_xpos>400</product_line_discount_title_xpos>
+                <product_line_tax_yn>0</product_line_tax_yn>
+                <product_line_tax_title>Tax</product_line_tax_title>
+                <product_line_tax_title_xpos>450</product_line_tax_title_xpos>
+                <product_line_total_yn>0</product_line_total_yn>
+				<total_tax_incl_yn>1</total_tax_incl_yn>
+                <product_line_total_title>total</product_line_total_title>
+                <product_line_total_title_xpos>500</product_line_total_title_xpos>
+                <product_line_total_with_tax_yn>1</product_line_total_with_tax_yn>
+                <product_line_total_with_discount_yn>1</product_line_total_with_discount_yn>
+                <total_subtotal>1</total_subtotal>
+                <total_subtotal_with_tax_yn>1</total_subtotal_with_tax_yn>
+                <total_subtotal_with_discount_yn>0</total_subtotal_with_discount_yn>
+                <total_shipping_yn>1</total_shipping_yn>
+                <total_shipping_with_tax_yn>0</total_shipping_with_tax_yn>
+                <total_discount_yn>1</total_discount_yn>
+                <total_tax_yn>1</total_tax_yn>
+                <total_tax_breakdown_yn>0</total_tax_breakdown_yn>
+                <total_default_grandtotal_yn>0</total_default_grandtotal_yn>
+                <total_paid_yn>0</total_paid_yn>
+                <total_due_yn>0</total_due_yn>
+                <hide_zero_tax_value>0</hide_zero_tax_value>
+                <hide_zero_shipping_value>0</hide_zero_shipping_value>
+                <hide_zero_discount_value>1</hide_zero_discount_value>
+                <subtotal_order>1,2,3,4</subtotal_order>
+            </wonder>
+            
+            <wonder_invoice>
+                <additional_action>0</additional_action>
+                <address_pad>0,0,0</address_pad>
+                <auto_processing_additional_action>0</auto_processing_additional_action>
+                <auto_processing_body><![CDATA[Please see invoice PDF attached.]]></auto_processing_body>
+                <auto_processing_condition_status>processing</auto_processing_condition_status>
+                <auto_processing_export_path><![CDATA[var/pickPack]]></auto_processing_export_path>
+                <auto_processing_ftp_port>21</auto_processing_ftp_port>
+                <auto_processing_ftp_remote_path_2nd>var/export/pickPack</auto_processing_ftp_remote_path_2nd>
+                <auto_processing_ftp_remote_path_3rd>var/export/pickPack</auto_processing_ftp_remote_path_3rd>
+				<auto_processing_ftp_remote_path>var/export/pickPack</auto_processing_ftp_remote_path>
+                <auto_processing_groupping>1</auto_processing_groupping>
+                <auto_processing_send_to></auto_processing_send_to>
+                <auto_processing_sender>sales</auto_processing_sender>
+                <auto_processing_set_flag>1</auto_processing_set_flag>
+                <auto_processing_subject>Auto Generated Invoice PDF</auto_processing_subject>
+                <auto_processing>0</auto_processing>
+				<billing_address_with_gift_yn>0</billing_address_with_gift_yn>
+                <billing_details_position>0</billing_details_position>
+                <billing_tax_details_title>Customer VAT #:</billing_tax_details_title>
+                <billing_tax_details_yn>0</billing_tax_details_yn>
+                <bundle_children_yn>1</bundle_children_yn>
+                <capitalize_label_yn>1</capitalize_label_yn>
+                <capitalize_label2_yn>1</capitalize_label2_yn>
+                <center_value_qty>1</center_value_qty>
+                <color_attribute_name>color</color_attribute_name>
+                <combine_custom_attribute_Xpos>434</combine_custom_attribute_Xpos>
+				<courierrules_method_yn>0</courierrules_method_yn>
+				<custom_message_fixed>0</custom_message_fixed>
+                <custom_message_image_line_yn>1</custom_message_image_line_yn>
+                <custom_message_image_locked_yn>1</custom_message_image_locked_yn>
+                <custom_message_image_nudge>0,0</custom_message_image_nudge>
+                <custom_message_nudge>300,200</custom_message_nudge>
+                <custom_message_yn>no</custom_message_yn>
+				<custom_round_yn>0</custom_round_yn>
+				<customer_custom_attribute_yn>0</customer_custom_attribute_yn>
+                <doubleline_yn>0</doubleline_yn>
+                <enable_auto_processing>0</enable_auto_processing>
+                <fill_product_header_yn>1</fill_product_header_yn>
+				<filter_items_by_status>0</filter_items_by_status>
+                <float_top_address_yn>1</float_top_address_yn>
+                <footer_customer_id>106,47</footer_customer_id>
+                <footer_order_id>106,76</footer_order_id>
+                <images_title></images_title>
+                <items_title>items</items_title>
+				<letterhead>1</letterhead>
+				<manual_processing_print_flag>0</manual_processing_print_flag>
+                <non_store_pickup_showdatetime>1</non_store_pickup_showdatetime>
+                <notes_filter_options>yesfrontend</notes_filter_options>
+                <notes_filter>captured amount</notes_filter>
+                <notes_position>yesshipping</notes_position>
+				<notes_title>Order Comments</notes_title>
+                <notes_yn>0</notes_yn>
+                <numbered_product_list_bundle_children_X>21</numbered_product_list_bundle_children_X>
+                <numbered_product_list_bundle_children_yn>0</numbered_product_list_bundle_children_yn>
+                <numbered_product_list_X>17</numbered_product_list_X>
+                <numbered_product_list_yn>0</numbered_product_list_yn>
+                <orderorinvoice>order</orderorinvoice>
+                <orderorinvoicedate>order</orderorinvoicedate>
+                <pack_barcode>450,800</pack_barcode>
+                <pack_cid>390,705</pack_cid>
+                <pack_color>400</pack_color>
+                <pack_column>570</pack_column>
+                <pack_customer>130,648</pack_customer>
+                <pack_customeraddress>130,633</pack_customeraddress>
+                <pack_noofitems>10</pack_noofitems>
+                <pack_noofitems>10</pack_noofitems>
+                <pack_oid>390,730</pack_oid>
+                <pack_order>390,755</pack_order>
+                <pack_price>505</pack_price>
+                <pack_product>230</pack_product>
+                <pack_qty>40</pack_qty>
+                <pack_size>450</pack_size>
+                <pack_sku>90</pack_sku>
+                <packed_by_text>Packed by: ____</packed_by_text>
+                <page_1_products_y_cutoff>0</page_1_products_y_cutoff>
+                <page_background_position>center_prolist</page_background_position>
+                <page_pad>0,0</page_pad>
+                <parent_image_yn>1</parent_image_yn>
+                <pickpack_bottom_shipping_address_id_yn>1</pickpack_bottom_shipping_address_id_yn>
+                <pickpack_bottom_shipping_address_yn_xtra>0</pickpack_bottom_shipping_address_yn_xtra>
+                <pickpack_bottom_shipping_address_yn>0</pickpack_bottom_shipping_address_yn>
+				<shipping_address_background_yn>0</shipping_address_background_yn>
+				<pickpack_second_bottom_shipping_address_yn>0</pickpack_second_bottom_shipping_address_yn>
+                <pickpack_company_address_yn>0</pickpack_company_address_yn>
+                <pickpack_fontsizeoverall>9</pickpack_fontsizeoverall>
+                <pickpack_fontsizeproductline>9</pickpack_fontsizeproductline>
+				<pickpack_headerbar_yn>1</pickpack_headerbar_yn>
+                <pickpack_logo_dimension>180,120</pickpack_logo_dimension>
+                <pickpack_logo_position>left</pickpack_logo_position>
+                <pickpack_packbarcode>1</pickpack_packbarcode>
+				<show_order_id>0</show_order_id>
+				<font_size_orderid>8</font_size_orderid>
+                <pickpack_packlogo>0</pickpack_packlogo>
+                <pickpack_return_address_yn>0</pickpack_return_address_yn>
+                <pickpack_returnfont>9</pickpack_returnfont>
+                <pickpack_returnlogo_shipping>0</pickpack_returnlogo_shipping>
+                <pickpack_returnlogo>0</pickpack_returnlogo>
+                <pickpack_returnlogo>0</pickpack_returnlogo>
+                <pickpack_shipfont_xtra>8</pickpack_shipfont_xtra>
+                <pickpack_shipfont>15</pickpack_shipfont>
+                <pickpack_title_2_yn>0</pickpack_title_2_yn>
+                <pickpack_title_pattern>Invoice {{if invoice_id}}#{{invoice_id}}   {{endif invoice_id}}Order #{{order_id}}{{if order_date}}   {{order_date}}{{endif order_date}}</pickpack_title_pattern>
+                <pickpack_title_yn>1</pickpack_title_yn>
+                <pickpack_title>Invoice #:</pickpack_title>
+				<positional_message_box_fixed_position>250,100</positional_message_box_fixed_position>
+                <prices_options>0</prices_options>
+                <prices_qtybackorderedX>400</prices_qtybackorderedX>
+                <prices_yn>1</prices_yn>
+				<currency_codes_or_symbols>magento</currency_codes_or_symbols>
+				<currency_symbol_position>auto</currency_symbol_position>
+                <pricesN_barcodeX>300</pricesN_barcodeX>
+                <pricesN_productX>200</pricesN_productX>
+                <pricesN_qty_priceX>40</pricesN_qty_priceX>
+                <pricesN_shelf2X>454</pricesN_shelf2X>
+                <pricesN_shelf3X>444</pricesN_shelf3X>
+                <pricesN_shelfX>434</pricesN_shelfX>
+                <pricesN_skuX>80</pricesN_skuX>
+                <pricesN_stockqtyX>530</pricesN_stockqtyX>
+                <pricesT_barcodeX>230</pricesT_barcodeX>
+                <pricesT_item_priceX>404</pricesT_item_priceX>
+                <pricesT_priceX>530</pricesT_priceX>
+                <pricesT_productX>40</pricesT_productX>
+                <pricesT_qty_priceX>350</pricesT_qty_priceX>
+                <pricesT_shelf2X>340</pricesT_shelf2X>
+                <pricesT_shelf3X>350</pricesT_shelf3X>
+                <pricesT_shelfX>330</pricesT_shelfX>
+                <pricesT_skuX>230</pricesT_skuX>
+                <pricesT_stockqtyX>530</pricesT_stockqtyX>
+                <pricesY_barcodeX>230</pricesY_barcodeX>
+                <pricesY_productX>40</pricesY_productX>
+                <pricesY_qty_priceX>410</pricesY_qty_priceX>
+                <pricesY_shelf2X>370</pricesY_shelf2X>
+                <pricesY_shelf3X>350</pricesY_shelf3X>
+                <pricesY_shelfX>350</pricesY_shelfX>
+                <pricesY_skuX>230</pricesY_skuX>
+                <pricesY_stockqtyX>530</pricesY_stockqtyX>
+                <product_images_border_color>#FFFFFF</product_images_border_color>
+                <product_images_line_nudge>0</product_images_line_nudge>
+                <product_images_maxdimensions>25,25</product_images_maxdimensions>
+                <product_images_source>image</product_images_source>
+                <product_images_y_nudge>10</product_images_y_nudge>
+                <product_images_yn>0</product_images_yn>
+                <product_name_bold_yn>0</product_name_bold_yn>
+                <product_options_title>options</product_options_title>
+                <product_options_yn>yes</product_options_yn>
+                <product_qty_backordered_title>backordered</product_qty_backordered_title>
+                <product_qty_upsize_yn>1</product_qty_upsize_yn>
+                <product_sku_barcode_yn>0</product_sku_barcode_yn>
+                <product_sku_yn>1</product_sku_yn>
+                <product_sku_trim_yn>0</product_sku_trim_yn>
+                <product_stock_qty_title>stock</product_stock_qty_title>
+                <product_stock_qty_yn>0</product_stock_qty_yn>
+				<product_warehouse_title>warehouse</product_warehouse_title>
+                <qty_title>qty</qty_title>
+                <shelving_2_title></shelving_2_title>
+                <shelving_2_yn>0</shelving_2_yn>
+                <shelving_2></shelving_2>
+                <shelving_real_title></shelving_real_title>
+                <shelving_title></shelving_title>
+                <shift_bundle_children_xpos>0</shift_bundle_children_xpos>
+                <shipaddress_packbarcode_yn>1</shipaddress_packbarcode_yn>
+                <shipaddress_title></shipaddress_title>
+				<shipeasy_flag_yn>0</shipeasy_flag_yn>
+				<shipeasyflagselect>0</shipeasyflagselect>
+                <shipment_details_boxes_weightsplit>45</shipment_details_boxes_weightsplit>
+                <shipment_details_boxes_yn>0</shipment_details_boxes_yn>
+                <shipment_details_cardinfo>0</shipment_details_cardinfo>
+                <shipment_details_carrier>1</shipment_details_carrier>
+                <shipment_details_count>0</shipment_details_count>
+                <shipment_details_custgroup_filter>not logged in, general</shipment_details_custgroup_filter>
+                <shipment_details_custgroup>0</shipment_details_custgroup>
+                <shipment_details_custom_attribute_2_yn>0</shipment_details_custom_attribute_2_yn>
+                <shipment_details_custom_attribute_yn>0</shipment_details_custom_attribute_yn>
+                <shipment_details_customer_id>0</shipment_details_customer_id>
+                <shipment_details_deadline_days>3</shipment_details_deadline_days>
+                <shipment_details_deadline_text>Payment due</shipment_details_deadline_text>
+				<shipment_details_deadline_date_type>printing</shipment_details_deadline_date_type>
+                <shipment_details_deadline_yn>0</shipment_details_deadline_yn>
+                <shipment_details_dispatch_date>0</shipment_details_dispatch_date>
+                <shipment_details_pallet_weight>200</shipment_details_pallet_weight>
+                <shipment_details_payment>1</shipment_details_payment>
+                <shipment_details_purchase_order>0</shipment_details_purchase_order>
+                <shipment_details_weight_unit>lb</shipment_details_weight_unit>
+                <shipment_details_weight>0</shipment_details_weight>
+				<shipment_details_weight_addon_yn>0</shipment_details_weight_addon_yn>
+                <shipment_details_yn>1</shipment_details_yn>
+				<shipment_temando_comment_yn>1</shipment_temando_comment_yn>
+                <shipping_billing_title_position>above</shipping_billing_title_position>
+                <shipping_details_yn>1</shipping_details_yn>
+                <show_gift_wrap_top_right>1</show_gift_wrap_top_right>
+				<show_product_name>1</show_product_name>
+                <show_wsa_storepickup_no_pickup_text_yn>0</show_wsa_storepickup_no_pickup_text_yn>
+				<show_wsa_storepickup>0</show_wsa_storepickup>
+                <size_attribute_name>size</size_attribute_name>
+                <sku_barcode_title></sku_barcode_title>
+                <sku_title>codes</sku_title>
+				<store_pickup_hide_shipping_yn>1</store_pickup_hide_shipping_yn>
+                <szy_attribute_to_update>custom_attribute</szy_attribute_to_update>
+                <szy_own_value></szy_own_value>
+                <tax_bands_yn>0</tax_bands_yn>
+                <tickbox_2_yn>0</tickbox_2_yn>
+                <tickbox_width>7</tickbox_width>
+                <tickbox_yn>1</tickbox_yn>
+				<tickbox2_width>7</tickbox2_width>
+                <tickbox2X>30</tickbox2X>
+                <tickboxX>21</tickboxX>
+                <title_date_xpos>350</title_date_xpos>
+				<tracking_number_barcode_yn>0</tracking_number_barcode_yn>
+				<tracking_number_yn>1</tracking_number_yn>
+                <trim_product_name_yn>1</trim_product_name_yn>
+				<new_pdf_per_name_yn>0</new_pdf_per_name_yn>
+				<product_name_bold_yn>0</product_name_bold_yn>
+                <wsa_pickup_location_model_default></wsa_pickup_location_model_default>
+                <product_line_prices_yn>1</product_line_prices_yn>
+                <product_line_prices_title>price</product_line_prices_title>
+                <product_line_prices_title_xpos>350</product_line_prices_title_xpos>
+                <product_line_prices_with_tax_yn>0</product_line_prices_with_tax_yn>
+                <product_line_prices_with_discount_yn>0</product_line_prices_with_discount_yn>
+                <product_line_discount_yn>0</product_line_discount_yn>
+                <product_line_discount_title>discount</product_line_discount_title>
+                <product_line_discount_title_xpos>400</product_line_discount_title_xpos>
+                <product_line_tax_yn>1</product_line_tax_yn>
+                <product_line_tax_title>tax</product_line_tax_title>
+                <product_line_tax_title_xpos>450</product_line_tax_title_xpos>
+				<total_tax_incl_yn>1</total_tax_incl_yn>
+                <product_line_total_yn>1</product_line_total_yn>
+                <product_line_total_title>total</product_line_total_title>
+                <product_line_total_title_xpos>500</product_line_total_title_xpos>
+                <product_line_total_with_tax_yn>1</product_line_total_with_tax_yn>
+                <product_line_total_with_discount_yn>1</product_line_total_with_discount_yn>
+                <total_subtotal>1</total_subtotal>
+                <total_subtotal_with_tax_yn>1</total_subtotal_with_tax_yn>
+                <total_subtotal_with_discount_yn>0</total_subtotal_with_discount_yn>
+                <total_shipping_yn>1</total_shipping_yn>
+                <total_shipping_with_tax_yn>0</total_shipping_with_tax_yn>
+                <total_discount_yn>1</total_discount_yn>
+                <total_tax_yn>1</total_tax_yn>
+                <total_tax_breakdown_yn>1</total_tax_breakdown_yn>
+                <total_default_grandtotal_yn>1</total_default_grandtotal_yn>
+                <total_paid_yn>0</total_paid_yn>
+                <total_due_yn>0</total_due_yn>
+                <hide_zero_tax_value>1</hide_zero_tax_value>
+                <hide_zero_shipping_value>0</hide_zero_shipping_value>
+                <hide_zero_discount_value>1</hide_zero_discount_value>
+                <subtotal_order>1,2,3,4</subtotal_order>
+            </wonder_invoice>
+            
+            <label>
+                <label_width>190</label_width>
+                <label_height>168</label_height>
+                <paper_margin>22,30,22,30</paper_margin>
+                <label_padding>5,5,5,5</label_padding>
+                <label_width_letter>190</label_width_letter>
+                <label_height_letter>168</label_height_letter>
+                <paper_margin_letter>22,30,22,30</paper_margin_letter>
+                <label_padding_letter>5,5,5,5</label_padding_letter>
+                <label_width_zebra>288</label_width_zebra>
+                <label_height_zebra>432</label_height_zebra>
+                <paper_margin_zebra>13,5,5,5</paper_margin_zebra>
+                <label_padding_zebra>10,5,5,5</label_padding_zebra>
+                <label_logo_yn>0</label_logo_yn>
+                <label_nudgelogo>0,0</label_nudgelogo>
+                <label_nudgelogo_text>0,0</label_nudgelogo_text>
+                <font_color_label>#000000</font_color_label>
+                <font_family_return_label>opensans</font_family_return_label>
+                <font_family_return_label_side>opensans</font_family_return_label_side>
+                <font_size_label>15</font_size_label>
+                <font_size_return_label>9</font_size_return_label>
+                <font_size_return_label_side>9</font_size_return_label_side>
+                <font_style_return_label>regular</font_style_return_label>
+                <font_style_return_label_side>regular</font_style_return_label_side>
+                <font_color_return_label>#000000</font_color_return_label>
+                <font_color_return_label_side>#000000</font_color_return_label_side>
+                <nudge_return_label_a4>0,0</nudge_return_label_a4>
+                <nudge_return_label_letter>0,0</nudge_return_label_letter>
+                <nudge_return_label_zebra>-0,0</nudge_return_label_zebra>
+                <label_barcode>0</label_barcode>
+                <nudge_barcode_letter>0,0</nudge_barcode_letter>
+                <nudge_barcode_a4>0,0</nudge_barcode_a4>
+                <nudge_barcode_zebra>0,0</nudge_barcode_zebra>
+                <nudge_shipping_address>0,0</nudge_shipping_address>
+                <label_shiplogo1_yn>0</label_shiplogo1_yn>
+                <label_shiplogo2_yn>0</label_shiplogo2_yn>
+                <label_shiplogo3_yn>0</label_shiplogo3_yn>
+                <label_nudge_shiplogo1>0,0</label_nudge_shiplogo1>
+                <label_nudge_shiplogo2>0,0</label_nudge_shiplogo2>
+                <label_nudge_shiplogo3>0,0</label_nudge_shiplogo3>
+                <include_price_tax>1</include_price_tax>
+            </label>
+            <label_zebra>
+                <address_format>{if company}{company},|{/if}
+{if name}{name},|{/if}
+{if street}{street},|{/if}
+{if city}{city},|{/if} {if region}{region_full}|{/if} {if postcode} {postcode}|{/if}
+{if country}{country}|{/if}</address_format>
+                <nudge_demension_zebra>442,275</nudge_demension_zebra>
+                <paper_margin_zebra>13,5,5,5</paper_margin_zebra>
+                <label_padding_zebra>10,5,5,5</label_padding_zebra>
+                <return_address_yn>yesside</return_address_yn>
+                <font_color_label>#000000</font_color_label>
+                <font_family_label>opensans</font_family_label>
+                <font_style_label>regular</font_style_label>
+                <font_size_label>15</font_size_label>
+                <font_family_return_label_side>opensans</font_family_return_label_side>
+                <font_size_return_label_side>9</font_size_return_label_side>
+                <font_style_return_label_side>bold</font_style_return_label_side>
+                <font_color_return_label_side>#000000</font_color_return_label_side>
+                <font_color_product>#000000</font_color_product>
+                <font_size_product>8</font_size_product>
+                <label_show_order_id_yn>1</label_show_order_id_yn>
+                <show_order_id_barcode_yn>1</show_order_id_barcode_yn>
+                <label_logo_yn2>0</label_logo_yn2>
+                <font_size_label2>15</font_size_label2>
+				<pricesN_skuX>30</pricesN_skuX>
+				<pricesN_productX>100</pricesN_productX>
+				<show_product_name>1</show_product_name>
+				<trim_product_name_yn>1</trim_product_name_yn>
+				<show_product_sku>1</show_product_sku>
+                <show_product_qty>1</show_product_qty>
+				<nudge_order_id_barcode>58,60</nudge_order_id_barcode>
+				<add_cn22_page_nudge>18,-22</add_cn22_page_nudge>
+				<product_qty_upsize_yn>1</product_qty_upsize_yn>
+				<tracking_number_yn>0</tracking_number_yn>
+				<tracking_number_barcode_yn>0</tracking_number_barcode_yn>
+				<tracking_number_barcode_fontsize>36</tracking_number_barcode_fontsize>
+				<tracking_number_fontsize>13</tracking_number_fontsize>
+                <show_product_list>1</show_product_list>
+                <auto_processing_ftp_remote_path>var/export/pickPack</auto_processing_ftp_remote_path>
+                <auto_processing_ftp_remote_path_2nd>var/export/pickPack</auto_processing_ftp_remote_path_2nd>
+                <auto_processing_ftp_remote_path_3rd>var/export/pickPack</auto_processing_ftp_remote_path_3rd>
+            </label_zebra>
+            <csvorders>
+                <column_mapping_csvorders>Order ID:%order_id%;
+Weight:%weight%;
+Quantity Items:%qty_items%;
+Custom Text:[Custom Text Value];
+Order Date:%order_date%;
+Empty Cell:[];
+Website:%website%;
+Shipping Description:%ship_method%;
+Billing Description:%payment_method%;
+Customer ID:%customer_id%;
+Billing First Name:%bill_firstname%;
+Billing Last Name:%bill_lastname%;
+Billing Company Name:%bill_company%;
+Billing Streets: %bill_streets%;
+Billing Address1:%bill_street1%;
+Billing Address2:%bill_street2%;
+Billing City:%bill_city%;
+Billing State:%bill_region%;
+Billing Zip:%bill_postcode%;
+Billing Country:%bill_country%;
+Billing Phone:%bill_telephone%;
+Billing Email:%bill_email%;
+Shipping First Name:%ship_firstname%;
+Shipping Last Name:%ship_lastname%;
+Shipping Company Name:%ship_company%;
+Shipping Streets: %ship_streets%;
+Shipping Address1:%ship_street1%;
+Shipping Address2:%ship_street2%;
+Shipping City:%ship_city%;
+Shipping State:%ship_region%;
+Shipping Zip:%ship_postcode%;
+Shipping Country:%ship_country%;
+Shipping Phone:%ship_telephone%;
+Shipping Email:%ship_email%;
+Newsletter Subscription Status:%subscription_status%;</column_mapping_csvorders>
+                <address_format>{ship_company},{ship_name},{ship_streets},{ship_city},{ship_postcode},{ship_region},{ship_country}</address_format>
+                <date_format>M j,Y</date_format>
+            </csvorders>
+            
+            <csvpick>
+                <column_mapping>PickTicketNumber:%order_id%;
+Warehouse:[WAREHOUSE LOGISTICS NJ];
+OrderDate:%order_date%;
+StartDate:%order_date%;
+CancelDate:%order_date_plus48h%;
+ShipDate:[];
+PaymentTerms:[cc paid];
+Certified Funds:[];
+Department:[];
+Store:%website%;
+DeclaredValuePercentage:[];
+SpecialInstructions:[];
+CustomerPONumber:%order_id%;
+AuthorizationNumber:[];
+OrderNumber:%order_id%;
+TakenBy:[];
+BillToCode:%customer_id%;
+BillToFirstName:%bill_firstname%;
+BillToLastName:%bill_lastname%;
+BillToCompanyName:%bill_company%;
+BillToAddress1:%bill_street1%;
+BillToAddress2:%bill_street2%;
+BillToCity:%bill_city%;
+BillToState:%bill_region%;
+BillToZip:%bill_postcode%;
+BillToCountry:%bill_country%;
+BillToNon_US_Region:%bill_non_us%;
+BillToPhone:%bill_telephone%;
+BillToEmail:%bill_email%;
+ShipToCode:[];
+ShipToFirstName:%ship_firstname%;
+ShipToLastName:%ship_lastname%;
+ShipToCompanyName:%ship_companyname%;
+ShipToAddress1:%ship_street1%;
+ShipToAddress2:%ship_street2%;
+ShipToCity:%ship_city%;
+ShipToState:%ship_region%;
+ShipToZip:%ship_postcode%;
+ShipToCountry:%ship_country%;
+ShipToNon_US_Region:%ship_non_us%;
+ShipToPhone:%ship_telephone%;
+ShipToEmail:%ship_email%;
+LineItemsTotalAmount:%order_price%;
+LineItemsTotalQuantity:%order_qty%;
+LineItemSeason:season;
+LineItemStyle:style;
+LineItemDescription:%product_name%;
+LineItemColor:color;
+LineItemSize:size;
+LineItemUPC:%sku%;
+LineItemUnitPrice:%sku_price%;
+LineItemQuantity:%qty%;
+Dccode:[];</column_mapping>
+                <date_format>M j,Y</date_format>
+            </csvpick>
+            
+            <csvpickcombined>
+                <column_mapping>
+SKU:%sku%;
+Total Quantity:%qty%;
+UnitPrice:%sku_price%;
+TotalPrice:%total_price%;
+Name:%product_name%;
+Category:%product_category%;
+Color:color;
+                </column_mapping>
+                <date_format>M j,Y</date_format>                
+            </csvpickcombined>
+            
+            <csvmanifestcombined>
+                <pre_cells>[Sample Co. Ltd][][%date%]
+[ ]
+[CONSIGNEE:]
+[-------------]
+[ ][Sample Co. Ltd]
+[ ][UNIT 1, TEST TOWER,]
+[ ][131 TEST ROAD,]
+[ ][TESTVILLE,]
+[ ][USA]
+[ ]
+[ ][Contact Name:][Jon Smith]
+[ ][TEL.][+1 222 4444]
+[ ]
+[NOTIFY PARTY:]
+[---------------]
+[ ][Broker Agent, Inc.]
+[ ][1224 S ST]
+[ ][Seattle, WA 98100]
+[ ][USA]
+[ ]
+[ ][Contact Name:][Jon Broker]
+[ ][TEL][+1 222-3333]
+[ ][FAX][+1 222-4444]
+[ ]
+[ ]
+[SHIPMENT DESTINATION:][SEATTLE, WA, USA]
+[--------------------------][---------------------]
+[ ]
+[ ][PACKING LIST]</pre_cells>
+                <column_mapping>SKU:%sku%;
+Total Quantity:%qty%;
+UnitPrice:%sku_price%;
+TotalPrice:%total_price%;
+Name:%product_name%;
+Category:%product_category%;
+Color:color;</column_mapping>
+                <column_mapping_grouped_cats>Description:%product_category%;
+Quantity:%qty%;
+UnitCost:%average_unit_cost%;
+TotalCost:%total_cost%;</column_mapping_grouped_cats>
+                <group_manifest_by_category_yn>1</group_manifest_by_category_yn>
+                <cost_multiplier>1</cost_multiplier>
+                <cost_base_to_display_rate>1</cost_base_to_display_rate>
+                <cost_round>0</cost_round>
+                <is_excel_yn>0</is_excel_yn>
+                <cost_prefix>USD</cost_prefix>
+                <weight_multiplier>1</weight_multiplier>
+                <weight_round>2</weight_round>
+                <date_format>M j, Y</date_format>
+            </csvmanifestcombined>
+            
+            <csvpickcombined>
+                <date_format>M j, Y</date_format>
+            </csvpickcombined>
+            
+            <stock>
+                <stock_stock>1</stock_stock>
+                <pickpack_name_yn_stock>0</pickpack_name_yn_stock>
+                <pickpack_shelving_yn_stock>0</pickpack_shelving_yn_stock>
+                <pickpack_infoline_yn_stock>1</pickpack_infoline_yn_stock>
+                <csv_or_pdf>pdf</csv_or_pdf>
+                <add_ordered_qty>0</add_ordered_qty>
+            </stock>
+            <gift_message>
+                <gift_message_yn>1</gift_message_yn>
+                <product_gift_message_yn>1</product_gift_message_yn>
+                <message_title_tofrom_yn>1</message_title_tofrom_yn>
+                <gift_message_nudge>0,0</gift_message_nudge>
+            </gift_message>
+            <action_menu>
+                <show_default_unhold_order>1</show_default_unhold_order>
+                <show_default_cancel_order>1</show_default_cancel_order>
+                <show_default_hold_order>1</show_default_hold_order>
+                <show_default_pdfinvoices_order>0</show_default_pdfinvoices_order>
+                <show_default_pdfshipments_order>0</show_default_pdfshipments_order>
+                <show_default_pdfcreditmemos_order>1</show_default_pdfcreditmemos_order>
+            	<show_seperator1>1</show_seperator1>
+            	<show_pdf_invoice>1</show_pdf_invoice>
+				<show_pdf_packing_sheet>1</show_pdf_packing_sheet>
+				<show_pdf_invoice_and_packing_sheet>1</show_pdf_invoice_and_packing_sheet>
+				<show_pdf_pick_order>1</show_pdf_pick_order>
+				<show_pdf_enpick_order>1</show_pdf_enpick_order>
+				<show_pdf_trolleybox>1</show_pdf_trolleybox>
+				<show_pdf_label_order>1</show_pdf_label_order>
+				<show_pdf_stock_order>1</show_pdf_stock_order>
+                <show_pdf_label_cn22>1</show_pdf_label_cn22>
+				<show_seperator2>1</show_seperator2>
+				<show_csv_orders_order>1</show_csv_orders_order>
+				<show_csv_pick_order>1</show_csv_pick_order>
+				<show_csv_pickcombined_order>1</show_csv_pickcombined_order>
+				<show_manifest_combined_order>0</show_manifest_combined_order>
+				<show_pdf_pick_order_2>1</show_pdf_pick_order_2>
+				<show_pdf_label_zebra>1</show_pdf_label_zebra>
+            </action_menu>
+			<product_separated>
+				<pickpack_title_separated>Product Separated</pickpack_title_separated>
+				<pickpack_pickprint>1</pickpack_pickprint>
+				<pickpack_name_yn_separated>1</pickpack_name_yn_separated>
+				<pickpack_name_Xpos_separated>25</pickpack_name_Xpos_separated>
+				<pickpack_sku_yn_separated>1</pickpack_sku_yn_separated>
+				<pickpack_sku_Xpos_separated>200</pickpack_sku_Xpos_separated>
+				<pickpack_type_yn_separated>1</pickpack_type_yn_separated>
+				<pickpack_type_Xpos_separated>420</pickpack_type_Xpos_separated>
+				<pickpack_title_total_qty>Total: </pickpack_title_total_qty>
+				<pickpack_position_total_qty>500</pickpack_position_total_qty>
+				<show_order_id>1</show_order_id>
+				<order_id_title>ID</order_id_title>
+				<order_id_Xpos>25</order_id_Xpos>
+				<show_customer_name>1</show_customer_name>
+				<customer_name_title>Name</customer_name_title>
+				<customer_name_Xpos>100</customer_name_Xpos>
+				<show_order_date>1</show_order_date>
+				<order_date_title>Date</order_date_title>
+				<order_date_Xpos>300</order_date_Xpos>
+				<show_customer_email>1</show_customer_email>
+				<customer_email_title>Email</customer_email_title>
+				<customer_email_Xpos>380</customer_email_Xpos>
+				<show_customer_phone>0</show_customer_phone>
+				<show_product_qty_in_order>1</show_product_qty_in_order>
+				<product_qty_in_order_title>Qty</product_qty_in_order_title>
+				<product_qty_in_order_Xpos>500</product_qty_in_order_Xpos>
+				<tickbox_yn>1</tickbox_yn>
+				<tickbox_title>OK</tickbox_title>
+				<tickboxX>530</tickboxX>
+				<tickbox_width>7</tickbox_width>
+				<filter_shipped_item_yn>1</filter_shipped_item_yn>
+				<auto_processing_ftp_remote_path>var/export/pickPack</auto_processing_ftp_remote_path>
+                <auto_processing_ftp_remote_path_2nd>var/export/pickPack</auto_processing_ftp_remote_path_2nd>
+                <auto_processing_ftp_remote_path_3rd>var/export/pickPack</auto_processing_ftp_remote_path_3rd>
+			</product_separated>
+        	<notifications>
+                <updates_url><![CDATA[www.moogento.com/media/feeds/]]></updates_url>
+            </notifications>
+            <file_name>
+                <packsheet_pdf_name>packing-sheet_</packsheet_pdf_name>                
+                <invoice_pdf_name>invoice_</invoice_pdf_name>                
+                <pack_invoice_pdf_name>invoice+packing-sheet_</pack_invoice_pdf_name>                
+                <address_label_sheet_name>address-labels_</address_label_sheet_name>\                
+                <out_of_stock_list_name>out-of-stock-list_</out_of_stock_list_name>                
+                <order_combined_picklist_name>order-combined_</order_combined_picklist_name>                
+                <product_separated_picklist_name>product-separated_</product_separated_picklist_name>                
+                <order_separated_picklist_name>order-separated_</order_separated_picklist_name>
+                <date_format>Y_m_d</date_format>
+            </file_name>		
+        </pickpack_options>
+        
+    </default>
+    <global>
+        <blocks>
+            <pickpack>
+                <class>Moogento_Pickpack_Block</class>
+            </pickpack>
+
+            <adminhtml>
+                <rewrite>
+                    <system_config_form_field>Moogento_Pickpack_Block_Adminhtml_System_Config_Form_Field</system_config_form_field>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+
+        <models>
+            <pickpack>
+                <class>Moogento_Pickpack_Model</class>
+                <resourceModel>pickpack_resource</resourceModel>
+            </pickpack>
+            <pickpack_resource>
+                <class>Moogento_Pickpack_Model_Resource</class>
+                <entities>
+                    <flagautoaction>
+                        <table>moogento_pickpack_flagautoaction</table>
+                    </flagautoaction>
+                    <printedtime>
+                        <table>moogento_pickpack_printedtime</table>
+                    </printedtime>
+                    <printgroup>
+                        <table>moogento_pickpack_printgroup</table>
+                    </printgroup>
+                </entities>
+            </pickpack_resource>
+
+			<emailattachments>
+                <class>Fooman_EmailAttachments_Model</class>
+            </emailattachments>
+            <!-- <core>
+                <rewrite>
+                    <email_template>Moogento_Pickpack_Model_Core_Email_Templateattach</email_template>
+                </rewrite>
+            </core> -->
+            
+        </models>
+
+        <resources>
+            <pickpack_setup>
+                <setup>
+                    <module>Moogento_Pickpack</module>
+                    <class>Moogento_Pickpack_Model_Resource_Setup</class>
+                </setup>
+            </pickpack_setup>
+        </resources>
+
+        <helpers>
+            <pickpack>
+                <class>Moogento_Pickpack_Helper</class>
+            </pickpack>
+        </helpers>
+
+        <pdf>
+            <invoices>
+                <default>sales/order_pdf_items_invoices_default</default>
+                <grouped>sales/order_pdf_items_invoices_grouped</grouped>
+            </invoices>
+        </pdf>
+
+        <events>
+            <sales_order_save_before>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/sales_order_observer</class>
+                        <method>saveBefore</method>
+                    </pickpack>
+                </observers>
+            </sales_order_save_before>
+            
+            <checkout_submit_all_after>
+			  <observers>
+				 <pickpack>
+					<class>pickpack/sales_order_observer</class>
+					<method>orderSuccess</method>
+				 </pickpack>
+			  </observers>
+		   </checkout_submit_all_after>
+
+            
+			<sales_order_save_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/sales_order_observer</class>
+                        <method>saveAfter</method>
+                    </pickpack>
+                </observers>
+            </sales_order_save_after>
+            <moo_pp_invoice_pdf_auto_generate_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>invoiceAfterAutoToPdf</method>
+                    </pickpack> 
+                </observers>
+            </moo_pp_invoice_pdf_auto_generate_after>
+
+            <moo_pp_pack_pdf_auto_generate_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>packAfterAutoToPdf</method>
+                    </pickpack>
+                </observers>
+            </moo_pp_pack_pdf_auto_generate_after>
+            
+            <moo_pp_pack_pdf_manual_generate_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>packAfterManualPrint</method>
+                    </pickpack>
+                </observers>
+            </moo_pp_pack_pdf_manual_generate_after>
+            
+            <moo_pp_invoice_pdf_manual_generate_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>invoiceAfterManualPrint</method>
+                    </pickpack>
+                </observers>
+            </moo_pp_invoice_pdf_manual_generate_after>
+            
+             <moo_pp_zebra_pdf_generate_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>zebraAfterToPdf</method>
+                    </pickpack>
+                </observers>
+            </moo_pp_zebra_pdf_generate_after>
+
+            <controller_action_layout_load_before>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>addCustomLayoutHandle</method>
+                    </pickpack>
+                </observers>
+            </controller_action_layout_load_before>
+            
+        </events>
+
+
+        <moo_pp>
+            <internal_flags>
+                <pp_invoice_printed>Invoice Printed Internal Flag</pp_invoice_printed>
+                <pp_packing_sheet_printed>Packing Sheet Printed Internal Flag</pp_packing_sheet_printed>
+                <pp_order_pick_list_printed>Order Pick Printed Internal Flag</pp_order_pick_list_printed>
+                <pp_items_pick_list_printed>Items Pick Printed Internal Flag</pp_items_pick_list_printed>
+            </internal_flags>
+        </moo_pp>
+
+        <template>
+			<email>
+				<moogento_pickpack_cron_product_separated_email_template translate="label">
+					<label>Moogento cron product separated</label>
+					<file>moogento_pickpack/cron_product_separated.html</file>
+					<type>html</type>
+				</moogento_pickpack_cron_product_separated_email_template>
+			</email>
+		</template>
+
+    </global>
+
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <pickpack>
+                    <file>moogento/pickpack.xml</file>
+                </pickpack>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Moogento_Pickpack>
+                    <files>
+                        <default>Moogento_PickPack.csv</default>
+                    </files>
+                </Moogento_Pickpack>
+            </modules>
+        </translate>
+
+        <events>
+			<http_response_send_before>
+				<observers>
+
+					<pickpack>
+
+						<class>pickpack/adminhtml_action_observer</class>
+
+						<method>beforeResponse</method>
+
+					</pickpack>
+				</observers>
+
+			</http_response_send_before>
+			
+			<!-- 
+<http_response_send_after>
+
+				<observers>
+
+					<pickpack>
+
+						<class>pickpack/adminhtml_action_observer</class>
+
+						<method>afterResponse</method>
+
+					</pickpack>
+				</observers>
+
+			</http_response_send_after>
+ -->
+			
+            <moo_pp_invoice_pdf_generate_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>invoiceAfterToPdf</method>
+                    </pickpack>
+                </observers>
+            </moo_pp_invoice_pdf_generate_after>
+
+            <moo_pp_pack_pdf_generate_after>
+                <observers>
+                    <pickpack>
+                        <class>pickpack/adminhtml_action_observer</class>
+                        <method>packAfterToPdf</method>
+                    </pickpack>
+                </observers>
+            </moo_pp_pack_pdf_generate_after>
+
+            <adminhtml_block_html_before>
+                <observers>
+                    <pickpack_widget_html_before>
+                        <class>pickpack/adminhtml_widget_block_observer</class>
+                        <method>beforeHtml</method>
+                    </pickpack_widget_html_before>
+                </observers>
+            </adminhtml_block_html_before>
+			
+			<admin_session_user_login_success>
+                <observers>
+                    <pickpack_notification>
+                        <type>singleton</type>
+                        <class>pickpack/feed_updates</class>
+                        <method>check</method>
+                    </pickpack_notification>
+                </observers>
+            </admin_session_user_login_success>
+        </events>
+    </adminhtml>
+
+    <crontab>
+        <jobs>
+            <pp_auto_wonder_invoice>
+                <run>
+                    <model>pickpack/sales_order_observer::bulkProcessingWonderInvoice</model>
+                </run>
+                <schedule>
+                    <config_path>pickpack_options/wonder_invoice/auto_processing_condition_specific_cron</config_path>
+                </schedule>
+            </pp_auto_wonder_invoice>
+
+            <pp_auto_wonder>
+                <run>
+                    <model>pickpack/sales_order_observer::bulkProcessingWonder</model>
+                </run>
+                <schedule>
+                    <config_path>pickpack_options/wonder/auto_processing_condition_specific_cron</config_path>
+                </schedule>
+            </pp_auto_wonder>
+
+            <pp_auto_picks>
+                <run>
+                    <model>pickpack/sales_order_observer::bulkProcessingPicks</model>
+                </run>
+                <schedule>
+                    <config_path>pickpack_options/picks/auto_processing_condition_specific_cron</config_path>
+                </schedule>
+            </pp_auto_picks>
+
+            <pp_auto_messages>
+                <run>
+                    <model>pickpack/sales_order_observer::bulkProcessingMessages</model>
+                </run>
+                <schedule>
+                    <config_path>pickpack_options/messages/auto_processing_condition_specific_cron</config_path>
+                </schedule>
+            </pp_auto_messages>
+			<!-- <pickpack_auto_process_all_product_separated>
+                <schedule><cron_expr>*/2 * * * *</cron_expr></schedule>
+                <run><model>pickpack/sales_order_observer::processAllProductSeparated</model></run>
+            </pickpack_auto_process_all_product_separated> -->
+        </jobs>
+    </crontab>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <moogento_pickpack after="Mage_Adminhtml">Moogento_Pickpack_Adminhtml</moogento_pickpack>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <frontend>
+        <translate>
+            <modules>
+                <Moogento_Pickpack>
+                    <files>
+                        <default>Moogento_PickPack.csv</default>
+                    </files>
+                </Moogento_Pickpack>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <pickpack>
+                    <file>moogento/pickpack.xml</file>
+                </pickpack>
+            </updates>
+        </layout>
+
+        <routers>
+            <pickpack>
+                <use>standard</use>
+                <args>
+                    <module>Moogento_Pickpack</module>
+                    <frontName>pickpack</frontName>
+                </args>
+            </pickpack>
+        </routers>
+    </frontend>
+</config>

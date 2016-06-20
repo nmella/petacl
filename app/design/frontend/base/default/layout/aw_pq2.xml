@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalog_product_view>
+        <reference name="head">
+            <action method="addCss" ifconfig="aw_pq2/general/is_enabled"><stylesheet>aw_pq2/css/styles.css</stylesheet></action>
+            <action method="addCss" ifconfig="aw_pq2/general/is_enabled"><stylesheet>aw_pq2/css/custom.css</stylesheet></action>
+            <action method="addItem" ifconfig="aw_pq2/general/is_enabled"><type>skin_js</type><name>aw_pq2/js/aw_pq2.js</name></action>
+            <action method="addItem" ifconfig="aw_pq2/general/is_enabled"><type>skin_js</type><name>aw_pq2/js/aw_pq2_voter.js</name></action>
+            <action method="addItem" ifconfig="aw_pq2/general/is_enabled"><type>skin_js</type><name>aw_pq2/js/aw_pq2_popup.js</name></action>
+            <action method="addItem" ifconfig="aw_pq2/general/is_enabled"><type>skin_js</type><name>aw_pq2/js/aw_pq2_sorter.js</name></action>
+        </reference>
+        <reference name="product.info.additional">
+            <block type="aw_pq2/question_list" name="aw_pq2_question_list" before="-" template="aw_pq2/catalog/product/view/list.phtml">
+                <block type="aw_pq2/question_sort" name="aw_pq2_question_sort" template="aw_pq2/question/sort.phtml" />
+                <block type="aw_pq2/question_form" name="aw_pq2_ask_question_form" template="aw_pq2/question/form.phtml" />
+                <block type="aw_pq2/answer_form" name="aw_pq2_add_answer_form" template="aw_pq2/answer/form.phtml" />
+            </block>
+        </reference>
+        <reference name="before_body_end">
+            <block type="aw_pq2/answer_popup" name="aw_pq2_answer_popup" template="aw_pq2/answer/popup.phtml">
+                <block type="aw_pq2/answer_popup_form" name="aw_pq2_add_answer_form" template="aw_pq2/answer/popup/form.phtml" />
+            </block>
+        </reference>
+    </catalog_product_view>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="aw_pq2" ifconfig="aw_pq2/general/is_enabled">
+                <name>aw_pq2</name>
+                <path>aw_pq2/customer/index</path>
+                <label>Product Questions</label>
+                <urlParams><_secure>true</_secure></urlParams>
+            </action>
+        </reference>
+    </customer_account>
+    <aw_pq2_customer_index>
+        <update handle="customer_account" />
+        <reference name="my.account.wrapper">
+            <block type="core/template" name="aw_pq2.customer.head" template="aw_pq2/customer/head.phtml" />
+            <block type="aw_pq2/customer_question_grid" name="aw_pq2.customer.question.grid" template="aw_pq2/customer/question/grid.phtml" />
+            <block type="aw_pq2/customer_answer_grid" name="aw_pq2.customer.answer.grid" template="aw_pq2/customer/answer/grid.phtml" />
+            <block type="aw_pq2/customer_subscribe" name="aw_pq2.customer.subscribe" template="aw_pq2/customer/subscribe.phtml" />
+        </reference>
+    </aw_pq2_customer_index>
+    <aw_pq2_notification_unsubscribe translate="label">
+        <label>Manage Notification List</label>
+        <reference name="head">
+            <action method="setTitle" translate="title" module="aw_pq2"><title>Manage Notification List</title></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+            <action method="setHeaderTitle" translate="title" module="aw_pq2"><title>Manage Notification List</title></action>
+        </reference>
+        <reference name="content">
+            <block type="aw_pq2/notification_manage" name="aw_pq2.notification.manage" template="aw_pq2/notification/manage.phtml"/>
+        </reference>
+    </aw_pq2_notification_unsubscribe>
+    <aw_pq2_notification_viewwebversion>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="core/template" name="content" template="aw_pq2/notification/web_version.phtml"/>
+        </block>
+    </aw_pq2_notification_viewwebversion>
+    <aw_pq2_question_list>
+        <block type="aw_pq2/question_list" name="aw_pq2_question_list" before="-" template="aw_pq2/catalog/product/view/list.phtml">
+            <block type="aw_pq2/question_sort" name="aw_pq2_question_sort" template="aw_pq2/question/sort.phtml" />
+            <block type="aw_pq2/question_form" name="aw_pq2_ask_question_form" template="aw_pq2/question/form.phtml" />
+            <block type="aw_pq2/answer_form" name="aw_pq2_add_answer_form" template="aw_pq2/answer/form.phtml" />
+        </block>
+    </aw_pq2_question_list>
+</layout>

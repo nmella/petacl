@@ -1,0 +1,90 @@
+div.entry-edit form#answer_edit_form span.field-row {
+    float: left;
+    width: 50%;
+}
+
+.columns div#aw_pq2_info_tabs_sharing_tab_content .form-list td.value {
+    width: 100%;
+}
+
+div#aw-pq2-form-content .title_window {
+    text-transform: uppercase;
+}
+
+div#aw-pq2-form-content .magento_message {
+    padding-top: 10px;
+}
+div#aw-pq2-form-content .content-footer {
+    padding-bottom: 10px;
+}
+
+div#aw-pq2-form-content .content-footer button {
+    margin-right: 5px;
+}
+
+div#aw-pq2-form-content_content label {
+    font-weight: bold;
+    width: 120px;
+}
+div#aw-pq2-form-content_content textarea {
+    float: left;
+}
+
+div#aw-pq2-form-content_content .entry-edit {
+     white-space: nowrap;
+}
+
+div#aw-pq2-form-content_content .entry-edit form#answer_edit_form select,
+div#aw-pq2-form-content_content .entry-edit form#answer_edit_form input {
+    width: 110px;
+}
+
+div#aw-pq2-form-content_content {
+    overflow: inherit !important;
+    height: auto !important;
+    padding-bottom: 18px;
+}
+
+div#aw_pq2_info_tabs_answers_tab_content span.answer-tab-question label {
+    font-weight: bold;
+    width: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+div#aw_pq2_info_tabs_answers_tab_content span.answer-tab-question {
+    background-color: #DFDFDF;
+}
+
+div#aw_pq2_info_tabs_answers_tab_content div button.add-new-answer {
+    margin-bottom: 5px;
+}
+
+div#aw_pq2_info_tabs_answers_tab_content div#answersGrid td.pager {
+    vertical-align: bottom;
+}
+
+div#aw-pq2-form-content_content div#customerGrid table td{
+    padding: 1px 2px;
+}
+
+div#aw-pq2-form-content_content .validation-advice {
+    white-space: normal;
+}
+
+form#sharingProductGrid_massaction-form {
+    display: none !important;
+}
+
+div#aw-pq2-form-content_content .entry-edit form#answer_new_form select,
+div#aw-pq2-form-content_content .entry-edit form#answer_new_form input {
+    width: 110px;
+}
+
+div#aw-pq2-form-content_content .entry-edit form#answer_new_form input[name='customer_group'] {
+    width: 50px;
+}
+
+div#aw-pq2-form-content_content .entry-edit form#answer_new_form td.label {
+    width: 100px;
+}

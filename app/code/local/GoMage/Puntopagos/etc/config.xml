@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<config>
+
+    <global>
+    	<sales>
+            <order>
+            	<statuses>
+            		 <payment_is_closed translate="label"><label>Payment is closed</label></payment_is_closed>
+            	</statuses>
+                <states>
+                    <payment_is_closed translate="label">
+                        <label>Payment is closed</label>
+                        <statuses>
+                            <payment_is_closed default="1"/>
+                        </statuses>
+                        <visible_on_front/>
+                    </payment_is_closed>
+                    <pending translate="label">
+                        <label>Pending</label>
+                        <statuses>
+                            <pending default="1"/>
+                        </statuses>
+                    </pending>
+                </states>
+            </order>
+        </sales>
+    </global>
+		 <frontend>
+        <events> 
+		<checkout_onepage_controller_success_action>
+       <observers>
+         <puntopagos_order_success>
+		 <type>model</type>
+              <class>GoMage_Puntopagos_Model_Observer</class>
+              <method>changeorderStatus</method>
+        </puntopagos_order_success>
+      </observers>
+     </checkout_onepage_controller_success_action>
+	 </events>
+	 </frontend>
+    <default>
+        <payment>
+        	<santander>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_santander</model>
+                <order_status>pending</order_status>                
+                <title>Santander</title>                                                
+                <logo>default/mp1.gif</logo>  
+                <allowspecific>0</allowspecific>              
+                <payment_action>Authorization</payment_action>  
+                <medio_pago></medio_pago>
+            </santander>
+            
+            <presto>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_presto</model>
+                <order_status>pending</order_status>                
+                <title>Presto</title>                                                
+                <logo>default/mp2.gif</logo>  
+                <allowspecific>0</allowspecific>  
+                <payment_action>Authorization</payment_action>
+                <medio_pago></medio_pago>              
+            </presto>
+            
+            <webpay>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_webpay</model>
+                <order_status>pending</order_status>                
+                <title>WebPay</title>                                                
+                <logo>default/mp3.gif</logo>  
+                <allowspecific>0</allowspecific>   
+                <payment_action>Authorization</payment_action>  
+                <medio_pago></medio_pago>           
+            </webpay>
+            
+            <banco>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_banco</model>
+                <order_status>pending</order_status>                
+                <title>Banco</title>                                                
+                <logo>default/mp4.gif</logo>  
+                <allowspecific>0</allowspecific>              
+                <payment_action>Authorization</payment_action>  
+                <medio_pago></medio_pago>
+            </banco>
+            
+            <bci>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_bci</model>
+                <order_status>pending</order_status>                
+                <title>Bci</title>                                                
+                <logo>default/mp5.gif</logo>  
+                <allowspecific>0</allowspecific>  
+                <payment_action>Authorization</payment_action>
+                <medio_pago></medio_pago>              
+            </bci>
+            
+            <tbanc>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_tbanc</model>
+                <order_status>pending</order_status>                
+                <title>TBanc</title>                                                
+                <logo>default/mp6.gif</logo>  
+                <allowspecific>0</allowspecific>
+                <payment_action>Authorization</payment_action>   
+                <medio_pago></medio_pago>             
+            </tbanc>
+            
+            <bancoestado>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_bancoestado</model>
+                <order_status>pending</order_status>                
+                <title>BancoEstado</title>                                                
+                <logo>default/mp7.gif</logo>  
+                <allowspecific>0</allowspecific>
+                <payment_action>Authorization</payment_action>   
+                <medio_pago></medio_pago>             
+            </bancoestado>
+            
+            <ripley>
+                <active>0</active>                
+                <cgi_url>http://sandbox.puntopagos.com</cgi_url>                                
+                <keyid backend_model="adminhtml/system_config_backend_encrypted"/>
+                <secrete_key backend_model="adminhtml/system_config_backend_encrypted"/>                
+                <model>payment/puntopagos_ripley</model>
+                <order_status>pending</order_status>                
+                <title>Ripley</title>                                                
+                <logo>default/mp10.gif</logo>  
+                <allowspecific>0</allowspecific>              
+                <payment_action>Authorization</payment_action>  
+                <medio_pago></medio_pago>
+            </ripley>
+
+         </payment>
+    </default>
+</config>

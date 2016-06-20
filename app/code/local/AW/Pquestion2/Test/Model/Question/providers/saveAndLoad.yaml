@@ -1,0 +1,41 @@
+-   #real db id without data set
+    question_id: 1
+    question_data: {}
+    expectation:
+        exception_on_save: false
+-   #real db id with data set
+    question_id: 1
+    question_data:
+        created_at: "2014-01-01 09:00:00"
+        show_in_store_ids: [1]
+        sharing_type: 1
+        sharing_value: [1]
+    expectation:
+        exception_on_save: false
+-   #no real db id without date set
+    question_id: 9999
+    question_data: {}
+    expectation:
+        exception_on_save: false
+-   #no real db id with date set
+    question_id: 9999
+    question_data:
+        show_in_store_ids: [1]
+        sharing_type: 1
+        sharing_value: [1]
+    expectation:
+        exception_on_save: false
+-   #new object without data set
+    question_id: null
+    question_data: {}
+    expectation:
+        exception_on_save: false
+-   #new object with data set
+    question_id: null
+    question_data:
+        created_at: "2014-01-01 09:00:00"
+        show_in_store_ids: [1]
+        sharing_type: 1
+        sharing_value: [1]
+    expectation:
+        exception_on_save: false

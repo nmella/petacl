@@ -1,0 +1,42 @@
+-   #check add new answer to exists question
+    question_id: 1
+    answer_id: null
+    answer_data:
+        author_name: Answers Name
+        author_email: email1@example.com
+        customer_id: 0
+        content: Content
+        is_admin: 0
+    expectation:
+        exception: false
+        answer_count: 1
+        answer_count_in_previous_answer_question: null #don't check
+-   #check add exists answer to exists question
+    question_id: 1
+    answer_id: 1
+    answer_data: {}
+    expectation:
+        exception: false
+        answer_count: 1
+        answer_count_in_previous_answer_question: 0
+-   #check add new answer to new question
+    question_id: null
+    answer_id: null
+    answer_data:
+        author_name: Answers Name
+        author_email: email1@example.com
+        customer_id: 0
+        content: Content
+        is_admin: 0
+    expectation:
+        exception: true
+        answer_count: 0
+        answer_count_in_previous_answer_question: null #don't check
+-   #check add exists answer to new question
+    question_id: null
+    answer_id: 1
+    answer_data: {}
+    expectation:
+        exception: true
+        answer_count: 0
+        answer_count_in_previous_answer_question: 1

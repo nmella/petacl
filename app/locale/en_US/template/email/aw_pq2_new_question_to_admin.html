@@ -1,0 +1,35 @@
+<!--@subject New Question about {{var product_name}} @-->
+<body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+<div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
+    <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+        <tr>
+            <td align="center" valign="top" style="padding:20px 0 20px 0">
+                <table bgcolor="FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{store url=''}}" style="color:#1E7EC8;"><img src="{{var logo_url}}" alt="{{var logo_alt}}" border="0"/></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <p>
+                                New question about <a href="{{var product_url}}">{{var product_name}}</a> has been asked.
+                            </p>
+                            <p>
+                                <b>Author:</b> {{var question_initiator_name}}
+                            </p>
+                            <p>
+                                <b>Question:</b>
+                                {{var question_text|escape|nl2br}}
+                            </p>
+                            <p>
+                                To answer the question or change its status - go to <a href="{{var backend_question_page}}">this page</a>.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>

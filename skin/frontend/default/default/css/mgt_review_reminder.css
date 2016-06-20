@@ -1,0 +1,36 @@
+#mgt-review-item-list {
+
+}
+
+.mgt-review-reminder-item {
+  padding:10px;
+  border:1px solid #cccccc;
+  margin-bottom:15px;
+  background:#ffffff;	
+}
+
+.mgt-review-reminder-item td.image {
+  border-right:1px solid #cccccc;	
+}
+
+.mgt-review-reminder-item td.data {
+  padding-left:20px;	
+}
+
+.mgt-review-reminder-item .form-add {
+  width:500px;
+  overflow:hidden;
+}
+
+.mgt-review-reminder-item ul.form-list {
+  padding:15px 0px 0px 0px;	
+}
+
+.mgt-review-reminder-item textarea {
+  width:492px;
+}
+
+.mgt-review-reminder-item .buttons-set {
+  margin:0px;
+  border:0px;
+}

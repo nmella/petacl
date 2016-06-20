@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Amasty_Stockstatus
+ */
+-->
+<config>
+        <translate>
+            <modules>
+                <Amasty_Stockstatus>
+                    <files>
+                        <default>Amasty_Stockstatus.csv</default>
+                    </files>
+                </Amasty_Stockstatus>
+            </modules>
+        </translate>
+        
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <amstockstatus translate="title" module="amstockstatus">
+                                            <title>Custom Stock Status</title>
+                                        </amstockstatus>
+                                    </children>
+                                </config>
+                            </children>
+                        </system> 
+                     </children>
+                </admin> 
+            </resources>
+        </acl>
+</config>

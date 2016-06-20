@@ -1,0 +1,265 @@
+	<?php
+	/**
+	 * Magento
+	 *
+	 * NOTICE OF LICENSE
+	 *
+	 * This source file is subject to the Academic Free License (AFL 3.0)
+	 * that is bundled with this package in the file LICENSE_AFL.txt.
+	 * It is also available through the world-wide-web at this URL:
+	 * http://opensource.org/licenses/afl-3.0.php
+	 * If you did not receive a copy of the license and are unable to
+	 * obtain it through the world-wide-web, please send an email
+	 * to license@magento.com so we can send you a copy immediately.
+	 *
+	 * DISCLAIMER
+	 *
+	 * Do not edit or add to this file if you wish to upgrade Magento to newer
+	 * versions in the future. If you wish to customize Magento for your
+	 * needs please refer to http://www.magento.com for more information.
+	 *
+	 * @category    design
+	 * @package     default_default
+	 * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+	 * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+	 */
+	 ?>
+	 
+	<div class="entry-edit">
+		<div class="entry-edit-head">
+			<h4 class="icon-head fieldset-legend <?php echo $this->getHeaderCssClass() ?>"><?php echo $this->getHeaderText() ?></h4>
+		</div>
+		<div id="customer_account_fieds">
+			<?php 
+			
+			echo $this->getForm()->getHtml() ?>
+			<div class="entry-edit-head">
+			<h4 class="icon-head fieldset-legend head-account">Requiero Factura</h4>
+		</div>
+			<div class="fieldset"  >
+			   <div class="input-box">
+				<input  type="checkbox" value="1" id="checkbox_field" name="order[custom_field][checkbox_field]"  />
+				<label for="checkbox_field"><?php echo $this->__('Requiero Factura') ?></label>
+			</div>
+		 <ul id="custom_fields">
+	   
+		  <li class="clearfix addition_field" >
+			<div class="input-box input-address">
+				<label for="field_1"><?php echo $this->__('RUT Factura') ?><span class="required">*</span></label>
+				<br>
+				<input type="text" id="field_1" class="input-text" title="<?php echo $this->__('Field 1') ?>" value="" name="order[custom_field][field_1]">
+			</div>
+		  </li>
+			<li class="clearfix addition_field" >
+			<div class="input-box input-firstname">
+				<label for="field_2"><?php echo $this->__('Razon Social') ?><span class="required">*</span></label>
+				<br>
+				<input type="text" id="field_2" class="input-text" title="<?php echo $this->__('Field 2') ?>" value="" name="order[custom_field][field_2]">
+			</div>
+			<div class="input-box">
+				<label for="field_3"><?php echo $this->__('Giro') ?><span class="required">*</span></label>
+				<br>
+				<input   type="text" id="field_3" class="input-text" title="<?php echo $this->__('Field 3') ?>" value="" name="order[custom_field][field_3]">
+			</div>
+		  </li>
+			  <li class="clearfix addition_field" >
+			<div class="input-box input-firstname">
+				<label for="field_4"><?php echo $this->__('Direccion') ?><span class="required">*</span></label>
+				<br>
+				<input  type="text" id="field_4" class="input-text" title="<?php echo $this->__('Field 4') ?>" value="" name="order[custom_field][field_4]">
+			</div>
+			<div class="input-box">
+				<label for="field_5"><?php echo $this->__('Comuna') ?><span class="required">*</span></label>
+				<br>
+				<input type="text" id="field_5" class="input-text" title="<?php echo $this->__('Field 5') ?>" value="" name="order[custom_field][field_5]">
+			</div>
+		  </li>
+		   <li class="clearfix addition_field">
+			<div class="input-box input-firstname">
+				<label for="field_6"><?php echo $this->__('Ciudad') ?><span class="required">*</span></label>
+				<br>
+				<input  type="text" id="field_6" class="input-text" title="<?php echo $this->__('Field 6') ?>" value="" name="order[custom_field][field_6]">
+			</div>
+		  </li>
+			  <li class="clearfix addition_field" >
+				  <div class="input-box input-firstname">
+					  <label for="field_7"><?php echo $this->__('N Orden de Compra') ?><span class="required"></span></label>
+					  <br>
+					  <input type="text" id="field_7" class="input-text " title="<?php echo $this->__('Field 7') ?>" value="" name="order[custom_field][field_7]">
+				  </div>
+			  </li>
+				<li class="clearfix addition_field" >
+				  <div class="input-box input-firstname">
+					  <label for="field_8"><?php echo $this->__('Observaciones') ?><span class="required"></span></label>
+					  <br>
+					  <input type="text" id="field_8" class="input-text " title="<?php echo $this->__('Field 8') ?>" value="" name="order[custom_field][field_8]">
+				  </div>
+			  </li>
+		  </ul>
+	</div>
+
+		</div>
+		<script type="text/javascript">order.accountFieldsBind($('customer_account_fieds'))</script>
+	</div>
+
+	<script>
+	$("custom_fields").hide();
+	$('checkbox_field').observe('click', function(e)  {
+		  if($('checkbox_field').checked){
+			$("custom_fields").show();
+			$("field_1").addClassName('required-entry');
+			$("field_1").addClassName('rut');
+			$("field_2").addClassName('required-entry');
+			$("field_3").addClassName('required-entry');
+			$("field_4").addClassName('required-entry');
+			$("field_5").addClassName('required-entry');
+			$("field_6").addClassName('required-entry');
+		  }
+		else{
+			$("custom_fields").hide();
+			$("field_1").removeClassName('required-entry');
+			$("field_2").removeClassName('required-entry');
+			$("field_3").removeClassName('required-entry');
+			$("field_4").removeClassName('required-entry');
+			$("field_5").removeClassName('required-entry');
+			$("field_6").removeClassName('required-entry');
+		}
+		
+		
+	});                    function numbersonly(el){
+							var key = el.which || el.keyCode;
+
+							// control keys
+							if ((key==null) || (key==0) || (key==8) ||
+								(key==9) || (key==13) || (key==27) )
+								return true;
+
+							var keychar = String.fromCharCode(key);
+							if (keychar){
+								keychar = keychar.toLowerCase();
+								if ((("0123456789kK-").indexOf(keychar) == -1)){
+									Event.stop(el);
+								}
+							}
+						}
+						
+						if ($('field_1') != undefined){
+								$('field_1').observe('keypress', numbersonly);
+							}
+						   function letternumber(el){
+							var key = el.which || el.keyCode;
+
+							// control keys
+							if ((key==null) || (key==0) || (key==8) ||
+								(key==9) || (key==13) || (key==27) )
+								return true;
+
+							var keychar = String.fromCharCode(key);
+							if (keychar){
+								keychar = keychar.toLowerCase();
+								if ((("abcdefghijklmnopqrstuvwxyz0123456789- ").indexOf(keychar) == -1)){
+									Event.stop(el);
+								}
+							}
+						}
+						
+						 [$('field_2'), $('field_3'), $('field_4'), $('field_5'), $('field_6'), $('field_7'), $('field_8')].each(function(el) {
+								  el.observe('keypress', letternumber);
+							});
+							
+		
+		$('field_1').observe('blur', checkfield1);
+		function checkfield1(){
+
+			if($('field_1').value!=""){
+						if(ComparaDV($('field_1').value)==true)
+						{
+							//$('field_1').setStyle({color:'green'}).removeClass('rut-false').removeClass('validation-failed');
+							$('field_1').next('.validation-advice').remove();
+						}
+						
+		
+						 
+			Validation.add('rut','RUT Incorrecto (Ej: 16637445-6)',function(the_field_value){
+				
+				if(ComparaDV(the_field_value)==true)
+				{
+					return true;
+				}
+				return false;
+			});
+		}else {
+			$("field_2").removeClassName('rut');
+				$("field_1").addClassName('required-entry');
+
+		}}
+		
+			function LTrim(str){
+			for(var i=0;str.charAt(i)==" ";i++);
+			return str.substring(i,str.length);
+		}
+
+		function RTrim(str){
+			for(var i=str.length-1;str.charAt(i)==" ";i--);
+			return str.substring(0,i+1);
+		}
+			  function Trim(str){return LTrim(RTrim(str));}
+							function GetDigVer(RutSolo){
+			var once = 11;
+			var largo = 0;
+			var suma = 0;
+			var resto = 0;
+			var fin = 0;
+			var dig= 0;
+			var largo = Trim(RutSolo).length;
+			var multiplo = 2;
+			while(largo != 0){
+				dig = RutSolo.substr(largo-1, 1);
+				ShowLargo=largo
+				ShowDig=dig;
+				largo = largo - 1;
+				suma = suma + (dig * multiplo);
+				ShowSuma=suma
+				ShowMultiplo=multiplo
+				multiplo = multiplo + 1;
+				if (multiplo > 7){
+					multiplo = 2;
+				}
+			}
+			resto = suma-(Math.floor(suma/once)*once);//esto entrega el el equivalente a suma mod 11, o fmod(suma,once)
+			fin = once - resto;
+			if (fin == 10){
+				digver = "K";
+			}     else {
+				if (fin == 11){
+					digver = 0;
+				} else {
+					digver = fin;
+				}
+			}
+			return digver;
+		}
+			function ComparaDV(RutSoloVal){
+			
+			aux = RutSoloVal;
+
+					aux=aux.replace(/\-/g, '');
+					aux=aux.replace(/k/g, 'K');
+
+			RutSolo = aux.substring(0, aux.length-1);
+			DigVer = aux.slice(-1);
+
+			if (RutSolo.length == 0) {
+				return false;
+			}
+
+			if(DigVer!=GetDigVer(RutSolo)){
+				return false;
+			} else {
+				return true;
+			}
+			return false;
+
+		}
+
+	</script>

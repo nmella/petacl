@@ -1,0 +1,13 @@
+<?php 
+
+$_items = $this->getItems();
+
+?>
+
+<?php if ($_items): ?>
+<div id="mgt-review-item-list">
+  <?php foreach ($_items as $_item): ?>
+      <?php echo $this->renderItem($_item); ?>
+  <?php endforeach ?>
+</div>
+<?php endif ?>

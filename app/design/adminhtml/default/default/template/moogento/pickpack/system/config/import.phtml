@@ -1,0 +1,43 @@
+<script type="text/javascript">
+var client = new XMLHttpRequest();
+	function importPickpack(){
+		
+		var file = document.getElementById('pickpack_options_general_import_csv_file');
+		/*create form for instance*/
+		var fd = new FormData();
+		/*add file to formdata*/
+		var fileOb = file.files[0];
+		var reader = new FileReader();
+	    reader.onload = function(){
+		      var text = reader.result;
+		      fd.append("upload", text);
+			client.open("post", '<?php echo $this->getAjaxCheckUrl() ?>' + '?isAjax=true&form_key=' + '<?php echo Mage::getSingleton("core/session")->getFormKey()?>', true);
+			//client.open("post", '/test.php', true)
+			//client.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			client.send(fd);
+	    };
+	    reader.readAsText(fileOb);
+		//console.log(fileOb.getAsText('utf-8'));
+		
+		// new Ajax.request('<?php echo $this->getAjaxCheckUrl() ?>', {
+		// 	method : 'post',
+		//	data    : fd,
+		// 	onSuccess: function(transport){
+		// 		if(transport.responseText)
+		// 			alert(transport.responseText);
+		// 		else
+		// 			arlert('Can not import now. Please contact support from Moogento. Thanks.');
+		// 	}
+		// });
+		/* Check the response status */  
+	   client.onreadystatechange = function() 
+	   {
+	      if (client.readyState == 4 && client.status == 200) 
+	      {
+	      	var Url = '<?php echo $this->getRedirectUrl(); ?>';
+	        window.location.href = Url;
+	      }
+	   }
+	}
+</script>
+<?php echo $this->getButtonHtml();?>

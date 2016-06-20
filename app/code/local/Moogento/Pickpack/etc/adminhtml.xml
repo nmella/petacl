@@ -1,0 +1,155 @@
+<?xml version="1.0" ?>
+<!--
+  Moogento
+  
+  SOFTWARE LICENSE
+  
+  This source file is covered by the Moogento End User License Agreement
+  that is bundled with this extension in the file License.html
+  It is also available online here:
+  https://moogento.com/License.html
+  
+  NOTICE
+  
+  If you customize this file please remember that it will be overwrtitten
+  with any future upgrade installs. 
+  If you'd like to add a feature which is not in this software, get in touch
+  at www.moogento.com for a quote.
+  
+  ID          pe+sMEDTrtCzNq3pehW9DJ0lnYtgqva4i4Z=
+  File        adminhtml.xml
+  @category   Moogento
+  @package    pickPack
+  @copyright  Copyright (c) 2016 Moogento <info@moogento.com> / All rights reserved.
+  @license    https://moogento.com/License.html
+-->
+<config>
+    <acl>
+        <resources>
+            <admin> 
+                <children>
+                    <sales>
+                        <children>
+                            <order>
+                                <children>
+                                    <actions>
+                                        <children>
+                                            <moo_pickpack_pdf_invoice translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Invoice)</title>
+                                                <sort_order>1000</sort_order>
+                                            </moo_pickpack_pdf_invoice>
+
+                                            <moo_pickpack_pdf_packingsheet translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Packing Sheet)</title>
+                                                <sort_order>1010</sort_order>
+                                            </moo_pickpack_pdf_packingsheet>
+
+                                            <moo_pickpack_pdf_invoice_and_packingsheet translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Invoice and Packing Sheet)</title>
+                                                <sort_order>1020</sort_order>
+                                            </moo_pickpack_pdf_invoice_and_packingsheet>
+
+                                            <moo_pickpack_pdf_label_zebra translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Zebra Labels)</title>
+                                                <sort_order>1025</sort_order>
+                                            </moo_pickpack_pdf_label_zebra>
+
+                                            <moo_pickpack_pdf_separated translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Order-separated Picklist)</title>
+                                                <sort_order>1030</sort_order>
+                                            </moo_pickpack_pdf_separated>
+
+                                            <moo_pickpack_pdf_product_separated translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Product-separated Picklist)</title>
+                                                <sort_order>1035</sort_order>
+                                            </moo_pickpack_pdf_product_separated>
+
+                                            <moo_pickpack_pdf_combined translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Order-combined Picklist)</title>
+                                                <sort_order>1040</sort_order>
+                                            </moo_pickpack_pdf_combined>
+											
+                                            <moo_pickpack_pdf_separated2 translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Orders Summary)</title>
+                                                <sort_order>1045</sort_order>
+                                            </moo_pickpack_pdf_separated2>
+
+                                            <moo_pickpack_pdf_troylleybox translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Troylleybox Picklist)</title>
+                                                <sort_order>1050</sort_order>
+                                            </moo_pickpack_pdf_troylleybox>
+
+                                            <moo_pickpack_pdf_address_label translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Address Labels)</title>
+                                                <sort_order>1060</sort_order>
+                                            </moo_pickpack_pdf_address_label>
+                                            
+                                            <moo_pickpack_pdf_cn22_label translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (CN22 Labels)</title>
+                                                <sort_order>1060</sort_order>
+                                            </moo_pickpack_pdf_cn22_label>
+
+                                            <moo_pickpack_pdf_csv_out_of_stock translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF/CSV (Out-of-stock List)</title>
+                                                <sort_order>1065</sort_order>
+                                            </moo_pickpack_pdf_csv_out_of_stock>
+
+                                            <moo_pickpack_csv_orders translate="title" module="pickpack">
+                                                <title>Moogento pickPack : CSV (Orders)</title>
+                                                <sort_order>1080</sort_order>
+                                            </moo_pickpack_csv_orders>
+
+                                            <moo_pickpack_csv_pick_order translate="title" module="pickpack">
+                                                <title>Moogento pickPack : CSV (Order-separated Products)</title>
+                                                <sort_order>1090</sort_order>
+                                            </moo_pickpack_csv_pick_order>
+
+                                            <moo_pickpack_csv_pick_combined_order translate="title" module="pickpack">
+                                                <title>Moogento pickPack : CSV (Order-combined Products)</title>
+                                                <sort_order>1100</sort_order>
+                                            </moo_pickpack_csv_pick_combined_order>
+
+                                            <moo_pickpack_manifest_combined_order translate="title" module="pickpack">
+                                                <title>Moogento pickPack : CSV/XML (Cargo Manifest)</title>
+                                                <sort_order>1110</sort_order>
+                                            </moo_pickpack_manifest_combined_order>
+											
+											<moo_pickpack_pdf_gift_message translate="title" module="pickpack">
+                                                <title>Moogento pickPack : PDF (Gift Message)</title>
+                                                <sort_order>1110</sort_order>
+                                            </moo_pickpack_pdf_gift_message>
+
+                                        </children>
+                                    </actions>
+                                </children>
+                            </order>
+                        </children>
+                    </sales>
+
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <pickpack_options>
+                                        <title>Moogento pickPack</title>
+                                        <sort_order>301</sort_order>
+                                    </pickpack_options>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <events>
+        <core_block_abstract_prepare_layout_before>
+            <observers>
+                <reward>
+                    <class>pickpack/observer</class>
+                    <method>applyLimitToGrid</method>
+                </reward>
+            </observers>
+        </core_block_abstract_prepare_layout_before>
+    </events>
+</config>

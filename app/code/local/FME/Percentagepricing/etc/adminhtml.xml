@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+		<menu>
+			<percentagepricing module="percentagepricing">
+				<title>Percentage Pricing</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="percentagepricing">
+						<title>Manage Rules</title>
+						<sort_order>0</sort_order>
+						<action>percentagepricing/adminhtml_percentagepricing</action>
+					</items>
+				</children>
+			</percentagepricing>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>						
+						<system>
+						    <children>
+							<config>
+							    <children>
+								<profile translate="title" module="percentagepricing">
+								    <title>Percentage Pricing</title>
+								    <sort_order>39</sort_order>
+								</profile>
+							    </children>
+							</config>
+						    </children>
+						</system>
+						<percentagepricing module="percentagepricing">
+				<title>Percentage Pricing</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="percentagepricing">
+						<title>Manage Rules</title>
+						<sort_order>0</sort_order>
+						<action>percentagepricing/adminhtml_percentagepricing</action>
+					</items>
+				</children>
+			</percentagepricing>
+					</children>
+					
+				</admin>
+			</resources>
+		</acl>
+    
+
+</config>

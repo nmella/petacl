@@ -1,0 +1,65 @@
+-
+    product: 1 #real db id with questions (by product, attributeset, website and global)
+    is_product_model: false
+    expectation:
+        collection_item_count: 4
+-
+    product: 1 #real db id with questions (by product, attributeset, website and global)
+    is_product_model: true # as model
+    expectation:
+        collection_item_count: 4
+-
+    product: 2 #real db id with questions (by attributeset, website and global)
+    is_product_model: false
+    expectation:
+        collection_item_count: 3
+-
+    product: 2 #real db id with questions (by attributeset, website and global)
+    is_product_model: true # as model
+    expectation:
+        collection_item_count: 3
+-
+    product: 3 #real db id with questions (by website and global)
+    is_product_model: false
+    expectation:
+        collection_item_count: 2
+-
+    product: 3 #real db id with questions (by website and global)
+    is_product_model: true # as model
+    expectation:
+        collection_item_count: 2
+-
+    product: 4 #real db id with questions (by global)
+    is_product_model: false
+    expectation:
+        collection_item_count: 1
+-
+    product: 4 #real db id with questions (by global)
+    is_product_model: true # as model
+    expectation:
+        collection_item_count: 1
+-
+    product: 9999 #no real db id
+    is_product_model: false
+    expectation:
+        collection_item_count: 1
+-
+    product: 9999 #no real db id
+    is_product_model: true # as model
+    expectation:
+        collection_item_count: 1
+-
+    product: null #new object
+    is_product_model: false
+    expectation:
+        collection_item_count: 1
+-
+    product: null #new object
+    is_product_model: true # as model
+    expectation:
+        collection_item_count: 1
+-
+    product: "1" #real db id with questions as string
+    is_product_model: false
+    expectation:
+        collection_item_count: 4

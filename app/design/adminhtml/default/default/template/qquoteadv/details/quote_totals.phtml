@@ -1,0 +1,104 @@
+<?php
+/**
+ *
+ * CART2QUOTE CONFIDENTIAL
+ * __________________
+ *
+ *  [2009] - [2016] Cart2Quote B.V.
+ *  All Rights Reserved.
+ *
+ * NOTICE OF LICENSE
+ *
+ * All information contained herein is, and remains
+ * the property of Cart2Quote B.V. and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Cart2Quote B.V.
+ * and its suppliers and may be covered by European and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Cart2Quote B.V.
+ *
+ * @category    Ophirah
+ * @package     Qquoteadv
+ * @copyright   Copyright (c) 2016 Cart2Quote B.V. (https://www.cart2quote.com)
+ * @license     https://www.cart2quote.com/ordering-licenses(https://www.cart2quote.com)
+ */
+?>
+<div class="entry-edit">
+    <?php
+
+    //$collectTotals is set in product.phtml and then this template is included
+    if ($collectedTotals = $quoteModel->getTotalsArray()) {
+        $_qTotals->setCollectedTotals($collectedTotals);
+        $_qTotals->updateTotals($quoteModel->getData('salesrule'));
+        if ($_qTotals->getData('no_profit') === true) {
+            $quoteModel->setData('no_profit', true);
+        }
+    }
+    ?>
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Quote Totals') ?></h4>
+    </div>
+
+    <div class="order-totals">
+        <table width="100%" cellspacing="0" cellpadding="8">
+            <?php
+            if (count($quoteModel->getQuoteTotals()) > 0):
+                //$quoteTotals = $_qTotals->sortQuoteTotals($quoteModel->getQuoteTotals());
+                $quoteTotals = $_qTotals->sortQuoteTotals();
+                $style = 'style="font-weight:bold;"';
+                ?>
+                <tfoot>
+                <?php foreach ($quoteTotals['totalFoot'] as $totalFoot):
+                    if (isset($totalFoot['code']) && $totalFoot['code'] == 'profit') {
+                        $styleProfit = 'style="border-top:solid 1px #CCC;"';
+                    } else {
+                        $styleProfit = '';
+
+                    }
+                    ?>
+
+                    <tr <?php if (isset($totalFoot['strong']) && $totalFoot['strong'] == 1) {
+                        echo $style;
+                    } ?>>
+                        <td class="label" colspan="1" <?php echo $styleProfit; ?>>
+                            <?php echo $totalFoot['label']; ?>
+                        </td>
+                        <td class="price" <?php echo $styleProfit; ?>>
+                            <?php echo Mage::app()->getStore($_qTotals->getQuoteStore())->formatPrice($totalFoot['value']); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tfoot>
+
+                <tbody>
+                <?php foreach ($quoteTotals['totalBody'] as $totalBody):
+                    if (isset($totalBody['code']) && $totalBody['code'] == 'subtotal') {
+                        $styleSubtotal = 'style="border-top:solid 1px #CCC;"';
+                    } else {
+                        $styleSubtotal = '';
+
+                    }?>
+                    <tr <?php if (isset($totalBody['strong']) && $totalBody['strong'] == 1) {
+                        echo $style;
+                    } ?>>
+                        <td class="label" colspan="1" <?php echo $styleSubtotal; ?>>
+                            <?php echo $totalBody['label']; ?>
+                        </td>
+                        <td class="price" <?php echo $styleSubtotal; ?>>
+                            <?php echo Mage::app()->getStore($_qTotals->getQuoteStore())->formatPrice($totalBody['value']); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            <?php endif; ?>
+        </table>
+        <?php include('buttons.phtml'); ?>
+        <?php //show last update date and time if quote if totals are not collected
+        if(!$this->isTotalsCollected()) {
+            $date = $this->formatDate($quoteModel->getData('updated_at'), 'medium', true);
+            echo '<br /><small>(Last Update: '.$date.')</small>';
+        } ?>
+    </div>
+</div>

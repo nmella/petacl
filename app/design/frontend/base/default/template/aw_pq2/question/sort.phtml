@@ -1,0 +1,56 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Pquestion2
+ * @version    2.1.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div class="aw-pq2-question-sort-block limiter">
+    <?php echo $this->__('Sort by') ?>
+    <select class="aw-pq2-question-sort__sortby" style="width:120px;">
+        <?php foreach ($this->getOptions() as $value => $label): ?>
+            <option value="<?php echo $value; ?>" <?php if ($this->getCurrentOrder() == $value): ?> selected="selected"<?php endif ?>>
+                <?php echo $label; ?>
+            </option>
+        <?php endforeach ?>
+    </select>
+    <a href="javascript:void(0)" class="aw-pq2-question-sort__dir">
+        <img src="<?php echo $this->getImageUrl($this->getCurrentDir()); ?>" alt=<?php echo $this->getTargetDir(); ?>/>
+    </a>
+    <script type="text/javascript">
+        var config = {
+            'sortBlockSelector'                     : '.aw-pq2-question-sort-block',
+            'sortbySelector'                        : '.aw-pq2-question-sort__sortby',
+            'dirSelector'                           : '.aw-pq2-question-sort__dir',
+            'updateContainerSelector'               : '.aw-pq2-question-list-wrapper',
+            'sortUrl'                               : <?php echo $this->getSortUrl(); ?>,
+            'sortDirValue'                          : <?php echo Zend_Json::encode($this->getCurrentDir()); ?>,
+            'sortDirValueTarget'                    : <?php echo $this->getTargetDir(); ?>,
+            'sortByValue'                           : <?php echo Zend_Json::encode($this->getCurrentOrder()); ?>,
+            'dirImagesUrl'                          : <?php echo $this->getImages(); ?>,
+            'overlayCssClass'                       : 'aw-pq2-overlay',
+            'overlayImage'                          : <?php echo $this->getOverlayImage(); ?>,
+            'overlayContainerSelector'              : '.aw-pq2-list.box-content',
+            'product'                               : <?php echo $this->getProduct(); ?>
+        };
+        var _awPq2Sorter = new awPq2Sorter(config);
+    </script>
+</div>

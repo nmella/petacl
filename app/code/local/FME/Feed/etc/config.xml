@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!--
+	@category   FME
+	@package    FME_Feed
+	@author     Qazi Mustafa(qazi.mustafa@unitedsol.net)
+	@license    http://www.fmeextensions.com/
+ -->
+<config>
+	<modules>
+        <FME_Feed>
+            <version>0.1.0</version>
+        </FME_Feed>
+    </modules>
+    <admin>
+        <routers>
+			<feed>
+				<use>admin</use>
+				<args>
+					<module>FME_Feed</module>
+					<frontName>feed</frontName>
+				</args>
+			</feed>
+        </routers>
+    </admin>
+    <admin>
+        <routers>
+			<feed>
+				<use>admin</use>
+				<args>
+					<module>FME_Feed</module>
+					<frontName>feed</frontName>
+				</args>
+			</feed>
+        </routers>
+    </admin>
+    <adminhtml>
+	<events>
+		<controller_action_predispatch>
+			<observers>
+				<fme_notification>
+					<type>singleton</type>
+					<class>feed/feed</class>
+					<method>getRss</method>
+				</fme_notification>
+			</observers>
+		</controller_action_predispatch>
+	</events>
+		
+		<menu>
+			<!--
+			<feed module="feed">
+				<title>Feed</title>
+				<sort_order>71</sort_order>               
+				<children>
+
+					<items module="feed">
+						<title>Manage Items</title>
+						<sort_order>0</sort_order>
+						<action>feed/adminhtml_feed</action>
+					</items>
+
+				</children>
+			</feed>
+			-->
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<!--
+						<FME_Feed>
+							<title>Feed Module</title>
+							<sort_order>10</sort_order>
+						</FME_Feed>
+						
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <feed translate="title" module="feed">
+                                            <title>FME Updates</title>
+                                            <sort_order>50</sort_order>
+                                        </feed>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+				-->
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<feed>
+					<file>feed.xml</file>
+				</feed>
+			</updates>
+		</layout>
+    </adminhtml>
+    <global>
+        <models>
+            <feed>
+                <class>FME_Feed_Model</class>
+                <resourceModel>feed_mysql4</resourceModel>
+            </feed>
+            <feed_mysql4>
+                <class>FME_Feed_Model_Mysql4</class>
+                <entities>
+                    <feed>
+                        <table>feed</table>
+                    </feed>
+                </entities>
+            </feed_mysql4>
+        </models>
+        <resources>
+            <feed_setup>
+                <setup>
+                    <module>FME_Feed</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </feed_setup>
+            <feed_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </feed_write>
+            <feed_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </feed_read>
+        </resources>
+        <blocks>
+            <feed>
+                <class>FME_Feed_Block</class>
+            </feed>
+        </blocks>
+        <helpers>
+            <feed>
+                <class>FME_Feed_Helper</class>
+            </feed>
+        </helpers>
+		
+    </global>
+</config>

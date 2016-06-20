@@ -1,0 +1,31 @@
+1.1.0 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Integrate check to avoid duplicated reminders
+
+1.0.9 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Fixed use app emulation for store view specific things
+
+1.0.8 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Fixed bug in observer
+
+1.0.7 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+change namespace to mgt
+
+1.0.6 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Fixed bug with db prefix
+
+1.0.5 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Fixed bug with db prefix
+
+1.0.4 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Fixed bug for php 5.2
+
+1.0.3 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Fixed typo
+
+1.0.2 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+Fixed bug in query
+
+1.0.1 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>
+small bugfixes
+
+1.0.0 Stefan Wieczorek <stefan.wieczorek@mgt-commerce.com>

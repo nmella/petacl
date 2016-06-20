@@ -1,0 +1,90 @@
+aliases:
+    question: &question
+        entity_id: 1
+        title: Title
+        author_name: Name
+        author_email: email@example.com
+        customer_id: 0
+        created_at: 2014-01-01
+        content: Content
+        product_id: 1
+        store_id: 1
+        show_in_store_ids: 1
+        status: 1
+        visibility: 1
+        sharing_type: 1
+        sharing_value: 1
+        helpfulness: 0
+    eav_customer: &eav_customer
+        entity_id: 13
+        entity_type_id: 1
+        attribute_set_id: 0
+        website_id: 1
+        email: example@example.com
+        group_id: 1
+        store_id: 1
+        is_active: 1
+        firstname: John
+        lastname: Smith
+    eav_catalog_product: &eav_catalog_product
+        entity_id: 1
+        type_id: simple
+        sku: book
+        name: Book
+        short_description: Book
+        description: Book
+        url_key: book
+        stock:
+            qty: 100.00
+            is_in_stock: 1
+        website_ids: [main]
+        category_ids: [2]
+        price: 10.00
+        tax_class_id: 2 # Taxable Goods
+        status: 1       # Enabled
+        visibility: 4   # Visible in Catalog & Search
+
+scope:
+    website:
+      -
+        website_id: 1
+        code: main
+        name: Main Website
+        default_group_id: 1
+    group:
+      -
+        group_id: 1
+        website_id: 1
+        name: Main Website Store
+        root_category_id: 2
+        default_store_id: 1
+    store:
+      -
+        store_id: 1
+        code: default
+        website_id: 1
+        group_id: 1
+        name: Default Store View
+        is_active: 1
+
+tables:
+    aw_pq2/question:
+      -
+        <<: *question
+        entity_id: 1
+        product_id: 1
+        author_name: Guest Name
+        content: Content
+
+eav:
+    customer:
+      -
+        <<: *eav_customer
+        entity_id: 1
+        firstname: John
+        lastname: Smith
+    catalog_product:
+      -
+        <<: *eav_catalog_product
+        entity_id: 1
+        name: Book

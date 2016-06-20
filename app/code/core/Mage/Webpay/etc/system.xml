@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<config>
+   <sections>
+        <payment>
+            <groups>
+                <Webpay_standard translate="label" module="Webpay">
+                     <label>Webpay Standard (Website Payments Standard)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </title>
+
+                        <order_status translate="label">
+                            <label>New order status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+
+                         <sort_order translate="label">
+                            <label>Sort order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </sort_order>
+
+                    </fields>
+                </Webpay_standard>
+            </groups>
+        </payment>
+        <Webpay translate="label" module="Webpay">
+            <label>Webpay Account</label>
+            <tab>sales</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>350</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <wps translate="label">
+                    <label>Website Payments Standard</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                         <business_name translate="label">
+                            <label>Business Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </business_name>
+												<business_account translate="label">
+												<label>Business Account</label>
+												<frontend_type>text</frontend_type>
+												<!--<backend_model>adminhtml/system_config_backend_encrypted</backend_model>//-->
+												<sort_order>2</sort_order>
+												<show_in_default>1</show_in_default>
+												<show_in_website>1</show_in_website>
+												<show_in_store>0</show_in_store>
+												</business_account>
+												<country translate="label">
+												 <label>Account Country</label>
+												 <frontend_type>select</frontend_type>		
+												 <sort_order>3</sort_order>
+												 <source_model>Mage_Webpay_Model_Source_PaymentCountry</source_model>
+												 <show_in_default>1</show_in_default>
+												 <show_in_website>1</show_in_website>
+												 <show_in_store>1</show_in_store>
+												</country>
+												
+                         <logo_url translate="label comment">
+                            <label>Business logo image URL</label>
+                            <comment>Maximum image size is 150*50 px.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </logo_url>
+                        <debug_flag translate="label">
+                            <label>Debug Flag</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug_flag>
+                    </fields>
+                </wps>
+            </groups>
+        </Webpay>
+    </sections>
+</config>

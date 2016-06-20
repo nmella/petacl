@@ -1,0 +1,12 @@
+<config>
+ <modules>
+  <Mage_Webpay>
+   <active>true</active>
+   <codePool>core</codePool>
+   <depends>
+    <Mage_Payment />
+   </depends>
+   <version>0.1.0</version>
+  </Mage_Webpay>
+ </modules>
+</config>

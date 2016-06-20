@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>js</type><name>extjs/ext-tree.js</name><params/></action>
+            <action method="addItem"><type>js</type><name>extjs/fix-defer.js</name><params/></action>
+            <action method="addItem"><type>js</type><name>extjs/ext-tree-checkbox.js</name><params/></action>
+               <action method="addItem"><type>js</type><name>mage/adminhtml/rules.js</name><params/></action>
+            <action method="addItem"><type>js_css</type><name>extjs/resources/css/ext-all.css</name><params/></action>
+        </reference>
+        
+    </default>
+    <percentagepricing_adminhtml_percentagepricing_index>
+        <reference name="content">
+            <block type="percentagepricing/adminhtml_percentagepricing" name="percentagepricing" />
+        </reference>
+    </percentagepricing_adminhtml_percentagepricing_index>
+</layout>

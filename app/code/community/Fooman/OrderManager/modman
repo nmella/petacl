@@ -1,0 +1,7 @@
+../../../../../app/code/community/Fooman/OrderManager/                              /app/code/community/Fooman/OrderManager/
+../../../../../app/design/adminhtml/default/default/layout/fooman_ordermanager.xml  /app/design/adminhtml/default/default/layout/fooman_ordermanager.xml
+../../../../../app/etc/modules/Fooman_OrderManager.xml                              /app/etc/modules/Fooman_OrderManager.xml
+../../../../../app/locale/de_DE/Fooman_OrderManager.csv                             /app/locale/de_DE/Fooman_OrderManager.csv
+../../../../../app/locale/en_US/Fooman_OrderManager.csv                             /app/locale/en_US/Fooman_OrderManager.csv
+../../../../../app/locale/it_IT/Fooman_OrderManager.csv                             /app/locale/it_IT/Fooman_OrderManager.csv
+../../../../../js/fooman/adminhtml/                                                 /js/fooman/adminhtml/

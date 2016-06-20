@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_sales_order_index>
+        <update handle="fooman_ordermanager_extra_columns" />
+    </adminhtml_sales_order_index>
+    <adminhtml_sales_order_grid>
+        <update handle="fooman_ordermanager_extra_columns" />
+    </adminhtml_sales_order_grid>
+    <fooman_ordermanager_extra_columns>
+        <reference name="head">
+            <action method="addJs"><script>fooman/adminhtml/grid.js</script></action>
+        </reference>
+        <reference name="sales_order.grid">
+            <action method="addColumnAfter" ifconfig="ordermanager/settings/displaytrackingcolumn">
+                <columnId>fooman_tracking</columnId>
+                <arguments module="ordermanager" translate="header">
+                    <header>Tracking #</header>
+                    <renderer>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_TrackingNumberInput</renderer>
+                    <type>text</type>
+                    <sortable>false</sortable>
+                    <filter>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_TrackingNumberInput</filter>
+                </arguments>
+                <after>entity_id</after>
+            </action>        
+            <action method="addColumnAfter" ifconfig="ordermanager/settings/displaycarriercolumn">
+                <columnId>fooman_carrier</columnId>
+                <arguments module="ordermanager" translate="header">
+                    <header>Carrier</header>
+                    <renderer>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_TrackingCarrierInput</renderer>
+                    <type>text</type>
+                    <sortable>false</sortable>
+                    <filter>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_TrackingCarrierInput</filter>
+                </arguments>
+                <after>entity_id</after>
+            </action>
+            <action method="addColumnAfter" ifconfig="ordermanager/settings/displayshippinginfo">
+                <columnId>fooman_shipping_info</columnId>
+                <arguments module="sales" translate="header">
+                    <header>Shipping Information</header>
+                    <renderer>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_ShippingInformation</renderer>
+                    <type>text</type>
+                    <sortable>false</sortable>
+                    <filter>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_ShippingInformation</filter>
+                </arguments>
+                <after>shipping_name</after>
+            </action>
+            <action method="addColumnAfter" ifconfig="ordermanager/settings/displayshipping">
+                <columnId>fooman_shipping_address</columnId>
+                <arguments module="sales" translate="header">
+                    <header>Shipping Address</header>
+                    <renderer>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_ShippingAddress</renderer>
+                    <type>text</type>
+                    <sortable>false</sortable>
+                    <filter>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_ShippingAddress</filter>
+                </arguments>
+                <after>shipping_name</after>
+            </action>
+            <action method="addColumnAfter" ifconfig="ordermanager/settings/displaybilling">
+                <columnId>fooman_billing_address</columnId>
+                <arguments module="sales" translate="header">
+                    <header>Billing Address</header>
+                    <renderer>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_BillingAddress</renderer>
+                    <type>text</type>
+                    <sortable>false</sortable>
+                    <filter>Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_BillingAddress</filter>
+                </arguments>
+                <after>billing_name</after>
+            </action>
+        </reference>
+    </fooman_ordermanager_extra_columns>
+</layout>

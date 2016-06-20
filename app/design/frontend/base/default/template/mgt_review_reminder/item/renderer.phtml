@@ -1,0 +1,26 @@
+<?php 
+
+$_item = $this->getItem();
+$_isReviewed = $_item->getIsReviewed();
+
+?>
+
+<?php if ($_item && !$_isReviewed): ?>
+
+<div class="mgt-review-reminder-item">
+
+  <table width="100%">
+    <tr>
+      <td class="image" width="200">
+        <?php echo $_item->getThumbnailHtml(175); ?>
+      </td>
+      <td class="data">
+         <h1><?php echo $_item->getName(); ?></h1>
+         <?php echo $this->renderForm(); ?>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+<?php endif ?>

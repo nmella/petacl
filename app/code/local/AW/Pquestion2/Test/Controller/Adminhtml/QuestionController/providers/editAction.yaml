@@ -1,0 +1,90 @@
+-   #check new question without customer and product
+    question_id: 0
+    product_id: 0
+    customer_id: 0
+    session_pq_form_data: null
+    expectation:
+        redirect: true
+        question_content: ""
+        product_name: ""
+        author_name: ""
+        page_title: "New Question"
+-   #check new question with NOT real product without customer
+    question_id: 0
+    product_id: 2
+    customer_id: 0
+    session_pq_form_data: null
+    expectation:
+        redirect: true
+        question_content: ""
+        product_name: ""
+        author_name: ""
+        page_title: "New Question"
+-   #check new question with real product without customer
+    question_id: 0
+    product_id: 1
+    customer_id: 0
+    session_pq_form_data: null
+    expectation:
+        redirect: false
+        question_content: ""
+        product_name: Book
+        author_name: ""
+        page_title: "New Question"
+-   #check new question with real product and NOT real customer
+    question_id: 0
+    product_id: 1
+    customer_id: 2
+    session_pq_form_data: null
+    expectation:
+        redirect: false
+        question_content: ""
+        product_name: Book
+        author_name: ""
+        page_title: "New Question"
+-   #check new question with real product and real customer
+    question_id: 0
+    product_id: 1
+    customer_id: 1
+    session_pq_form_data: null
+    expectation:
+        redirect: false
+        question_content: ""
+        product_name: Book
+        author_name: John Smith
+        page_title: "New Question"
+-   #check new question with session data
+    question_id: 0
+    product_id: 1
+    customer_id: 1
+    session_pq_form_data:
+        content: "My Awesome Content"
+    expectation:
+        redirect: false
+        question_content: "My Awesome Content"
+        product_name: Book
+        author_name: John Smith
+        page_title: "New Question"
+-   #check exists question without session data
+    question_id: 1
+    product_id: 0
+    customer_id: 0
+    session_pq_form_data: null
+    expectation:
+        redirect: false
+        question_content: "Content"
+        product_name: Book
+        author_name: Guest Name
+        page_title: "Edit Question"
+-   #check exists question with session data
+    question_id: 1
+    product_id: 0
+    customer_id: 0
+    session_pq_form_data:
+        content: "My Awesome Content"
+    expectation:
+        redirect: false
+        question_content: "My Awesome Content"
+        product_name: Book
+        author_name: Guest Name
+        page_title: "Edit Question"

@@ -1,0 +1,12 @@
+-
+    store_id: 1 #as int
+    expectation:
+        collection_item_count: 4
+-
+    store_id: "1" #as string
+    expectation:
+        collection_item_count: 4
+-
+    store_id: 9999 #only 'all store views'
+    expectation:
+        collection_item_count: 2

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <aw_pq2>
+                    <title>Product Questions</title>
+                    <sort_order>200</sort_order>
+                    <children>
+                        <pending_questions module="aw_pq2">
+                            <title>Pending Questions</title>
+                            <sort_order>1</sort_order>
+                            <action>adminhtml/awpq2_question/listPending</action>
+                        </pending_questions>
+                        <all_questions module="aw_pq2">
+                            <title>All Questions</title>
+                            <sort_order>2</sort_order>
+                            <action>adminhtml/awpq2_question/list</action>
+                        </all_questions>
+                        <settings module="aw_pq2">
+                            <title>Settings</title>
+                            <sort_order>3</sort_order>
+                            <action>adminhtml/system_config/edit/section/aw_pq2</action>
+                        </settings>
+                    </children>
+                </aw_pq2>
+            </children>
+        </catalog>
+    </menu>
+    <layout>
+        <updates>
+            <aw_pq2 module="AW_Pquestion2">
+                <file>aw_pq2.xml</file>
+            </aw_pq2>
+        </updates>
+    </layout>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <aw_pq2 translate="title" module="aw_pq2">
+                                <title>Product Questions</title>
+                                <sort_order>200</sort_order>
+                                <children>
+                                    <pending_questions module="aw_pq2">
+                                        <title>Pending Questions</title>
+                                        <sort_order>1</sort_order>
+                                        <action>adminhtml/awpq2_question/listPending</action>
+                                    </pending_questions>
+                                    <all_questions module="aw_pq2">
+                                        <title>All Questions</title>
+                                        <sort_order>2</sort_order>
+                                        <action>adminhtml/awpq2_question/list</action>
+                                    </all_questions>
+                                    <settings module="aw_pq2">
+                                        <title>Settings</title>
+                                        <sort_order>3</sort_order>
+                                        <action>adminhtml/system_config/edit/section/aw_pq2</action>
+                                    </settings>
+                                </children>
+                            </aw_pq2>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <aw_pq2>
+                                        <title>aheadWorks - Product Questions 2 Section</title>
+                                    </aw_pq2>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <AW_Pquestion2>
+                <files>
+                    <default>AW_Pquestion2.csv</default>
+                </files>
+            </AW_Pquestion2>
+        </modules>
+    </translate>
+</config>
