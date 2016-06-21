@@ -5,18 +5,18 @@
  *
  * GoMage Feed Pro
  * @category     Extension
- * @copyright    Copyright (c) 2010-2013 GoMage.com (http://www.gomage.com)
+ * @copyright    Copyright (c) 2010-2015 GoMage.com (http://www.gomage.com)
  * @author       GoMage.com
  * @license      http://www.gomage.com/licensing  Single domain license
  * @terms of use http://www.gomage.com/terms-of-use
- * @version      Release: 3.3
+ * @version      Release: 3.6
  * @since        Class available since Release 1.0
  */ 
  -->
 <config>
     <modules>
         <GoMage_Feed>
-            <version>3.3</version>
+            <version>3.6</version>
         </GoMage_Feed>
     </modules>
 	<frontend>
@@ -25,20 +25,20 @@
                 <use>standard</use>
                 <args>
                     <module>GoMage_Feed</module>
-                    <frontName>feed</frontName>
+                    <frontName>gomage_feed</frontName>
                 </args>
             </gomage_feed>
         </routers>
     </frontend>
     <admin>
         <routers>
-			<gomage_feed>
-				<use>admin</use>
-				<args>
-					<module>GoMage_Feed</module>
-					<frontName>gomage_feed</frontName>
-				</args>
-			</gomage_feed>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <gomage_feed before="Mage_Adminhtml">GoMage_Feed_Adminhtml</gomage_feed>
+                    </modules>
+                </args>
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>
@@ -75,17 +75,17 @@
             	<children>
 	                <gomage_feed>
 						<title>Feeds</title>
-						<action>gomage_feed/adminhtml_items</action>
+						<action>adminhtml/gomage_feed_items</action>
 						<sort_order>15</sort_order>
 						<children>
 							<gomage_feed_items>
 								<title>Manage Feeds</title>
-								<action>gomage_feed/adminhtml_items</action>
+								<action>adminhtml/gomage_feed_items</action>
 								<sort_order>10</sort_order>
 							</gomage_feed_items>
 							<gomage_feed_attributes>
 								<title>Manage Dynamic Attributes</title>
-								<action>gomage_feed/adminhtml_attributes</action>
+								<action>adminhtml/gomage_feed_attributes</action>
 								<sort_order>20</sort_order>
 							</gomage_feed_attributes>
 						</children>
@@ -230,12 +230,10 @@
     			<email_template>gomage_feedpro_notifications_email_template</email_template>
     		</notifications>
     	</gomage_feedpro>
-
         <gomage_notification>
             <notification>
                 <enable>1</enable>
             </notification>
         </gomage_notification>
-
     </default>
 </config>

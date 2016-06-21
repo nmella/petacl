@@ -5,11 +5,11 @@
  * GoMage Feed Pro
  *
  * @category     Extension
- * @copyright    Copyright (c) 2010-2013 GoMage.com (http://www.gomage.com)
+ * @copyright    Copyright (c) 2010-2015 GoMage.com (http://www.gomage.com)
  * @author       GoMage.com
  * @license      http://www.gomage.com/licensing  Single domain license
  * @terms of use http://www.gomage.com/terms-of-use
- * @version      Release: 3.3
+ * @version      Release: 3.6
  * @since        Class available since Release 2.0
  */
 ?>
@@ -49,7 +49,7 @@ if(empty($data)){
         <td>
             <input  style="width:98%; display:none;" type="text" id="mapping-<?php echo $i;?>-static-prefix-value" class="input-text" name="field[<?php echo $i;?>][prefix_value]" value="<?php echo @$data[$i]['prefix_value'];?>"  />
             <?php
-            $slect_prefix_type = Mage::helper('gomage_feed')->getAttributeSelect($i, @$data[$i]['attribute_prefix_value'], (isset($data[$i]['prefix_type']) && in_array($data[$i]['prefix_type'], array('attribute','parent_attribute')) || !isset($data[$i]['prefix_type'])));
+            $slect_prefix_type = Mage::helper('gomage_feed/attribute')->getAttributeSelect($i, @$data[$i]['attribute_prefix_value'], (isset($data[$i]['prefix_type']) && in_array($data[$i]['prefix_type'], array('attribute','parent_attribute')) || !isset($data[$i]['prefix_type'])));
             $slect_prefix_type = str_replace('attribute_value', 'attribute_prefix_value', $slect_prefix_type);
             $slect_prefix_type = str_replace('attribute-value', 'attribute-prefix-value', $slect_prefix_type);
             $slect_prefix_type = str_replace('width:260px;', 'width:60px;', $slect_prefix_type);
@@ -68,7 +68,7 @@ if(empty($data)){
         </td>
         <td>
             <input style="width:98%;display:<?php echo isset($data[$i]['type']) && $data[$i]['type'] == 'static' ? 'block' : 'none';?>;"  id="mapping-<?php echo $i;?>-static-value" type="text" class="input-text" name="field[<?php echo $i;?>][static_value]" value="<?php echo @$data[$i]['static_value'] ?>" />
-            <?php $select_value =  Mage::helper('gomage_feed')->getAttributeSelect($i, @$data[$i]['attribute_value'], (isset($data[$i]['type']) && in_array($data[$i]['type'], array('attribute','parent_attribute')) || !isset($data[$i]['type'])));
+            <?php $select_value =  Mage::helper('gomage_feed/attribute')->getAttributeSelect($i, @$data[$i]['attribute_value'], (isset($data[$i]['type']) && in_array($data[$i]['type'], array('attribute','parent_attribute')) || !isset($data[$i]['type'])));
             $select_value = str_replace('width:260px;', 'width:120px;', $select_value);
             echo $select_value;
             ?>
@@ -87,7 +87,7 @@ if(empty($data)){
         <td>
             <input style="width:98%; display:none;" type="text" id="mapping-<?php echo $i;?>-static-suffix-value" class="input-text" name="field[<?php echo $i;?>][suffix_value]" value="<?php echo @$data[$i]['suffix_value'];?>"  />
             <?php
-            $slect_sufix_type = Mage::helper('gomage_feed')->getAttributeSelect($i, @$data[$i]['attribute_suffix_value'], (isset($data[$i]['suffix_type']) && in_array($data[$i]['suffix_type'], array('attribute','parent_attribute')) || !isset($data[$i]['suffix_type'])));
+            $slect_sufix_type = Mage::helper('gomage_feed/attribute')->getAttributeSelect($i, @$data[$i]['attribute_suffix_value'], (isset($data[$i]['suffix_type']) && in_array($data[$i]['suffix_type'], array('attribute','parent_attribute')) || !isset($data[$i]['suffix_type'])));
             $slect_sufix_type = str_replace('attribute_value', 'attribute_suffix_value', $slect_sufix_type);
             $slect_sufix_type = str_replace('attribute-value', 'attribute-suffix-value', $slect_sufix_type);
             $slect_sufix_type = str_replace('width:260px;', 'width:60px;', $slect_sufix_type);
@@ -99,7 +99,7 @@ if(empty($data)){
         </td>
         <td>
             <div style="margin: 2px;" class="nowrap">
-                <?php echo Mage::helper('gomage_feed')->getOutputTypeSelect($i, (isset($data[$i]['output_type']) ? $data[$i]['output_type'] : '')); ?>
+                <?php echo Mage::helper('gomage_feed/attribute')->getOutputTypeSelect($i, (isset($data[$i]['output_type']) ? $data[$i]['output_type'] : '')); ?>
             </div>
         </td>
         <td><div class="gfp-input-wrapper"><input type="text" class="input-text" name="field[<?php echo $i;?>][limit]" value="<?php echo @$data[$i]['limit'];?>" /></div></td>

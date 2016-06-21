@@ -5,11 +5,11 @@
  * GoMage Feed Pro
  *
  * @category     Extension
- * @copyright    Copyright (c) 2010-2013 GoMage.com (http://www.gomage.com)
+ * @copyright    Copyright (c) 2010-2015 GoMage.com (http://www.gomage.com)
  * @author       GoMage.com
  * @license      http://www.gomage.com/licensing  Single domain license
  * @terms of use http://www.gomage.com/terms-of-use
- * @version      Release: 3.3
+ * @version      Release: 3.6
  * @since        Class available since Release 1.0
  */
 ?>
@@ -248,15 +248,15 @@ if($data = $this->getFeed()->getContent()){
                         var i = ++mappingTotalRows;
                         var tr = document.createElement('tr');
 
-                        var attribute = '<?php echo str_replace('width:260px;', 'width:120px;',addslashes(Mage::helper('gomage_feed')->getAttributeSelect("[iterator]")));?>';
-                        var output_type = '<?php echo addslashes(Mage::helper('gomage_feed')->getOutputTypeSelect("[iterator]", ""));?>';
-                        <?php $attribute_prefix = addslashes(Mage::helper('gomage_feed')->getAttributeSelect("[iterator]"));
+                        var attribute = '<?php echo str_replace('width:260px;', 'width:120px;',addslashes(Mage::helper('gomage_feed/attribute')->getAttributeSelect("[iterator]")));?>';
+                        var output_type = '<?php echo addslashes(Mage::helper('gomage_feed/attribute')->getOutputTypeSelect("[iterator]", ""));?>';
+                        <?php $attribute_prefix = addslashes(Mage::helper('gomage_feed/attribute')->getAttributeSelect("[iterator]"));
                                              $attribute_prefix = str_replace('attribute_value', 'attribute_prefix_value', $attribute_prefix);
                                              $attribute_prefix = str_replace('attribute-value', 'attribute-prefix-value', $attribute_prefix);
                                              $attribute_prefix = str_replace('width:260px;', 'width:60px;', $attribute_prefix);
                                             ?>
                         var attribute_prefix = '<?php echo $attribute_prefix;?>';
-                        <?php $attribute_suffix = addslashes(Mage::helper('gomage_feed')->getAttributeSelect("[iterator]"));
+                        <?php $attribute_suffix = addslashes(Mage::helper('gomage_feed/attribute')->getAttributeSelect("[iterator]"));
                               $attribute_suffix = str_replace('attribute_value', 'attribute_prefix_value', $attribute_suffix);
                               $attribute_suffix = str_replace('attribute-value', 'attribute-prefix-value', $attribute_suffix);
                               $attribute_suffix = str_replace('attribute-value', 'attribute-prefix-value', $attribute_suffix);

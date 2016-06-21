@@ -5,11 +5,11 @@
  * GoMage Feed Pro
  *
  * @category     Extension
- * @copyright    Copyright (c) 2010-2013 GoMage.com (http://www.gomage.com)
+ * @copyright    Copyright (c) 2010-2015 GoMage.com (http://www.gomage.com)
  * @author       GoMage.com
  * @license      http://www.gomage.com/licensing  Single domain license
  * @terms of use http://www.gomage.com/terms-of-use
- * @version      Release: 3.3
+ * @version      Release: 3.6
  * @since        Class available since Release 3.2
  */
 
@@ -43,7 +43,7 @@ $_colspan = $_colspan > 1 ? 'colspan="' . $_colspan . '"' : '';
 
 <script type="text/javascript">
 //<![CDATA[
-var gomage_feed_config_generate_url = "<?php echo Mage::helper("adminhtml")->getUrl('gomage_feed/adminhtml_amazon/generatecode')?>"; 
+var gomage_feed_config_generate_url = "<?php echo Mage::helper("adminhtml")->getUrl('adminhtml/gomage_feed_amazon/generatecode')?>";
 // create row creator
 var arrayRow<?php echo $_htmlId ?> = {
     // define row prototypeJS template
@@ -132,9 +132,12 @@ foreach ($this->getArrayRows() as $_rowId => $_row) {
                         
 var  typevalue = '';
 
-<?php $data= Mage::getStoreConfig('gomage_feedpro/amazon/config'); 
-$array = @unserialize($data);
-
+<?php
+    $array = array();
+    $data  = Mage::getStoreConfig('gomage_feedpro/amazon/config');
+    if ($data) {
+        $array = @unserialize($data);
+    }
 ?>	
   
 <?php foreach ($array as $key=>$val): ?>
