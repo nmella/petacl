@@ -1,3 +1,5 @@
 app/etc/local.xml
 media/
 var/
+sitemap.xml
+sitemaps/peta.xml
