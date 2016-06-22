@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+   <block type="mercadolivre/modal" name="body_ml" as="body_ml" template="mercadolivre/jquery.phtml" />
+           <block type="mercadolivre/modal" name="body_ml" as="body_ml" template="mercadolivre/modal.phtml" after="-"/>
+-->
+<layout>
+
+    <pluggto_adminhtml_queue_edit>
+        <reference name="content">
+            <block type="pluggto/queue_edit" name="pluggto_queue_edit" template="pluggto/queue/edit.phtml" ></block>
+        </reference>
+    </pluggto_adminhtml_queue_edit>
+
+
+</layout>
