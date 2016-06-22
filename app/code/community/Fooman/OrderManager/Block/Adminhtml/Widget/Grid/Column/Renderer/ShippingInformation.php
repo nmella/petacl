@@ -50,12 +50,12 @@ class Fooman_OrderManager_Block_Adminhtml_Widget_Grid_Column_Renderer_ShippingIn
             }
             if ($row->getShippingDescription()) {
 				if (strpos($row->getShippingDescription(),'Ultra Rápido') !== false) {
-					$class = "class='shipping_ultra'";
+					$class = "class=' shipping_ultra'";
 				}
 				if (strpos($row->getShippingDescription(),'Peta LG.') !== false || strpos($row->getShippingDescription(),'Peta (') !== false) {
-                                        $class = "class='shipping_AMPM'";
+                                        $class = "class=' shipping_AMPM'";
                                 }
-            $returnHtml .= '<strong'. $class . '>' . $this->escapeHtml($row->getShippingDescription()) . '</strong><br/>';
+            $returnHtml .= '<strong' . $class . '>' . $this->escapeHtml($row->getShippingDescription()) . '</strong><br/>';
             }
             if ($this->helper('tax')->displayShippingPriceIncludingTax()) {
                 $_excl = $infoBlock->displayShippingPriceInclTax($order);
