@@ -27,6 +27,10 @@ class MageWorx_OrdersEdit_Block_Adminhtml_Sales_Order_Edit_Form_Payment extends 
      */
     public function getQuote()
     {
+        if ($this->getData('quote')) {
+            return $this->getData('quote');
+        }
+
         /** @var Mage_Sales_model_Order $order */
         $order = $this->getOrder() ? $this->getOrder() : Mage::registry('ordersedit_order');
         /** @var Mage_Sales_Model_Quote $quote */

@@ -22,6 +22,7 @@
 
             <action method="addJs"><file>mage/adminhtml/product/composite/configure.js</file></action>
             <action method="addJs"><file>varien/configurable.js</file></action>
+            <action method="addJs"><file>varien/form.js</file></action>
         </reference>
 
         <!--  Replace standard "Order History" block  -->

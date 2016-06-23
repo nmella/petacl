@@ -35,9 +35,9 @@ if ($installer->tableExists($this->getTable('mageworx_orderspro_upload_files')) 
     ");
 }
 
-//if (!$installer->getConnection()->tableColumnExists($installer->getTable('sales/order'), 'is_edited')) {
-//    $installer->run("ALTER TABLE `{$this->getTable('sales/order')}` ADD `is_edited` tinyint(1) NOT NULL DEFAULT 0;");
-//}
+if (!$installer->getConnection()->tableColumnExists($installer->getTable('sales/order'), 'is_edited')) {
+    $installer->run("ALTER TABLE `{$this->getTable('sales/order')}` ADD `is_edited` tinyint(1) NOT NULL DEFAULT 0;");
+}
 
 // Customer Credit start:
 if ($installer->getConnection()->tableColumnExists($installer->getTable('sales/order'), 'base_customer_credit_amount')) {

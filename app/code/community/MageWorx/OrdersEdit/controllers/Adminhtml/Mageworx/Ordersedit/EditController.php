@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MageWorx
  * Admin Order Editor extension
@@ -7,7 +8,6 @@
  * @package    MageWorx_OrdersEdit
  * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
  */
-
 class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends Mage_Adminhtml_Controller_Action
 {
     /**
@@ -23,14 +23,20 @@ class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends M
         $block = $this->getMwEditHelper()->getBlockById($blockId);
         /** @var Mage_Sales_Model_Order $order */
         $order = Mage::getModel('sales/order')->load($orderId);
+        /** @var Mage_Sales_Model_Quote $quote */
+        $quote = Mage::getModel('mageworx_ordersedit/edit')->getQuoteByOrder($order);
 
         if (!$block || !$order) {
             return $this;
         }
 
         $pendingChanges = $this->getMwEditHelper()->getPendingChanges($orderId);
-        if (empty($pendingChanges))
-        {
+        $pendingChanges = is_array($pendingChanges) ? $pendingChanges : array();
+        $quote = Mage::getSingleton('mageworx_ordersedit/edit_quote')->applyDataToQuote($quote, $pendingChanges);
+
+        if (empty($pendingChanges)) {
+            Mage::getSingleton('adminhtml/session_quote')
+                ->setData('base_shipping_custom_price', $order->getBaseShippingAmount());
             $this->getMwEditHelper()->removeTempQuoteItems($order);
         }
 
@@ -38,6 +44,7 @@ class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends M
 
         $form = $this->getLayout()->createBlock($block['block']);
         $form->setOrder($order);
+        $form->setQuote($quote);
 
         $buttons = $this->getLayout()->createBlock('core/template')
             ->setTemplate('mageworx/ordersedit/edit/buttons.phtml');
@@ -107,27 +114,31 @@ class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends M
 
             $pendingChanges = $this->getMwEditHelper()->addPendingChanges($orderId, $data);
             /** @var Mage_Sales_Model_Quote $quote */
-            $quote = Mage::getSingleton('mageworx_ordersedit/edit_quote')->applyDataToQuote($quote, $pendingChanges);
+            $quote = Mage::getSingleton('mageworx_ordersedit/edit_quote')
+                ->setSaveFlag(false)
+                ->applyDataToQuote($quote, $pendingChanges);
 
             $order->addData($data);
 
             $blockId = $this->getRequest()->getParam('edited_block');
-            $blockData = $this->getMwEditHelper()->getBlockById($blockId);
-            $block = $this->getLayout()->createBlock($blockData['changedBlock']);
+            if ($blockId != 'false') {
+                $blockData = $this->getMwEditHelper()->getBlockById($blockId);
+                $block = $this->getLayout()->createBlock($blockData['changedBlock']);
 
-            if ($blockId == 'shipping_address') {
-                $block->setAddressType('shipping');
-            } elseif ($blockId == 'billing_address') {
-                $block->setAddressType('billing');
+                if ($blockId == 'shipping_address') {
+                    $block->setAddressType('shipping');
+                } elseif ($blockId == 'billing_address') {
+                    $block->setAddressType('billing');
+                }
+
+                $block->setQuote($quote);
+                $block->setOrder($order);
+
+                $noticeHtml = $this->getLayout()->createBlock('core/template')
+                    ->setTemplate('mageworx/ordersedit/changed/notice.phtml')
+                    ->toHtml();
+                $result[$blockId] = $noticeHtml . $block->toHtml();
             }
-
-            $block->setQuote($quote);
-            $block->setOrder($order);
-
-            $noticeHtml = $this->getLayout()->createBlock('core/template')
-                ->setTemplate('mageworx/ordersedit/changed/notice.phtml')
-                ->toHtml();
-            $result[$blockId] = $noticeHtml . $block->toHtml();
 
             // Render temp totals (preview)
             /** @var array $totals */
@@ -137,8 +148,8 @@ class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends M
                 'temp_totals',
                 array(
                     'totals' => $totals,
-                    'order'  => $order,
-                    'quote'  => $quote
+                    'order' => $order,
+                    'quote' => $quote
                 )
             );
             $tempTotalsHtml = $tempTotalsBlock->toHtml();
@@ -166,20 +177,37 @@ class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends M
 
             $pendingChanges = $this->getMwEditHelper()->getPendingChanges($orderId);
 
+            $surcharge = $this->getRequest()->getParam('surcharge');
+            if ($surcharge) {
+                $pendingChanges['surcharge'] = $surcharge;
+            }
+
             if ($pendingChanges) {
 
                 $origOrder = clone $order;
 
-                Mage::getSingleton('mageworx_ordersedit/edit_quote')->applyDataToQuote($quote, $pendingChanges);
+                Mage::getSingleton('mageworx_ordersedit/edit_quote')->setSaveFlag(true)->applyDataToQuote($quote, $pendingChanges);
+                if ($quote->getBaseGrandTotal() < 0) {
+                    throw new Exception('GT < 0');
+                }
+
                 Mage::getSingleton('mageworx_ordersedit/edit')->saveOrder($quote, $order, $pendingChanges);
                 Mage::getSingleton('mageworx_ordersedit/edit_quote')->saveTemporaryItems($quote, 0, false); // Drop is_temporary flag from items
+                Mage::dispatchEvent('mwoe_save_order_after', array(
+                    'quote' => $quote,
+                    'order' => $order,
+                    'orig_order' => $origOrder
+                ));
 
                 $invoices = $order->getInvoiceCollection();
-                if ($order->getGrandTotal() > ($origOrder->getGrandTotal() - $origOrder->getBaseTotalRefunded()) && count($invoices)) { // Create invoice if needed
-                    Mage::getSingleton('mageworx_ordersedit/edit_invoice')->invoiceChanges($origOrder, $order, $pendingChanges);
-                } elseif ($order->getGrandTotal() < ($origOrder->getGrandTotal() - $origOrder->getBaseTotalRefunded()) && count($invoices)) { // Create refund if needed
+                if ($order->getBaseGrandTotal() > ($origOrder->getBaseTotalPaid() - $origOrder->getBaseTotalRefunded()) && count($invoices)) { // Create invoice if needed
+                    if (!$surcharge) {
+                        Mage::getSingleton('mageworx_ordersedit/edit_invoice')->invoiceChanges($origOrder, $order, Mage_Sales_Model_Order_Invoice::CAPTURE_ONLINE);
+                    }
+                } elseif ($order->getBaseGrandTotal() < ($origOrder->getBaseTotalPaid() - $origOrder->getBaseTotalRefunded() - $origOrder->getBaseTotalCanceled()) && count($invoices)) { // Create refund if needed
                     Mage::getSingleton('mageworx_ordersedit/edit_creditmemo')->refundChanges($origOrder, $order, $pendingChanges);
                 }
+
 
                 $this->getMwEditHelper()->resetPendingChanges($orderId);
             }
@@ -188,7 +216,7 @@ class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends M
 
         } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')
-                ->addError($this->__('An error occured while saving the order' . $e->getMessage()));
+                ->addError($this->__('An error occurred while saving the order ' . $e->getMessage()));
         }
 
         $this->_redirectReferer();
@@ -226,5 +254,13 @@ class MageWorx_OrdersEdit_Adminhtml_Mageworx_Ordersedit_EditController extends M
     protected function getMwEditHelper()
     {
         return Mage::helper('mageworx_ordersedit/edit');
+    }
+
+    /**
+     * @return MageWorx_OrdersEdit_Helper_Data
+     */
+    protected function getMwHelper()
+    {
+        return Mage::helper('mageworx_ordersedit');
     }
 }

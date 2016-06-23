@@ -52,8 +52,20 @@ class MageWorx_OrdersEdit_Block_Adminhtml_Sales_Order_View extends MageWorx_Orde
     public function _beforeToHtml()
     {
         parent::_beforeToHtml();
-        if ($this->_helper->isHideEditButton()) {
+        if ($this->_helper->isHideEditButton() || !$this->_helper->isOrderEditable($this->getOrder())) {
             $this->_removeButton('order_edit');
+            
+            
+            $order = $this->getOrder();
+            if ($this->_isAllowedAction('ship') && $order->canShip()
+            && !$order->getForcedDoShipmentWithInvoice()) {
+            $this->_addButton('order_ship', array(
+                'label'     => Mage::helper('sales')->__('Ship'),
+                'onclick'   => 'setLocation(\'' . $this->getShipUrl() . '\')',
+                'class'     => 'go'
+            ));
+        }
+        
         }
     }
 }

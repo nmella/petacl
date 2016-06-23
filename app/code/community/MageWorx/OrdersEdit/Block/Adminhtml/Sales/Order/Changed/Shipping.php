@@ -18,20 +18,10 @@ class MageWorx_OrdersEdit_Block_Adminhtml_Sales_Order_Changed_Shipping extends M
      */
     public function getActiveMethodRate()
     {
-        /** @var Mage_Sales_model_Order $order */
-        $order = $this->getOrder() ? $this->getOrder() : Mage::registry('ordersedit_order');
         /** @var Mage_Sales_Model_Quote $quote */
-        $quote = Mage::getSingleton('mageworx_ordersedit/edit')->getQuoteByOrder($order);
-        $pendingChanges = Mage::helper('mageworx_ordersedit/edit')->getPendingChanges($order->getId());
-        if (!empty($pendingChanges)) {
-            /** @var Mage_Sales_Model_Quote $quote */
-            $quote = Mage::getSingleton('mageworx_ordersedit/edit_quote')->applyDataToQuote($quote, $pendingChanges);
-        }
+        $quote = $this->getQuote();
         /** @var array $rates */
-        $rates = $quote->getShippingAddress()
-            ->setCollectShippingRates(true)
-            ->collectShippingRates()
-            ->getGroupedAllShippingRates();
+        $rates = $quote->getShippingAddress()->getGroupedAllShippingRates();
         /** @var string $method */
         $method = $quote->getShippingAddress()->getShippingMethod();
 

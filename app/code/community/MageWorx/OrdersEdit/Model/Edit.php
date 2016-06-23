@@ -42,15 +42,25 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
      */
     public function getQuoteByOrder(Mage_Sales_Model_Order $order)
     {
-        $this->checkOrderQuote($order);
+        /** @var MageWorx_OrdersEdit_Helper_Edit $editHelper */
+        $editHelper = Mage::helper('mageworx_ordersedit/edit');
 
-        $quoteId = $order->getQuoteId();
-        $storeId = $order->getStoreId();
+        if (!$this->getQuote()) {
+            $this->checkOrderQuote($order);
 
-        //@todo modification is needed to make correct restoration of bundled products
-        $this->checkQuoteItems($quoteId, $order);
+            $quoteId = $order->getQuoteId();
+            $storeId = $order->getStoreId();
 
-        $quote = Mage::getModel('sales/quote')->setStoreId($storeId)->load($quoteId);
+            //@todo modification is needed to make correct restoration of bundled products
+            $this->checkQuoteItems($quoteId, $order);
+
+            /** @var Mage_Sales_Model_Quote $quote */
+            $quote = Mage::getModel('sales/quote')->setStoreId($storeId)->load($quoteId);
+            $editHelper->removeRefundedItemsFromQuote($quote, $order);
+            $this->setQuote($quote);
+        } else {
+            $quote = $this->getQuote();
+        }
 
         return $quote;
     }
@@ -170,6 +180,8 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
      */
     protected function returnOrderItem(Mage_Sales_Model_Order_Item $orderItem, $qtyToReturn = null)
     {
+        $delete = false;
+
         if (is_null($qtyToReturn)) {
             $qtyToReturn = $orderItem->getQtyToRefund() + $orderItem->getQtyToCancel();
         }
@@ -185,10 +197,21 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
             }
 
             $this->cancelOrderItem($orderItem, $qtyToCancel);
+            $delete = true;
         }
 
         if ($qtyToReturn > 0 && $orderItem->getQtyToRefund() > 0) {
             $this->refundOrderItem($orderItem, $qtyToReturn);
+        } elseif ($delete) {
+            if ($orderItem->getChildrenItems()) {
+                /** @var Mage_Sales_Model_Order_Item $childOrderItem */
+                foreach ($orderItem->getChildrenItems() as $childOrderItem) {
+                    Mage::getModel('sales/quote_item')->load($childOrderItem->getQuoteItemId())->delete();
+                    $childOrderItem->delete();
+                }
+            }
+            Mage::getModel('sales/quote_item')->load($orderItem->getQuoteItemId())->delete();
+            $orderItem->delete();
         }
 
         return $this;
@@ -367,12 +390,13 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
             if ((isset($params['action']) && $params['action'] == 'remove')) {
                 $this->_removeOrderItem($order, $orderItem);
 
+                $price = $this->getItemPricesConsideringTax($orderItem);
                 $itemChange = array(
                     'name'         => $orderItem->getName(),
                     'qty_before'   => $orderItemQty,
                     'qty_after'    => '',
-                    'price_before' => $orderItem->getOrigData('price'),
-                    'price_after'  => $orderItem->getPrice()
+                    'price_before' => $price['before'],
+                    'price_after'  => $price['after']
                 );
                 $log->addItemChange($orderItem->getId(), $itemChange);
 
@@ -406,14 +430,21 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
                         }
                     }
                 }
+            } elseif ($quoteItem->getPrice() != $orderItem->getPrice()) {
+                $orderItem = $converter->itemToOrderItem($quoteItem, $orderItem);
             }
 
+            if (isset($params['instruction'])) {
+                $orderItem->setData('instruction', trim($params['instruction']));
+            }
+
+            $price = $this->getItemPricesConsideringTax($orderItem);
             $itemChange = array(
                 'name'         => $orderItem->getName(),
                 'qty_before'   => $orderItemQty,
                 'qty_after'    => $quoteItem->getQty(),
-                'price_before' => $orderItem->getOrigData('price'),
-                'price_after'  => $orderItem->getPrice()
+                'price_before' => $price['before'],
+                'price_after'  => $price['after']
             );
 
             /* Check Discount changes */
@@ -442,6 +473,25 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
         }
 
         return $this;
+    }
+
+    /**
+     * Get order item original and modified prices incl/excl tax
+     *
+     * @param Mage_Sales_Model_Order_Item $orderItem
+     * @return array $price
+     */
+    protected function getItemPricesConsideringTax($orderItem)
+    {
+        if (Mage::getModel('tax/config')->displaySalesSubtotalInclTax() ||
+            Mage::getModel('tax/config')->displaySalesSubtotalBoth()) {
+            $price['before']  = $orderItem->getOrigData('price') + $orderItem->getOrigData('tax_amount');
+            $price['after']   = $orderItem->getData('price') + $orderItem->getData('tax_amount');
+        } else {
+            $price['before']  = $orderItem->getOrigData('price');
+            $price['after']   = $orderItem->getData('price');
+        }
+        return $price;
     }
 
     /**
@@ -637,6 +687,13 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
                 $orderItem->save();
             }
 
+            /** @var Mage_Sales_Model_Resource_Order_Item_Collection $orderItemsCollection */
+            $orderItemsCollection = $order->getItemsCollection();
+            if ($orderItemsCollection->getItemById($orderItem->getId())) {
+                $orderItemsCollection->removeItemByKey($orderItem->getId());
+            }
+            $orderItemsCollection->addItem($orderItem);
+
             /*** Add new items to log ***/
             $changedItem = $quoteItem;
             $itemChange = array(
@@ -664,6 +721,7 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
         $this->getLogModel()->commitOrderChanges($order);
 
         $quote->save();
+        $order->setData('is_edited', 1);
         $order->save();
 
         return $this;
@@ -696,13 +754,8 @@ class MageWorx_OrdersEdit_Model_Edit extends Mage_Core_Model_Abstract
      * @param bool|false $excludeRefunded
      * @return float|int
      */
-    protected function getQtyRest($item, $excludeRefunded = false)
+    protected function getQtyRest(Mage_Sales_Model_Order_Item $item, $excludeRefunded = false)
     {
-        $qty = $item->getOrigData('qty_ordered') - $item->getQtyCanceled();
-        if ($excludeRefunded) {
-            $qty -= $item->getQtyRefunded();
-        }
-
-        return $qty;
+        return Mage::helper('mageworx_ordersedit/edit')->getOrderItemQtyRest($item, $excludeRefunded);
     }
 }

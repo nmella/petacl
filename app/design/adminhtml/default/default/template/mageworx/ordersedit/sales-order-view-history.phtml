@@ -76,7 +76,26 @@ $helper = Mage::helper('mageworx_ordersedit');
             <?php endif; ?>
             <?php if ($_item->getComment()): ?>
                 <br/>
-                <p id="order_comment_<?php echo $_item->getEntityId() ?>"><?php echo nl2br($this->cleanString($_item->getComment())); ?></p>
+                <p id="order_comment_<?php echo $_item->getEntityId() ?>">
+                    <?php
+                    // TODO: refactor this
+                    if ($helper->foeModuleCheck('MageWorx_OrdersSurcharge') && mb_stripos($_item->getComment(), 'The email with the payment link was sent to the customer. ID #') !== false) {
+                        $comment = nl2br($this->cleanString($_item->getComment()));
+                        $matches = array();
+                        preg_match('/([ID #]+)([\d]+)/ui', $comment, $matches);
+                        $surchargePossibleId = isset($matches[2]) ? $matches[2] : null;
+                        $surcharge = Mage::getModel('mageworx_orderssurcharge/surcharge')->load($surchargePossibleId);
+                        $surchargeId = $surcharge->getId();
+                        if ($surchargeId && $surcharge->canPay()) {
+                            $link = ' <div class="mw-link-delete_surcharge" onclick="deleteSurcharge(\'' . $surchargeId . '\'); return false;">' . $helper->__('Cancel') . '</div>';
+                            $comment .= $link;
+                        }
+                        echo $comment;
+                    } else {
+                        echo nl2br($this->cleanString($_item->getComment()));
+                    }
+                    ?>
+                </p>
                 <?php if ($editAllowed) {?>
                     <form action="<?php echo $this->getSubmitEditUrl() ?>" id="edit_comment_<?php echo $_item->getEntityId() ?>" style="display:none;">
                         <input type="hidden" name="comment_id" value="<?php echo $_item->getEntityId() ?>" />
@@ -116,8 +135,9 @@ $helper = Mage::helper('mageworx_ordersedit');
                 new Ajax.Request(url, {
                     onSuccess: function(transport) {                        
                         try {
+                            coneol.log(transport.responseText);
                             if (transport.responseText.isJSON()) {
-                                var response = transport.responseText.evalJSON()
+                                var response = transport.responseText.evalJSON();
                                 if (response.error) {
                                     alert(response.message);
                                 }
@@ -140,6 +160,35 @@ $helper = Mage::helper('mageworx_ordersedit');
         {
 
         }
-    
+
+        function deleteSurcharge(id) {
+            if (confirm('Are you sure to cancel this payment link? Customer won’t be able to use it for a payment in this case.')) {
+                var url = '<?php echo Mage::getModel('adminhtml/url')->getUrl('adminhtml/mageworx_orderssurcharge_surcharge/remove'); ?>';
+                new Ajax.Request(url, {
+                    parameters: {"surcharge_id":id,"is_ajax":"true", "order_id":"<?php echo $this->getOrder()->getId();?>"},
+                    onSuccess: function(transport) {
+                        try {
+                            if (transport.responseText.isJSON()) {
+                                var response = transport.responseText.evalJSON();
+                                console.log(response);
+                                if (response.error) {
+                                    alert(response.message);
+                                }
+                                if(response.ajaxExpired && response.ajaxRedirect) {
+                                    setLocation(response.ajaxRedirect);
+                                }
+                            } else {
+                                console.log('Not JSON');
+                                $('order_history_block').update(transport.responseText);
+                            }
+                        }
+                        catch (e) {
+                            console.log(e);
+                            $('order_history_block').update(transport.responseText);
+                        }
+                    }
+                });
+            }
+        }
     </script>
 </div>

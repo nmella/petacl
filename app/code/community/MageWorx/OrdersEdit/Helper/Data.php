@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MageWorx
  * Admin Order Editor extension
@@ -7,7 +8,6 @@
  * @package    MageWorx_OrdersEdit
  * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
  */
-
 class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
@@ -141,6 +141,32 @@ class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
     public function getThumbnailHeight()
     {
         return Mage::getStoreConfig('mageworx_ordersmanagement/ordersedit/thumbnail_height');
+    }
+
+    /**
+     * @todo Add backend config for that method
+     *
+     * @return bool
+     */
+    public function isAutoInvoiceAndRefund()
+    {
+        $module = 'MageWorx_OrdersSurcharge';
+        $result = !(string)Mage::getConfig()->getModuleConfig($module)->active == 'true';
+        return $result;
+    }
+
+    /**
+     * @param Mage_Sales_Model_Order $order
+     * @return bool
+     */
+    public function isOrderEditable(Mage_Sales_Model_Order $order)
+    {
+        /** @see MageWorx_OrdersSurcharge_Model_Observer_Order::checkIsOrderEditable() */
+        if (Mage::getSingleton('adminhtml/session')->getBlockEditOrder()) {
+            return false;
+        }
+
+        return true;
     }
 
     /** Return count of deleted orders
@@ -677,8 +703,16 @@ class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getImgByItem($item)
     {
+        if ((string)Mage::getConfig()->getModuleConfig('MageWorx_CustomOptions')->active == 'true') {
+            $image = $this->getCustomOptionImage($item);
+            if ($image) {
+                return $image;
+            }
+        }
+
         $productId = $item->getProductId();
         $product = Mage::getModel('catalog/product')->setStoreId($item->getStoreId())->load($productId);
+
         switch ($product->getTypeId()) {
             case 'configurable':
                 return $this->getImgByItemForConfigurableProduct($item, $product);
@@ -689,11 +723,99 @@ class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
                     try {
                         return Mage::helper('catalog/image')->init($product, 'thumbnail');
                     } catch (Exception $e) {
-                        return;
+                        return null;
                     }
                 }
         }
-        return;
+
+        return null;
+    }
+
+    /**
+     * Get option image if the image mode of the option was set as replace
+     * APO comp.
+     *
+     * @param $item
+     * @return $this|null
+     */
+    public function getCustomOptionImage($item)
+    {
+        $product = $item->getProduct();
+
+        if (!$product) {
+            return null;
+        }
+
+        if (is_null($product->getHasOptions())) {
+            $product->load($product->getId());
+        }
+
+        $availableProductTypes = array(
+            'simple',
+            'virtual',
+            'downloadable'
+        );
+        $productTypeAvailable = in_array($product->getTypeId(), $availableProductTypes);
+        if ($productTypeAvailable && $product->getHasOptions()) {
+
+            $post = $item->getProductOptions();
+            if (!empty($post['options'])) {
+                $options = $post['options'];
+            } else {
+                return null;
+            }
+
+            foreach ($options as $optionId => $value) {
+
+                if (!isset($value['option_id'])) {
+                    continue;
+                }
+
+                $optionModel = $product->getOptionById($value['option_id']);
+                if (!$optionModel) {
+                    continue;
+                }
+
+                $optionModel->setProduct($product);
+
+                /* Process an image only if the image mode set as "replace" */
+                if ($optionModel->getImageMode() != 2) {
+                    continue;
+                }
+
+                switch ($optionModel->getType()) {
+                    case 'drop_down':
+                    case 'radio':
+                    case 'checkbox':
+                    case 'multiple':
+                    case 'swatch':
+                    case 'multiswatch':
+                        if (is_array($value['option_value'])) {
+                            $optionTypeIds = $value['option_value'];
+                        } else {
+                            $optionTypeIds = explode(',', $value['option_value']);
+                        }
+                        foreach ($optionTypeIds as $optionTypeId) {
+                            if (!$optionTypeId) {
+                                continue;
+                            }
+                            $images = $optionModel->getOptionValueImages($optionTypeId);
+                            if ($images) {
+                                foreach ($images as $index => $image) {
+                                    // file
+                                    if ($image['source'] == 1 && (!$optionModel->getExcludeFirstImage() || ($optionModel->getExcludeFirstImage() && $index > 0))) {
+                                        // replace main image
+                                        $thumb = Mage::getModel('mageworx_customoptions/catalog_product_option_image')->init($image['image_file']);
+                                        return $thumb;
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -706,12 +828,12 @@ class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
         $childrens = $item->getChildrenItems();
         $child = current($childrens);
         if ($child === false) {
-            return;
+            return null;
         }
 
         $childProductId = $child->getProductId();
         if (!$childProductId) {
-            return;
+            return null;
         }
 
         $childProduct = Mage::getModel('catalog/product')->setStoreId($item->getStoreId())->load($childProductId);
@@ -719,15 +841,17 @@ class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
             try {
                 return Mage::helper('catalog/image')->init($childProduct, 'thumbnail');
             } catch (Exception $e) {
-                return;
+                return null;
             }
         } elseif ($product->getThumbnail() && $product->getThumbnail() != 'no_selection') {
             try {
                 return Mage::helper('catalog/image')->init($product, 'thumbnail');
             } catch (Exception $e) {
-                return;
+                return null;
             }
         }
+
+        return null;
     }
 
     /**
@@ -764,8 +888,8 @@ class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * Check module and class (optional)
      *
-     * @param  string       $module
-     * @param  null|string  $class
+     * @param  string $module
+     * @param  null|string $class
      * @return bool
      */
     public static function foeModuleCheck($module, $class = null, $rewriteClass = null)
@@ -793,12 +917,12 @@ class MageWorx_OrdersEdit_Helper_Data extends Mage_Core_Helper_Abstract
     {
         //if admin user exists, use current firstname and lastname
         if ($item->getAdminFirstname() && $item->getAdminLastname()) {
-            return $item->getAdminFirstname().' '.$item->getAdminLastname();
+            return $item->getAdminFirstname() . ' ' . $item->getAdminLastname();
         }
 
         //if admin user doesn't exist, use saved data
         if ($item->getCreatorFirstname() || $item->getCreatorLastname()) {
-            return $item->getCreatorFirstname().' '.$item->getCreatorLastname();
+            return $item->getCreatorFirstname() . ' ' . $item->getCreatorLastname();
         } else {
             return $item->getCreatorUsername();
         }

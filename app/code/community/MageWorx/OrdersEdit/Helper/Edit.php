@@ -61,7 +61,7 @@ class MageWorx_OrdersEdit_Helper_Edit extends Mage_Core_Helper_Abstract
                     'className' => 'head-products',
                     'blockId' => 'order_items',
                     'block' => 'mageworx_ordersedit/adminhtml_sales_order_edit_form_items',
-                    'changedBlock' => 'mageworx_ordersedit/adminhtml_sales_order_changed_items'
+                    'changedBlock' => 'mageworx_ordersedit/adminhtml_sales_order_edit_form_items'
                 ),
                 array(
                     'className' => 'head-coupons',
@@ -203,7 +203,7 @@ class MageWorx_OrdersEdit_Helper_Edit extends Mage_Core_Helper_Abstract
             $oldChanges = array();
         }
 
-        if (isset($newChanges['quote_items'])) {
+        if (isset($newChanges['quote_items']) && !empty($newChanges['quote_items'])) {
             foreach($newChanges['quote_items'] as $quoteId => $quoteItemData) {
                 if (isset($quoteItemData['configured']) && $quoteItemData['configured']) {
                     $quoteItem = Mage::getModel('sales/quote_item')->load($quoteId);
@@ -215,6 +215,10 @@ class MageWorx_OrdersEdit_Helper_Edit extends Mage_Core_Helper_Abstract
                     $quoteItemData['product_id'] = $productId;
                     $newChanges['product_to_add'][$quoteItem->getItemId()] = $quoteItemData;
                 }
+            }
+            if (isset($oldChanges['quote_items']) && !empty($oldChanges['quote_items'])) {
+                $quoteItems  = $newChanges['quote_items'] + $oldChanges['quote_items'];
+                $newChanges['quote_items'] = $quoteItems;
             }
         }
 
@@ -310,5 +314,63 @@ class MageWorx_OrdersEdit_Helper_Edit extends Mage_Core_Helper_Abstract
             }
         }
         return true;
+    }
+
+    /**
+     * @param Mage_Sales_Model_Order $order
+     * @return bool
+     */
+    public function isOrderEditable(Mage_Sales_Model_Order $order)
+    {
+        return Mage::helper('mageworx_ordersedit')->isOrderEditable($order);
+    }
+
+    /**
+     * Get rest of available item qty.
+     * qty = qty - canceled [ - refunded ] (optional)
+     *
+     * @param Mage_Sales_Model_Order_Item $item
+     * @param bool|false $excludeRefunded
+     * @return float|int
+     */
+    public function getOrderItemQtyRest(Mage_Sales_Model_Order_Item $item, $excludeRefunded = false)
+    {
+        $qty = $item->getOrigData('qty_ordered') - $item->getQtyCanceled();
+        if ($excludeRefunded) {
+            $qty -= $item->getQtyRefunded();
+        }
+
+        return $qty;
+    }
+
+    /**
+     * Remove refunded items from the quote items collection
+     *
+     * @param Mage_Sales_Model_Quote $quote
+     * @param Mage_Sales_Model_Order $order
+     * @return void
+     */
+    public function removeRefundedItemsFromQuote(Mage_Sales_Model_Quote $quote, Mage_Sales_Model_Order $order)
+    {
+        /** @var Mage_Sales_Model_Resource_Quote_Item_Collection $quoteItemsCollection */
+        $quoteItemsCollection = $quote->getItemsCollection();
+
+        try {
+            /** @var Mage_Sales_Model_Quote_Item $quoteItem */
+            foreach ($quoteItemsCollection as $quoteItem) {
+                $orderItem = $order->getItemByQuoteItemId($quoteItem->getId());
+
+                if (!$orderItem) {
+                    continue;
+                }
+
+                if (!$this->getOrderItemQtyRest($orderItem, true)) {
+                    $quoteItemsCollection->removeItemByKey($quoteItem->getId());
+                }
+            }
+        } catch (Exception $e) {
+            // When the APO was uninstalled (or disabled) the items with a custom options (APO) throws an errors
+            Mage::logException($e);
+        }
     }
 }

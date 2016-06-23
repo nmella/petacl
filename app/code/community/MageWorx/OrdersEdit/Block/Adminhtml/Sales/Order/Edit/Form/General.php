@@ -17,6 +17,7 @@ class MageWorx_OrdersEdit_Block_Adminhtml_Sales_Order_Edit_Form_General extends 
      */
     protected function _prepareForm()
     {
+        $helper = Mage::helper('mageworx_ordersedit');
         $form = new Varien_Data_Form();
 
         $statuses = Mage::getSingleton('adminhtml/system_config_source_order_status')->toOptionArray();
@@ -26,6 +27,17 @@ class MageWorx_OrdersEdit_Block_Adminhtml_Sales_Order_Edit_Form_General extends 
                 'title' => Mage::helper('adminhtml')->__('Order Status'),
                 'required' => true,
                 'values' => $statuses
+            )
+        );
+
+        $form->addField('increment_id', 'text', array(
+                'name'  => 'increment_id',
+                'label' => Mage::helper('adminhtml')->__('Order Number'),
+                'title' => Mage::helper('adminhtml')->__('Order Number'),
+                'required' => true,
+                'class' => 'mageworx-increment-id-field validate-length maximum-length-50 minimum-length-1',
+                'after_element_html' =>
+                    '<p class="sub-note"><sup>'. $helper->__('Must be less than 51 characters') .'</sup></p>'
             )
         );
 

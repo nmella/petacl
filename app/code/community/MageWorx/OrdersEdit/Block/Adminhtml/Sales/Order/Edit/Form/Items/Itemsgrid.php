@@ -122,4 +122,28 @@ class MageWorx_OrdersEdit_Block_Adminhtml_Sales_Order_Edit_Form_Items_Itemsgrid 
         return $items;
     }
 
+    /**
+     * Render order item additional instructions form
+     *
+     * @param $item
+     * @return string
+     */
+    public function getGetOrderItemInstructionsForm($item)
+    {
+        $result = '';
+
+        if (MageWorx_OrdersEdit_Helper_Data::foeModuleCheck('MageWorx_OrdersInstructions')) {
+            $instructions = $this->getLayout()->createBlock(
+                'mageworx_ordersinstructions/adminhtml_item_form_instructions',
+                'order.item.instructions',
+                [
+                    'item' => $item
+                ]
+            );
+
+            $result = $instructions->toHtml();
+        }
+
+        return $result;
+    }
 }

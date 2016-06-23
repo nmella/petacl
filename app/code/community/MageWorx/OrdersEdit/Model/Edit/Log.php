@@ -26,7 +26,8 @@ class MageWorx_OrdersEdit_Model_Edit_Log extends Mage_Core_Model_Abstract
         'method' => 'Payment Method',
         'shipping_description' => 'Shipping Method',
         'shipping_amount' => 'Shipping Amount',
-        'coupon_code' => 'Coupon Code'
+        'coupon_code' => 'Coupon Code',
+        'increment_id' => 'Order Number'
     );
 
     /**
@@ -266,15 +267,9 @@ class MageWorx_OrdersEdit_Model_Edit_Log extends Mage_Core_Model_Abstract
         // 0 - no one; 1 - only admin; 2 - notify all;
         /** @var int $notify */
         $notify = intval($this->getHelper()->isSendUpdateEmail());
-        $order->addStatusHistoryComment($text, $order->getStatus())
-            ->setIsVisibleOnFront(1)
-            ->setIsCustomerNotified($notify > 1);
-
-        if ($notify) {
-            $order->sendOrderUpdateEmail($notify > 1, $text);
-        }
-
-        $order->save();
+        /** @var MageWorx_OrdersBase_Model_Logger $logger */
+        $logger = Mage::getModel('mageworx_ordersbase/logger');
+        $logger->log($text, $order, $notify);
 
         return $this;
     }

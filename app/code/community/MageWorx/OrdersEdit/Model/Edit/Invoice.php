@@ -43,24 +43,30 @@ class MageWorx_OrdersEdit_Model_Edit_Invoice extends Mage_Core_Model_Abstract
      *
      * @param Mage_Sales_Model_Order $origOrder
      * @param Mage_Sales_Model_Order $newOrder
-     * @param $changes
+     * @param string $capture - CAPTURE_ONLINE, CAPTURE_OFFLINE, NOT_CAPTURE (default)
+     * @param bool $dummy - create dummy invoice without totals
      * @return $this
+     * @throws Exception
+     * @throws bool
+     * @see Mage_Sales_Model_Order_Invoice
      */
-    public function invoiceChanges(Mage_Sales_Model_Order $origOrder, Mage_Sales_Model_Order $newOrder, $changes)
+    public function invoiceChanges(Mage_Sales_Model_Order $origOrder, Mage_Sales_Model_Order $newOrder, $capture = Mage_Sales_Model_Order_Invoice::NOT_CAPTURE, $dummy = false)
     {
         /** @var Mage_Sales_Model_Order_Invoice $invoice */
         $invoice = Mage::getModel('sales/service_order', $newOrder)->prepareInvoice();
 
-        foreach ($this->_availableTotals as $code) {
-            $diff = $newOrder->getData($code) - $origOrder->getData($code);
-            if (!$diff) {
-                continue;
-            }
+        if (!$dummy) {
+            foreach ($this->_availableTotals as $code) {
+                $diff = $newOrder->getData($code) - $origOrder->getData($code);
+                if (!$diff) {
+                    continue;
+                }
 
-            $invoice->setData($code, $diff);
+                $invoice->setData($code, $diff);
+            }
         }
 
-        $invoice->setRequestedCaptureCase(Mage_Sales_Model_Order_Invoice::CAPTURE_ONLINE);
+        $invoice->setRequestedCaptureCase($capture);
         $invoice->register();
 
         $transaction = Mage::getModel('core/resource_transaction')

@@ -7,6 +7,12 @@
  * @package    MageWorx_OrdersEdit
  * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
  */
+/**
+ * @var MageWorx_OrdersEdit_Block_Adminhtml_Sales_Order_Totals $this
+ */
+?>
+<?php
+$buttons = $this->getButtonsHtml();
 ?>
 <div class="box-right">
     <div class="entry-edit new-totals">
@@ -43,12 +49,12 @@
                             </tr>
                         <?php endif?>
                     <?php endforeach?>
+                        <?php echo $this->getAfterTotalsHtml();?>
                     </tbody>
                 <?php endif?>
             </table>
             <?php
-            echo $this->getButtonHtml($this->__('Cancel'), 'orderEdit.cancelChangedOrder(\'' . Mage::helper('mageworx_ordersedit/edit')->getCancelChangesUrl() . '\');', 'mw_floater mw_br');
-            echo $this->getButtonHtml($this->__('Apply'), 'orderEdit.applyChangedOrder();', 'mw_floater-right mw_br');
+            echo $buttons;
             ?>
         </div>
     </div>

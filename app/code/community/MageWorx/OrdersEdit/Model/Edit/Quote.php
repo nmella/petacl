@@ -11,6 +11,7 @@
 class MageWorx_OrdersEdit_Model_Edit_Quote extends Mage_Core_Model_Abstract
 {
     protected $_orderItems = array();
+    protected $saveFlag = false;
 
     /**
      * Apply all the changes to quote
@@ -32,7 +33,7 @@ class MageWorx_OrdersEdit_Model_Edit_Quote extends Mage_Core_Model_Abstract
                 $this->setShipping($quote, $value);
             } elseif ($key == 'quote_items') {
                 $this->updateItems($quote, $value);
-            } elseif ($key == 'product_to_add') {
+            } elseif ($key == 'product_to_add' && !empty($value)) {
                 $this->addNewItems($quote, $value);
             } elseif ($key == 'coupon_code') {
                 $this->setCouponCode($quote, $value);
@@ -46,6 +47,11 @@ class MageWorx_OrdersEdit_Model_Edit_Quote extends Mage_Core_Model_Abstract
         $this->collectMultifees();
 
         $quote->setTotalsCollectedFlag(false)->collectTotals();
+        Mage::dispatchEvent('mwoe_apply_data_to_quote_collect_totals_after', array(
+            'quote' => $quote,
+            'new_data' => $data
+        ));
+
         $this->saveTemporaryItems($quote, 1, true);
 
         if (isset($data['coupon_code'])) {
@@ -151,15 +157,8 @@ class MageWorx_OrdersEdit_Model_Edit_Quote extends Mage_Core_Model_Abstract
     {
         foreach ($data as $itemId => $params) {
             $quoteItem = $quote->getItemById($itemId);
-
-            /** @var Mage_Sales_Model_Order $order */
-            $order = Mage::registry('ordersedit_order');
-            if ($order) {
-                /** @var Mage_Sales_Model_Order_Item $orderItem */
-                $orderItem = $order->getItemByQuoteItemId($quoteItem->getItemId());
-                if (!$orderItem || !Mage::helper('mageworx_ordersedit/edit')->checkOrderItemForCancelRefund($orderItem)) {
-                    continue;
-                }
+            if (!$quoteItem) {
+                continue;
             }
 
             // Set empty action by default to prevent warnings, if no one action was specified
@@ -181,9 +180,9 @@ class MageWorx_OrdersEdit_Model_Edit_Quote extends Mage_Core_Model_Abstract
             ) {
                 $childrens = $quoteItem->getChildren();
                 foreach ($childrens as $childQuoteItem) {
-                    $quote->removeItem($childQuoteItem->getId());
+                    $quote->getItemsCollection()->removeItemByKey($childQuoteItem->getId());
                 }
-                $quote->removeItem($quoteItem->getId());
+                $quote->getItemsCollection()->removeItemByKey($quoteItem->getId());
                 continue;
             }
 
@@ -196,10 +195,26 @@ class MageWorx_OrdersEdit_Model_Edit_Quote extends Mage_Core_Model_Abstract
                 $quoteItem->setOriginalCustomPrice((float)$params['custom_price']);
             }
 
+            if (isset($params['instruction'])) {
+                $quoteItem->setData('instruction', trim($params['instruction']));
+            }
+
             $noDiscount = !isset($params['use_discount']);
             $quoteItem->setNoDiscount($noDiscount);
 
             $quoteItem->save();
+        }
+
+        if (!$this->getSaveFlag()) {
+            /** @var Mage_Sales_Model_Resource_Quote_Item_Collection $quoteItems */
+            $quoteItems = $quote->getItemsCollection();
+
+            // @todo DO NOT REMOVE existing and available quote item on save!!!
+            foreach ($quoteItems as $quoteItem) {
+                if (!isset($data[$quoteItem->getId()])) {
+                    $quote->removeItem($quoteItem->getId());
+                }
+            }
         }
 
         return $this;
@@ -418,5 +433,23 @@ class MageWorx_OrdersEdit_Model_Edit_Quote extends Mage_Core_Model_Abstract
         }
 
         return null;
+    }
+
+    /**
+     * @param bool $flag
+     * @return $this
+     */
+    public function setSaveFlag($flag)
+    {
+        $this->saveFlag = (bool)$flag;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSaveFlag()
+    {
+        return $this->saveFlag;
     }
 }

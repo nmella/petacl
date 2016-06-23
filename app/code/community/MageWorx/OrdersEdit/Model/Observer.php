@@ -168,7 +168,9 @@ class MageWorx_OrdersEdit_Model_Observer
         } else {
             $baseShippingAmount = $order->getBaseShippingAmount();
         }
-        Mage::getSingleton('adminhtml/session_quote')->setBaseShippingCustomPrice($baseShippingAmount);
+        if (!Mage::getSingleton('adminhtml/session_quote')->getBaseShippingCustomPrice()) {
+            Mage::getSingleton('adminhtml/session_quote')->setBaseShippingCustomPrice($baseShippingAmount);
+        }
 
         // for collectShippingRates
         $quote->setTotalsCollectedFlag(false);
@@ -250,7 +252,6 @@ class MageWorx_OrdersEdit_Model_Observer
                 }
             }
         }
-        Mage::getSingleton('adminhtml/session_quote')->setBaseShippingCustomPrice(null);
 
         $quote = $this->applyFreeShippingCartRule($quote);
 
