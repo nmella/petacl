@@ -2105,11 +2105,59 @@ class Thirdlevel_Pluggto_Model_Product extends Mage_Core_Model_Abstract
 
         $magentoProductData = $product->getData();
 
+        if(isset($configs['pricetable']) && !empty($configs['pricetable'])){
+
+        $tableData = array();
+
+            foreach ($configs['pricetable'] as $code => $tabledata){
+
+                $thiscode = array();
+
+                $thiscode['code'] = $code;
+
+
+
+
+                        foreach($tabledata as $key => $attribute){
+
+                            if(isset($magentoProductData[$attribute])){
+
+                                    if($key == 'action'){
+
+                                        $attr = $product->getResource()->getAttribute($attribute);
+
+
+                                        if (is_object($attr)) {
+                                            $attrValue = $attr->getSource()->getOptionText($magentoProductData[$attribute]);
+                                        }
+
+                                        $thiscode[$key] = $attrValue;
+
+                                    } else {
+
+                                        $thiscode[$key] = $magentoProductData[$attribute];
+
+
+                                    }
+
+                            }
+
+                    }
+
+                $tableData[] = $thiscode;
+
+            }
+
+
+            $data['price_table'] = $tableData;
+        }
+
         foreach ($configs['fields'] as $key => $value) {
 
             if (!empty($value)) {
 
                 try {
+
                     $attr = $product->getResource()->getAttribute($value);
 
                     if (is_object($attr)) {

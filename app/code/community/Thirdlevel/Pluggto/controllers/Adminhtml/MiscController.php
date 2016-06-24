@@ -49,7 +49,83 @@ class Thirdlevel_Pluggto_Adminhtml_MiscController extends Mage_Adminhtml_Control
 
     }
 
-    public function createAttributesAction($newAttributeCode){
+
+
+    public function update_table_priceAction(){
+
+
+        $saveConfig = new Mage_Core_Model_Config();
+
+        $api = Mage::getModel('pluggto/api')->get('users/prices',null,null,true);
+
+        if(isset($api['Body']['results'])){
+
+
+            if(!empty($api['Body']['results'])){
+
+                foreach($api['Body']['results'] as $priceCode){
+
+                    $priceCode = $priceCode['code'];
+
+                    // incrementar, decrementar, ou sobreescrever
+                    $priceAttribute = array('name'=> 'Tipo de Personalização ('.$priceCode.')','code'=> "tb_".$priceCode ."_action",'label' => 'Operação ('.$priceCode.')', 'type' => 'select','note'=> 'Escolha se deverá sobreescrer o preço e preço especial do produto, incrementar ou decrementar','values'=> array (
+                        0 => 'overwrite',
+                        1 => 'increase',
+                        2 => 'decrease'
+                    ));
+
+                    $this->createAttributesAction($priceAttribute,'Preço '.ucfirst($priceCode));
+                    $saveConfig->saveConfig('pluggto/pricetable/'.$priceCode.'/action',"tb_".$priceCode ."_action");
+
+                    // preço
+                    $priceAttribute = array('name'=> 'Preço','code'=> "tb_".$priceCode ."_price",'label' => 'Preço (de) ('.$priceCode.')', 'type' => 'decimal','note'=> 'Sobrescreve preço do produto caso a opção sobrescrever esteja setada');
+                    $this->createAttributesAction($priceAttribute,'Preço '.ucfirst($priceCode));
+                    $saveConfig->saveConfig('pluggto/pricetable/'.$priceCode.'/price',"tb_".$priceCode ."_price");
+
+                    // preço especial
+                    $priceAttribute = array('name'=> 'Preço Especial','code'=> "tb_".$priceCode ."_sprice",'label' => 'Preço Especial (por) ('.$priceCode.')', 'type' => 'decimal','note'=> 'Sobrescreve preço especial do produto caso a opção sobrescrever esteja setada');
+                    $this->createAttributesAction($priceAttribute,'Preço '.ucfirst($priceCode));
+                    $saveConfig->saveConfig('pluggto/pricetable/'.$priceCode.'/special_price',"tb_".$priceCode ."_sprice");
+
+                    // percentagem
+                    $priceAttribute = array('name'=> 'Porcentagem','code'=> "tb_".$priceCode ."_pc",'label' => 'Porcentagem de Incremento/Decremento ('.$priceCode.')', 'type' => 'decimal','note'=> 'Aplica uma porcentagem de incremento/decremento caso a opção Incrementar/Decrementar esteja setada');
+                    $this->createAttributesAction($priceAttribute,'Preço '.ucfirst($priceCode));
+                    $saveConfig->saveConfig('pluggto/pricetable/'.$priceCode.'/percentage',"tb_".$priceCode ."_pc");
+
+                    // minimum
+                    $priceAttribute = array('name'=> 'Preço Mínimo','code'=> "tb_".$priceCode ."_min",'label' => 'Preço mínimo de venda do produto (por) ('.$priceCode.')', 'type' => 'decimal','note'=> 'Campo utilizado para funcionalidade de precificação dinâmica');
+                    $this->createAttributesAction($priceAttribute,'Preço '.ucfirst($priceCode));
+                    $saveConfig->saveConfig('pluggto/pricetable/'.$priceCode.'/minimum_price',"tb_".$priceCode ."_min");
+
+                    // maximum
+                    $priceAttribute = array('name'=> 'Preço Máximo','code'=> "tb_".$priceCode ."_max",'label' => 'Preço máximo de venda do produto (por) ('.$priceCode.')', 'type' => 'decimal','note'=> 'Campo utilizado para funcionalidade de precificação dinâmica');
+                    $this->createAttributesAction($priceAttribute,'Preço '.ucfirst($priceCode));
+                    $saveConfig->saveConfig('pluggto/pricetable/'.$priceCode.'/maximum_price',"tb_".$priceCode ."_max");
+
+                }
+
+            } else {
+                Mage::getSingleton('core/session')->addError(Mage::helper('pluggto')->__('Você não tem nenhuma tabela de preço cadastrada, é necessário cadastrar uma tabela antes no Plugg.to'));
+                $this->_redirect('adminhtml/system_config/edit/section/pluggto');
+            }
+
+
+
+        } else {
+
+            Mage::getSingleton('core/session')->addError(Mage::helper('pluggto')->__('Ocorreu um erro em gerar os atributos de preço'));
+            $this->_redirect('adminhtml/system_config/edit/section/pluggto');
+
+        }
+
+
+        Mage::getSingleton('core/session')->addSuccess(Mage::helper('pluggto')->__('Atributos de preço criados com Sucesso'));
+        $this->_redirect('adminhtml/system_config/edit/section/pluggto');
+
+
+    }
+
+    public function createAttributesAction($newAttributeCode,$group = 'PluggTo'){
 
         //  verificar se attributo existe
 
@@ -73,7 +149,7 @@ class Thirdlevel_Pluggto_Adminhtml_MiscController extends Mage_Adminhtml_Control
         }
 
         $config = array(
-            'group'         => 'PluggTo',
+            'group'    => $group,
             'type'     => $newAttributeCode['type'],
             'position' => 1,
             'required' => 0,

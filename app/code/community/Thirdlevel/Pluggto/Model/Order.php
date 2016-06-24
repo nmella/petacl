@@ -142,9 +142,12 @@ class Thirdlevel_Pluggto_Model_Order extends Mage_Core_Model_Abstract
                  if(isset($data['created_by'])){
                     $api = Mage::getSingleton('pluggto/api')->load(1);
                     $canalReturn = $api->get('clientInfo/'.$data['created_by'],null,null,true);
+
                     if(isset($canalReturn['Body']['name'])){
                         $order->setCanal($canalReturn['Body']['name']);
+                        $order->setExtOrderId($canalReturn['Body']['name'].'-'.$data['external'][$data['created_by']]);
                     }
+
                 }
             }
 
@@ -241,11 +244,41 @@ class Thirdlevel_Pluggto_Model_Order extends Mage_Core_Model_Abstract
             $PayerAddressLine = array();
 
         // receiver address line
-          if(!empty($data['payer_address']))            $PayerAddressLine[]  = $data['payer_address'];
-          if(!empty($data['payer_address_number']))     $PayerAddressLine[]  = $data['payer_address_number'];
-          if(!empty($data['payer_additional_info']))    $PayerAddressLine[]  = $data['payer_additional_info'];
-          if(!empty($data['payer_address_complement'])) $PayerAddressLine[]  = $data['payer_address_complement'];
-          if(!empty($data['payer_neighborhood']))       $PayerAddressLine[]  = $data['payer_neighborhood'];
+            if(!empty($data['payer_address'])) {
+               $PayerAddressLine[]  = $data['payer_address'];
+             } else {
+              $PayerAddressLine[] = '';
+             }
+
+             if(!empty($data['payer_address_number'])){
+              $PayerAddressLine[]  = $data['payer_address_number'];
+            } else {
+              $PayerAddressLine[]  = '';
+            }
+
+            if(!empty($data['payer_address_complement'])){
+
+                if(!empty($data['payer_additional_info'])){
+                    $PayerAddressLine[]  = $data['payer_address_complement'] . '-'. $data['payer_additional_info'];
+                } else {
+                    $PayerAddressLine[]  = $data['payer_address_complement'];
+                }
+
+            } else {
+
+                if(!empty($data['payer_additional_info'])){
+                    $PayerAddressLine[]  = $data['payer_additional_info'];
+                } else {
+                    $PayerAddressLine[]  = '';
+                }
+            }
+
+            if(!empty($data['payer_neighborhood'])){
+                $PayerAddressLine[]  = $data['payer_neighborhood'];
+            } else {
+                $PayerAddressLine[]  = '';
+            }
+
 
             if(!empty($PayerAddressLine)){
                 $billing->setStreet($PayerAddressLine);
@@ -262,7 +295,7 @@ class Thirdlevel_Pluggto_Model_Order extends Mage_Core_Model_Abstract
             }
 
             if(isset($data['payer_country'])) {
-            $billing->setCountry($data['payer_country']);
+               $billing->setCountry($data['payer_country']);
             }
 
             if (isset($data['payer_phone']) && isset($data['payer_phone_area'])) {
@@ -295,10 +328,6 @@ class Thirdlevel_Pluggto_Model_Order extends Mage_Core_Model_Abstract
                 $order->setBillingAddress($billing);
             }
 
-
-
-
-
             // shipping information
             if ($order->getIncrementId()) {
                 $shipping = Mage::getModel('sales/order_address')->load($order->getShippingAddress()->getId());
@@ -310,16 +339,67 @@ class Thirdlevel_Pluggto_Model_Order extends Mage_Core_Model_Abstract
 
             $shipping->setFirstname($data['receiver_name']);
             $shipping->setLastname($data['receiver_lastname']);
+
             $ReceiverAddressLine = array();
-
-
             // receiver address line
-            if(!empty($data['receiver_address']))             $ReceiverAddressLine[]  = $data['receiver_address'];
-            if(!empty($data['receiver_address_number']))      $ReceiverAddressLine[]  = $data['receiver_address_number'];
-            if(!empty($data['receiver_additional_info']))     $ReceiverAddressLine[]  = $data['receiver_additional_info'];
-            if(!empty($data['receiver_address_complement']))  $ReceiverAddressLine[]  = $data['receiver_address_complement'];
-            if(!empty($data['receiver_neighborhood']))        $ReceiverAddressLine[]  = $data['receiver_neighborhood'];
 
+            if(!empty($data['receiver_address'])){
+                $ReceiverAddressLine[]  = $data['receiver_address'];
+            } else {
+                $ReceiverAddressLine[]  = '';
+            }
+
+            if($data['receiver_address_number'] != null && $data['receiver_address_number'] != '' ){
+                $ReceiverAddressLine[]  = $data['receiver_address_number'];
+            } else {
+                $ReceiverAddressLine[]  = '';
+            }
+
+            if(!empty($data['receiver_address_complement'])){
+
+                if(!empty($data['receiver_additional_info'])){
+
+                    if(!empty($data['receiver_address_reference'])){
+                        $ReceiverAddressLine[]  = $data['receiver_address_complement'] . '-'. $data['receiver_additional_info'] . '-' . $data['receiver_address_reference'];
+                    } else {
+                        $ReceiverAddressLine[]  = $data['receiver_address_complement'] . '-'. $data['receiver_additional_info'];
+                    }
+
+                } else {
+
+                    if (!empty($data['receiver_address_reference'])) {
+                        $ReceiverAddressLine[] = $data['receiver_address_complement'] . '-' . $data['receiver_address_reference'];
+                    } else {
+                        $ReceiverAddressLine[] = $data['receiver_address_complement'];
+                    }
+
+                }
+
+            } else {
+
+                if(!empty($data['receiver_additional_info'])){
+
+                    if(!empty($data['receiver_address_reference'])){
+                        $ReceiverAddressLine[]  = $data['receiver_additional_info'] . '-' . $data['receiver_address_reference'];
+                    } else {
+                        $ReceiverAddressLine[]  = $data['receiver_additional_info'];
+                    }
+
+                } else {
+
+                    if(!empty($data['receiver_address_reference'])){
+                        $ReceiverAddressLine[]  = $data['receiver_address_reference'];
+                    } else {
+                        $ReceiverAddressLine[]  = '';
+                    }
+                }
+            }
+
+            if(!empty($data['receiver_neighborhood'])){
+                $ReceiverAddressLine[]  = $data['receiver_neighborhood'];
+            } else {
+                $ReceiverAddressLine[]  = '';
+            }
 
             if(!empty($ReceiverAddressLine)){
                 $shipping->setStreet($ReceiverAddressLine);

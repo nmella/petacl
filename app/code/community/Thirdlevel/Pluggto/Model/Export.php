@@ -143,7 +143,7 @@ class Thirdlevel_Pluggto_Model_Export extends Mage_Core_Model_Abstract
 
         if($variation != null){
 
-            $url = 'skus/'.trim($variation->getSku()).'/stock';
+            $url = 'skus/'.rawurlencode(trim($variation->getSku())).'/stock';
 
             $body = array (
                 'action' => $type,
@@ -154,7 +154,7 @@ class Thirdlevel_Pluggto_Model_Export extends Mage_Core_Model_Abstract
 
         } else {
 
-            $url = 'skus/'.trim($product->getSku()).'/stock';
+            $url = 'skus/'.rawurlencode(trim($product->getSku())).'/stock';
             $body = array (
                 'action' => $type,
                 'quantity' => $qtd

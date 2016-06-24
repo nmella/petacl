@@ -22,7 +22,7 @@
                         <![CDATA[
                             <div>
                                 <h3>Informações:</h3>
-                                <br><h5>Versão 0.1.8.4</h5>
+                                <br><h5>Versão 0.1.8.5</h5>
                                 <br>
                                 <p>O módulo é fornecido com código aberto, podendo a loja alterar seu código, porém nesse caso o suporte ao mesmo não será mais fornecido pelo Plugg.To</p><br>
                                 <br>
@@ -591,6 +591,19 @@
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </generate_attributes>
+                        <generate_table_price translate="label">
+                            <label>Gerar/Atualizar atributos de preço</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>pluggto/button_create</frontend_model>
+                            <process>update_table_price</process>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment>
+                                <![CDATA[Atributos de preço permite que você crie um preço de venda para cada canal que deseja vender.]]>
+                            </comment>
+                        </generate_table_price>
                     </fields>
                 </fields>
                 <shipping>
