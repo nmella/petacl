@@ -1,5 +1,6 @@
 app/etc/local.xml
 media/
+backup/
 var/
 sitemap.xml
 sitemaps/peta.xml
