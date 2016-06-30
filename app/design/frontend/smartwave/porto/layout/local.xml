@@ -336,10 +336,4 @@
            <action method="addItem"><type>skin_js</type><name>js/mask.js</name></action>
         </reference>
 </customer_account_create>
-<qquoteadv_index_index>
-<reference name="head">
-            <action method="addItem"><type>skin_js</type><name>js/rut-validate.js</name></action>
-           <action method="addItem"><type>skin_js</type><name>js/mask.js</name></action>
-        </reference>
-</qquoteadv_index_index>
 </layout>
