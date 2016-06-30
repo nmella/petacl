@@ -13,6 +13,7 @@ include("includes_webpay/configuration.php");
 include("includes_webpay/database.php");
 require_once( 'includes_webpay/phpmailer/class.phpmailer.php' );
 $database = new database( $mosConfig_host, $mosConfig_user, $mosConfig_password, $mosConfig_db, $mosConfig_dbprefix );
+
 /*************************************RECOGE VALORES PARA INSERTARLOS EN LA TABLA WEBPAY******/
 	$trs_transaccion = $_POST['TBK_TIPO_TRANSACCION']; $trs_respuesta = $_POST['TBK_RESPUESTA']; $trs_orden_compra = $_POST['TBK_ORDEN_COMPRA']; $trs_id_session = $_POST['TBK_ID_SESION']; $trs_cod_autorizacion = $_POST['TBK_CODIGO_AUTORIZACION'];
 	$trs_monto = substr($_POST['TBK_MONTO'],0,-2).".00";
