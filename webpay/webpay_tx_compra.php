@@ -21,7 +21,7 @@ $database = new database( $mosConfig_host, $mosConfig_user, $mosConfig_password,
 	$trs_nro_tarjeta = $_POST['TBK_NUMERO_TARJETA']; $trs_fecha_expiracion = $_POST['TBK_FECHA_EXPIRACION']; $trs_fecha_contable = $_POST['TBK_FECHA_CONTABLE']; $trs_fecha_transaccion = $_POST['TBK_FECHA_TRANSACCION']; $trs_hora_transaccion = $_POST['TBK_HORA_TRANSACCION']; $trs_id_transaccion = $_POST['TBK_ID_TRANSACCION']; $trs_tipo_pago = $_POST['TBK_TIPO_PAGO']; $trs_nro_cuotas = $_POST['TBK_NUMERO_CUOTAS']; $trs_mac = $_POST['TBK_MAC']; $trs_monto_cuota = $_POST['TBK_MONTO_CUOTA']; $trs_tasa_interes_max = $_POST['TBK_TASA_INTERES_MAX']; $trs_fecha_transaccion = ($trs_fecha_transaccion=='') ? strftime('%Y-%m-%d') : strftime('%Y').'-'.substr($trs_fecha_transaccion,0,2).'-'.substr($trs_fecha_transaccion,2,2);
 	$trs_fecha_expiracion = ($trs_fecha_expiracion=='') ? strftime('%Y-%m-%d') : strftime('%Y').'-'.substr($trs_fecha_expiracion,0,2).'-'.substr($trs_fecha_expiracion,2,2);
 	$trs_fecha_contable = ($trs_fecha_contable=='') ? strftime('%Y-%m-%d') : strftime('%Y').'-'.substr($trs_fecha_contable,0,2).'-'.substr($trs_fecha_contable,2,2);
-	$correo='varaya_2000@yahoo.com';
+	$correo='nmella@uc.cl';
 	$NombreDestino="Victor";
 	$bandera_no_aceptado_banco="";
 	
@@ -46,9 +46,12 @@ $database = new database( $mosConfig_host, $mosConfig_user, $mosConfig_password,
 	}
 	fclose($fp);
 	
+	
+	//$filename2="log738505843.txt";
+	
 	$resultado = file_get_contents($mosConfig_live_site."/cgi-bin/chkmac.cgi?filename=".$filename2);
 	$result[0] = trim($resultado);
-
+	//echo $result[0].$mosConfig_live_site."/cgi-bin/chkmac.cgi?filename=".$filename2;
 /* 2.- Invocar a tbk_check_mac (Que en realidad no es una cgi) usando como parámetro el archivo generado */ 
 	//$cmdline = $mosConfig_absolute_path ."/cgi-bin/tbk_check_mac.cgi $filename"; 
    //     exec($cmdline,$result,$retint); //echo $result[0];
