@@ -4,3 +4,4 @@ backup/
 var/
 sitemap.xml
 sitemaps/peta.xml
+cgi-bin
