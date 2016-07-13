@@ -195,6 +195,16 @@
                 </observers>
             </adminhtml_sales_order_create_process_data_before>
 
+			<sales_order_save_before>
+                <observers>
+                    <saveadditionalorderdata>
+                        <type>singleton</type>
+                        <class>Idev_OneStepCheckout_Model_Observer</class>
+                        <method>salesEventSaveAdditionOrderDataBackend</method>
+                    </saveadditionalorderdata>
+                </observers>
+            </sales_order_save_before>			
+			
             <controller_action_predispatch_adminhtml_sales_order_create_save>
                 <observers>
                     <onestepcheckout_save_customercomment_admin>

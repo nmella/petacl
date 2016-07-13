@@ -72,5 +72,24 @@ class Idev_OneStepCheckout_Model_Observer
         //$observer->getEvent()->getOrder()->setData('field_8', $observer->getEvent()->getQuote()->getData('field_8'));
         return $this;
     }
+	
+	public function salesEventSaveAdditionOrderDataBackend($observer)
+    { 
+	    $request = Mage::getSingleton('core/app')->getRequest();
+	    $order =  $observer->getEvent()->getOrder();		
+		$_order_data = Mage::app()->getRequest()->getParam('order');		
+
+        if ($_order_data['custom_field']['checkbox_field']!=''){
+            $order->setData('field_1', $_order_data['custom_field']['field_1']);
+            $order->setData('field_2', $_order_data['custom_field']['field_2']);
+            $order->setData('field_3', $_order_data['custom_field']['field_3']);
+            $order->setData('field_4', $_order_data['custom_field']['field_4']);
+            $order->setData('field_5', $_order_data['custom_field']['field_5']);
+            $order->setData('field_6', $_order_data['custom_field']['field_6']);
+            $order->setData('field_7', $_order_data['custom_field']['field_7']);
+            $order->setData('field_8', $_order_data['custom_field']['field_8']);			
+        }
+        return $this;
+    }
 
 }
