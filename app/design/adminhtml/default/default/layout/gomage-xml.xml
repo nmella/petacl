@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="1.0">	
+    
+    <gomage_xml_index_generate> 
+    	<block type="gomage_xml/adminhtml_content" name="gomage_xml.admin.content" output="toHtml"/> 
+    </gomage_xml_index_generate>
+    <gomage_xml_index_save> 
+    	<block type="gomage_xml/adminhtml_content" name="gomage_xml.admin.content" output="toHtml"/> 
+    </gomage_xml_index_save>	    
+</layout>

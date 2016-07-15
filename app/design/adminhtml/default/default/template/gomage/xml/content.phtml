@@ -1,0 +1,27 @@
+<div class="content-header">
+	<button id="gomage_xml_generate_button" class="scalable" type="button" title="<?php echo $this->__('Generate XML file'); ?>"><span><span><span><?php echo $this->__('Generate XML file'); ?></span></span></span></button>
+	<?php if ($this->isFileGenerated()): ?>
+		<button id="gomage_xml_save_button" class="scalable" type="button" title="<?php echo $this->__('Save Changes'); ?>"><span><span><span><?php echo $this->__('Save Changes'); ?></span></span></span></button>
+	<?php endif; ?>
+</div>
+<textarea <?php if (!$this->isFileGenerated()): ?>disabled="disabled"<?php endif; ?> style="width:99%;height:200px;" name="gomage_xml_content" id="gomage_xml_content"><?php echo $this->getFileContent();?></textarea>
+
+<script type="text/javascript">
+//<![CDATA[
+
+function gomageGenerateXmlData() {
+	submitAndReloadArea($('gomage_xml_content').parentNode, '<?php echo $this->getUrl('gomage_xml/index/generate', array('order_id'=>$this->getOrder()->getId())); ?>');
+}
+if ($('gomage_xml_generate_button')) {
+	$('gomage_xml_generate_button').observe('click', gomageGenerateXmlData);
+}
+
+function gomageSaveXmlData() {
+	submitAndReloadArea($('gomage_xml_content').parentNode, '<?php echo $this->getUrl('gomage_xml/index/save', array('order_id'=>$this->getOrder()->getId())); ?>');
+}
+if ($('gomage_xml_save_button')) {
+	$('gomage_xml_save_button').observe('click', gomageSaveXmlData);
+} 
+
+//]]>
+</script>
