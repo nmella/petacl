@@ -29,13 +29,12 @@ define('PS', PATH_SEPARATOR);
 define('BP', dirname(dirname(__FILE__)));
 
 Mage::register('original_include_path', get_include_path());
-$file = BP . '/app/code/local/Varien/Autoload.php';  //Agregado segun el Manual de Extendware Core
+
 if (defined('COMPILER_INCLUDE_PATH')) {
     $appPath = COMPILER_INCLUDE_PATH;
     set_include_path($appPath . PS . Mage::registry('original_include_path'));
     include_once COMPILER_INCLUDE_PATH . DS . "Mage_Core_functions.php";
-if (is_file($file)) include_once $file;  //AGREGADO POR Extendware
-else  include_once COMPILER_INCLUDE_PATH . DS . "Varien_Autoload.php"; // "else" fue agregado
+    include_once COMPILER_INCLUDE_PATH . DS . "Varien_Autoload.php"; // "else" fue agregado
 } else {
     /**
      * Set include path
@@ -49,8 +48,7 @@ else  include_once COMPILER_INCLUDE_PATH . DS . "Varien_Autoload.php"; // "else"
     $appPath = implode(PS, $paths);
     set_include_path($appPath . PS . Mage::registry('original_include_path'));
     include_once "Mage/Core/functions.php";
-	if (is_file($file)) include_once $file;
-    else include_once "Varien/Autoload.php";
+    include_once "Varien/Autoload.php";
 }
 
 Varien_Autoload::register();
