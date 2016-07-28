@@ -1,0 +1,76 @@
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Category Management') ?></h4>
+    </div>
+
+    <fieldset id="grop_fields">
+        <span><?php echo Mage::helper('mercadolivre')->__('Select the categories to be unmapped.') ?></span>
+        <br><br>
+        <select multiple id="categorias" name="categorias" style="width: 300px; height: 150px;'">
+            <?php
+            $baseUrl = Mage::getBaseUrl();
+
+            $categoriesMl = Mage::getModel('mercadolivre/category')->getCollection();
+            foreach($categoriesMl as $categorieMl)
+            {
+                $categorieStore = Mage::getModel('catalog/category')->load($categorieMl->getStoreId());
+                echo "<option value=".$categorieMl->getStoreId().">".$categorieStore->getName()."</option>";
+            }
+            ?>
+        </select>
+        <br>
+        <button id="deleteCategory" type="button" style="margin-top: 10px;">
+            <span><?php echo Mage::helper('mercadolivre')->__('Unmap selected categories') ?></span>
+        </button>
+        </fieldset>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Attribute Management') ?></h4>
+        </div>
+        <fieldset>
+            <span><?php echo Mage::helper('mercadolivre')->__('Select the attributes to be unmapped.') ?></span>
+            <br><br>
+        <select multiple id="atributos" name="atributos" style="width: 300px; height: 150px">
+            <?php
+            $attributesMl = Mage::getModel('mercadolivre/attribute')->getCollection();
+            foreach($attributesMl as $attributeMl){
+                echo "<option value=".$attributeMl->getEntityId().">".$attributeMl->getAttributeMercadolivreName()." (".$attributeMl->getAttributeStoreName().")"."</option>";
+            }
+            ?>
+        </select>
+            <br>
+        <button id="deleteAttribute" type="button" style="margin-top: 10px;">
+            <span><?php echo Mage::helper('mercadolivre')->__('Unmap selected attributes') ?></span>
+        </button>
+        </fieldset>
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('System Logs') ?></h4>
+            </div>
+            <fieldset>
+                <span><?php echo Mage::helper('mercadolivre')->__('Send the downloaded file to suporte@thirdlevel.com.br when oppening a support ticket.') ?></span>
+                <br><br>
+        <button id="logButton" title="Retrieve Logs" type="button" style="">
+            <span><?php echo Mage::helper('mercadolivre')->__('Download Logs') ?></span>
+        </button>
+    </fieldset>
+<script type="text/javascript">
+    var $j = jQuery.noConflict();
+    $j(document).ready(function () {
+    $j("#logButton").click(function() {
+        window.location.href = '<?php echo $this->getLogUrl(); ?>';
+    });
+
+
+    $j("#deleteCategory").click(function() {
+    var cat = $j("#categorias").val();
+    window.location.href = '<?php echo $baseUrl."mercadolivre/mercadolivre_service/deleteCategoryMapping?id=" ?>'+cat;
+    });
+
+    $j("#deleteAttribute").click(function(){
+    var attr = $j("#atributos").val();
+    window.location.href = '<?php echo $baseUrl."mercadolivre/mercadolivre_service/deleteAttributeMapping?id="; ?>'+attr;
+    });
+
+    });
+</script>

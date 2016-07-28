@@ -1,0 +1,524 @@
+<?php
+    /**
+     *
+     * NOTICE OF LICENSE
+     *
+     * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+     *
+     * @company        ThirdLevel
+     * @package        MercadoLivre
+     * @author         André Fuhrman (andrefuhrman@gmail.com)
+     * @copyright      Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+     *
+     */
+
+    $product    = $this->getProduct();
+    $quantity   = $this->getQuantity();
+    $model      = $this->getModel();
+    $typechange = $this->getTypeChange();
+
+    // Variáveis que indicam se determinadas propriedades do anúncio podem ou não ser alteradas
+    $allowChangeItemTitle       = true;
+    $allowChangeItemCondition   = true;
+    $allowChangeItemShipping    = true;
+    $allowChangeItemWarranty    = true;
+
+    $lock       = true;
+
+
+    /**
+     * @param $model
+     * @param $quantity
+     * @return mixed
+     */
+    function ConfigureItemInformationForEdition($model, $quantity)
+    {
+        $item['daystoend'] = $model['daystoend'];
+        $item['status']    = $model['item_status'];
+
+        $item['title'] = $model['item_title'];
+        $item['type']  = $model['item_type'];
+
+        $item['warranty']      = $model['warranty'];
+        $item['free_shipping'] = $model['free_shipping'];
+        $item['local_pick_up'] = $model['local_pick_up'];
+        $item['auto_relist']   = $model['auto_relist'];
+        $item['condition']     = $model['condition'];
+        $item['exclude_regions'] = $model['exclude_regions'];
+
+        $item['product_id'] = $model['product_id'];
+        $item['price']      = $model['item_price'];
+        $item['quantity']   = $quantity;
+        $item['auto_stock'] = $model['item_use_product_quantity'];
+
+        return $item;
+    }
+
+
+    if (isset($model['item_id']))
+    {
+        // Edição de Anúncio Existente
+        $item = ConfigureItemInformationForEdition($model, $quantity);
+
+        // Configurando o que poderá ser editado
+        if ($model['item_status'] == 'closed')
+        {
+            $lock = false;
+        } else
+        {
+            if ($typechange)
+            {
+                $lock = false;
+            } else
+            {
+                $lock = true;
+            }
+        }
+
+        if (isset($model['item_sold']))
+        {
+            if ($model['item_sold'] == 1)
+            {
+                $allowChangeItemTitle     = false;
+                $allowChangeItemCondition = false;
+                $allowChangeItemShipping  = false;
+                $allowChangeItemWarranty  = false;
+            }
+        }
+
+    } else
+    {
+        // Criação de Novo Anúncio
+
+        $item['daystoend'] = false;
+        $item['status']    = '';
+
+        $item['title'] = $this->getTitle();
+        $item['type']  = '';
+
+
+        if (isset($product['mercadolivre_warranty']))
+        {
+            $item['warranty'] = $product['mercadolivre_warranty'];
+        } else
+        {
+            $item['warranty'] = '';
+        }
+        $item['free_shipping'] = $this->getDefaultShipping();
+        $item['local_pick_up'] = $this->getDefaultLocalpickup();
+        $item['auto_relist']   = $this->getDefaultAutoRelist();
+        $item['condition']     = $this->getDefaultCondition();
+
+        $item['product_id'] = $product['entity_id'];
+        $item['price']      = $this->getProductPrice();
+        $item['quantity']   = $quantity;
+        $item['auto_stock'] = 1;
+
+        // Não há restrições para alteração dos campos
+        $lock                     = false;
+        $allowChangeItemTitle     = true;
+        $allowChangeItemCondition = true;
+        $allowChangeItemShipping  = true;
+        $allowChangeItemWarranty  = true;
+    }
+?>
+<script>
+    window.onload = (function(){
+       exibirRegioes();
+    });
+
+function exibirRegioes(){
+    var e = document.getElementById("free_shipping");
+    var strUser = e.options[e.selectedIndex].value;
+    var excludeRegions = document.getElementById("exclude_regions");
+
+    if(strUser == 1){
+        document.getElementById("exclude_regions").disabled = false;
+    } else {
+        document.getElementById("exclude_regions").disabled = true;
+    }
+}
+</script>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Other Tasks') ?></h4>
+    </div>
+
+    <fieldset id="grop_fields">
+        <table class="form-list" cellspacing="0">
+            <?php if (isset($model['item_id']))
+            {
+                ?>
+                <input type="hidden" value="<?php echo $model['item_id']; ?>" name="item_id"/>
+            <?php } ?>
+
+            <!-- Campos visíveis quando anúncio já está criado - Início -->
+            <?php if (isset($model['mercadolivre_id']))
+            {
+                ?>
+
+                <?php if (isset($model['thumb']))
+            {
+                ?>
+                <tr>
+                    <td class="label">
+                        <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Thumbnail:') ?></label>
+                    </td>
+                    <td class="value">
+                        <img src="<?php echo $model['thumb']; ?>"/>
+                    </td>
+                </tr>
+            <?php } ?>
+                <?php if (isset($model['permanent_link']))
+            {
+                ?>
+                <tr>
+                    <td class="label">
+                        <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('MercadoLivre Link:') ?></label>
+                    </td>
+                    <td class="value">
+                        <a href="<?php echo $model['permanent_link']; ?>"
+                           target="_blank">
+                            <?php echo $model['permanent_link']; ?></a>
+                    </td>
+                </tr>
+
+            <?php } ?>
+                <?php if (isset($model['mercadolivre_id']))
+            {
+                ?>
+                <tr>
+                    <td class="label">
+                        <label
+                            for="mercadolivre_id"><?php echo Mage::helper('mercadolivre')->__('MercadoLivre Id:') ?></label>
+                    </td>
+                    <td class="value">
+                        <?php echo $model['mercadolivre_id']; ?>
+                        <input type='hidden' name='mercadolivre_id' value='<?php echo $model['mercadolivre_id']; ?>'/>
+
+                    </td>
+                </tr>
+            <?php } ?>
+                <?php if (isset($model['item_sold']))
+            {
+                ?>
+                <tr>
+                    <td class="label">
+                        <label
+                            for="item_sold"><?php echo Mage::helper('mercadolivre')->__('Sold Quantity:') ?></label>
+                    </td>
+                    <td class="value">
+                        <?php echo $model['item_sold']; ?>
+                        <input type="hidden" value="<?php echo $model['item_sold']; ?>" name="item_sold"/>
+                        <input type="hidden" value="<?php echo $model['first_descrition_id']; ?>"
+                               name="first_descrition_id"/>
+                    </td>
+                </tr>
+            <?php
+            } else
+            {
+                ?>
+                <input type="hidden" value="0" name="item_sold"/>
+            <?php } ?>
+                <?php if (isset($model['daystoend']))
+                    {
+                ?>
+                        <tr>
+                            <td class="label">
+                                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Ends:') ?></label>
+                            </td>
+                            <td class="value">
+                                <?php echo $model['daystoend'] . ' ' . Mage::helper('mercadolivre')->__('days'); ?>
+                            </td>
+                        </tr>
+                <?php
+                    }
+                ?>
+
+                <tr>
+                    <td class="label">
+                        <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Status:') ?></label>
+                    </td>
+                    <td class="value">
+                        <?php echo Mage::helper('mercadolivre')->__($item['status']); ?>
+                        <input id="item_status"
+                               class="input-text"
+                               type="hidden"
+                               value="<?php echo $item['status']; ?>"
+                               name="item_item_status"/>
+                    </td>
+                </tr>
+
+            <?php } ?>
+            <!-- Campos visíveis quando anúncio já está criado - Fim -->
+
+            <!-- Campos Sempre Visíveis - Início -->
+            <!-- Título do Anúncio -->
+            <tr>
+                <td class="label">
+                    <label for="item_title"><?php echo Mage::helper('mercadolivre')->__('Item Title') ?></label>
+                </td>
+                <td class="value">
+                    <input id="item_title"
+                           class="input-text required-entry"
+                           type="text"
+                           width="80px"
+                           value="<?php echo $item['title']; ?>" name="item_title"
+                           maxlength="59"
+
+                           <?php
+                               if (!$allowChangeItemTitle)
+                               {
+                                   echo " disabled ";
+                               }
+                           ?>/><br/>
+                    <i>
+                        <?php
+                            if (!$allowChangeItemTitle)
+                            {
+                                echo Mage::helper('mercadolivre')->__('Change not allowed for listing with sale(s).');
+                            }
+                        ?>
+                    </i>
+                    <?php
+                        if(strlen($item["title"]) > 59):
+                    ?>
+                    <i>
+                        <?php echo Mage::helper("mercadolivre")->__("Title truncated - Reason: Longer than allowed."); ?></i>
+                        <?php
+                        endif;
+                    ?>
+                </td>
+            </tr>
+
+            <!-- Tipo de Anúncio -->
+            <tr>
+                <td class="label">
+                    <label for="item_type"><?php echo Mage::helper('mercadolivre')->__('Item Type') ?></label>
+                </td>
+                <td class="value">
+                    <select id="item_type" <?php if ($lock)
+                    {
+                        echo " disabled ";
+                    } ?>class=" required-entry select"
+                            title="Item Status" name="item_type">
+                        <?php
+                            foreach ($this->getTypes() as $type => $key):
+                                if ($type == $item['type'])
+                                {
+                                    ?>
+                                    <option selected value="<?php echo $type ?>"><?php echo $key ?></option>
+                                <?php
+                                } elseif ($item['type'] == '' && $this->getDefaultType() == $type)
+                                {
+                                    ?>
+                                    <option selected value="<?php echo $type ?>"><?php echo $key ?></option>
+                                <?php
+                                } else
+                                {
+                                    ; ?>
+                                    <option value="<?php echo $type ?>"><?php echo $key ?></option>
+                                <?php }; ?>
+                            <?php endforeach; ?>
+                    </select><br/>
+                    <i>
+                        <?php
+                            if ($lock)
+                            {
+                                echo Mage::helper('mercadolivre')->__('In order to change the listing type for an active item, check module\'s configuration.');
+                            }
+                        ?>
+                    </i>
+                </td>
+            </tr>
+
+            <!-- Texto Sobre Garantia -->
+            <tr>
+                <td class="label">
+                    <label for="warranty"><?php echo Mage::helper('mercadolivre')->__('Warranty') ?></label>
+                </td>
+                <td class="value">
+                    <input id="warranty"
+                           type="text"
+                           name="warranty"
+                           class="input-text"
+                           value="<?php echo $item['warranty'] ?>"
+                           <?php
+                               if (!$allowChangeItemWarranty)
+                               {
+                                   echo " disabled ";
+                               }
+                           ?>/><br/>
+                    <i>
+                        <?php
+                            if (!$allowChangeItemWarranty)
+                            {
+                                echo Mage::helper('mercadolivre')->__('Change not allowed for listing with sale(s).');
+                            }else
+                            {
+                                echo Mage::helper('mercadolivre')->__('Leave it blank if no warranty is provided.');
+                            }
+                        ?>
+                    </i>
+                </td>
+            </tr>
+
+            <!-- Entrega Grátis -->
+            <tr>
+                <td class="label">
+                    <label for="free_shipping"><?php echo Mage::helper('mercadolivre')->__('Free Shipping Listing') ?></label>
+                </td>
+                <td class="value">
+                    <select id="free_shipping"
+                            class="required-entry select"
+                            title="free_shipping"
+                            name="free_shipping"
+                            onchange="exibirRegioes()"
+                            <?php
+                                if (!$allowChangeItemShipping)
+                                {
+                                    echo " disabled ";
+                                }
+                            ?>>
+                        <option <?php if ($item['free_shipping'] == '1')
+                        {
+                            echo 'selected';
+                        } ?> value="<?php echo '1' ?>"><?php echo Mage::helper('mercadolivre')->__('Yes') ?>
+                        </option>
+                        <option <?php if ($item['free_shipping'] == '0')
+                        {
+                            echo 'selected';
+                        } ?> value="<?php echo '0' ?>"><?php echo Mage::helper('mercadolivre')->__('No') ?>
+                        </option>
+                    </select><br/>
+                    <i>
+                        <?php
+                            if (!$allowChangeItemShipping)
+                            {
+                                echo Mage::helper('mercadolivre')->__('Change not allowed for listing with sale(s).');
+                            }
+                        ?>
+                    </i>
+                </td>
+            </tr>
+
+            <?php if(strcmp(Mage::getStoreConfig("mercadolivre/geral/country"), "MLB") == 0) : ?>
+            <div id="excluderegions">
+            <tr>
+                <td class="label">
+                    <label id="txtRegion" for="free_shipping">Excluir regiões Norte e Nordeste</label>
+                </td>
+                <td class="value">
+                    <select id="exclude_regions"
+                            class="required-entry select"
+                            title="exclude_regions"
+                            name="exclude_regions"
+                        <?php
+                            if (!$allowChangeItemShipping)
+                            {
+                                echo " disabled ";
+                            }
+                        ?>>
+                        <option <?php if ($item['exclude_regions'] == '1')
+                        {
+                            echo 'selected';
+                        } ?> value="<?php echo '1' ?>"><?php echo Mage::helper('mercadolivre')->__('Yes') ?>
+                        </option>
+                        <option <?php if ($item['exclude_regions'] == '0')
+                        {
+                            echo 'selected';
+                        } ?> value="<?php echo '0' ?>"><?php echo Mage::helper('mercadolivre')->__('No') ?>
+                        </option>
+                    </select><br/>
+                    <i>
+                        <?php
+                            if (!$allowChangeItemShipping)
+                            {
+                                echo Mage::helper('mercadolivre')->__('Change not allowed for listing with sale(s).');
+                            }
+                        ?>
+                    </i>
+                </td>
+            </tr>
+            </div>
+            <?php endif; ?>
+            <!-- Retirada Local -->
+            <tr>
+                <td class="label">
+                    <label for="local_pick_up"><?php echo Mage::helper('mercadolivre')->__('Allow Local Pickup') ?></label>
+                </td>
+
+                <td class="value">
+                    <select id="local_pick_up" class=" required-entry select" title="Local Pickup" name="local_pick_up">
+                        <option <?php if ($item['local_pick_up'] == '1')
+                        {
+                            echo 'selected';
+                        } ?> value="<?php echo '1' ?>"><?php echo Mage::helper('mercadolivre')->__('Yes') ?></option>
+                        <option <?php if ($item['local_pick_up'] == '0')
+                        {
+                            echo 'selected';
+                        } ?> value="<?php echo '0' ?>"><?php echo Mage::helper('mercadolivre')->__('No') ?></option>
+                    </select>
+                </td>
+            </tr>
+
+            <!-- Auto Relist -->
+            <tr>
+                <td class="label">
+                    <label for="auto-relist"><?php echo Mage::helper('mercadolivre')->__('Auto Relist (beta)') ?></label>
+                </td>
+                <td class="value">
+                    <select id="auto-relist" class=" required-entry select" title="Auto Relist" name="auto_relist">
+                        <option <?php if ($item['auto_relist'] == '1')
+                        {
+                            echo 'selected';
+                        } ?> value="1"><?php echo Mage::helper('mercadolivre')->__('Yes') ?></option>
+                        <option <?php if ($item['auto_relist'] == '0')
+                        {
+                            echo 'selected';
+                        } ?> value="0"><?php echo Mage::helper('mercadolivre')->__('No') ?></option>
+                    </select>
+                </td>
+            </tr>
+
+            <!-- Condição do Item -->
+            <tr>
+                <td class="label">
+                    <label for="condition"><?php echo Mage::helper('mercadolivre')->__('Condition') ?></label>
+                </td>
+                <td class="value">
+                    <select id="condition"
+                            class="required-entry select"
+                            title="condition"
+                            name="condition"
+                            <?php
+                                if (!$allowChangeItemCondition)
+                                {
+                                    echo " disabled ";
+                                }
+                            ?>>
+                        <option <?php if ($item['condition'] == 'new')
+                        {
+                            echo 'selected';
+                        } ?> value="new"><?php echo Mage::helper('mercadolivre')->__('New') ?></option>
+                        <option <?php if ($item['condition'] == 'used')
+                        {
+                            echo 'selected';
+                        } ?> value="used"><?php echo Mage::helper('mercadolivre')->__('Used') ?></option>
+                    </select><br/>
+                    <i>
+                        <?php
+                            if (!$allowChangeItemCondition)
+                            {
+                                echo Mage::helper('mercadolivre')->__('Change not allowed for listing with sale(s).');
+                            }
+                        ?>
+                    </i>
+                </td>
+            </tr>
+            <!-- Campos Sempre Visíveis - Fim -->
+        </table>
+    </fieldset>
+</div>
+
+

@@ -1,0 +1,106 @@
+<?php
+    /**
+     *
+     * NOTICE OF LICENSE
+     *
+     * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+     *
+     * @company        ThirdLevel
+     * @package        MercadoLivre
+     * @author         André Fuhrman (andrefuhrman@gmail.com)
+     * @copyright      Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+     *
+     */
+
+    // License Reason Error
+    $reason = $this->getReason();
+
+    // Error Messages
+    // Reason Old
+    $oldTitle_Str       = 'License Error';
+    $oldMessage_Str     = 'An error ocurred with your license.<br/><br/>Reference Error: L00.';
+    $oldLinkMessage_Str = 'Contact ThirdLevel and inform this error and its reference.';
+
+    // Reason Invalid
+    $invalidTitle_Str       = 'Invalid License';
+    $invalidMessage_Str     = 'Your license key is invalid.<br/><br/>Reference Error: L01.';
+    $invalidLinkMessage_Str = 'Access our system, click on Serviços > Meus Serviços and check your license key.';
+
+    // Reason Expired
+    $expiredTitle_Str       = 'Expired License';
+    $expiredMessage_Str     = 'Your license key has expired.<br/><br/>Reference Error: L02.';
+    $expiredLinkMessage_Str = 'Acquire a new license to continue using ThirdLevel\'s Module. Access our system and click on Serviços > Assine Já';
+
+    // Reason Suspended
+    $suspendedTitle_Str         = 'Suspended License';
+    $suspendedMessage_Str       = 'Your license key is suspended.<br/><br/>Reference Error: L03.';
+    $suspendedLinkMessage_Str   = 'Access our system to manage your license and payments (if necessary).';
+
+    // Reason Default
+    $defaultTitle_Str       = 'License Error';
+    $defaultMessage_Str     = 'An unknown error occurred while verifying ThirdLevel Module’s license.<br/><br/>Reference Error: L04.';
+    $defaultLinkMessage_Str = 'Access our support system and open a ticket informing us about this occurrence and its reference error.';
+
+    // Interpret response
+    switch ($reason)
+    {
+        case "old":
+            ?>
+                <div class="page-title">
+                    <h1><?php echo Mage::helper('mercadolivre')->__($oldTitle_Str); ?></h1>
+                </div>
+                <h3><?php echo Mage::helper('mercadolivre')->__($oldLinkMessage_Str); ?></h3>
+                <br/><br/>
+            <?php
+                break;
+        case "Invalid":
+            ?>
+                <div class="page-title">
+                    <h1><?php echo Mage::helper('mercadolivre')->__($invalidTitle_Str); ?></h1>
+                </div>
+                <h3><?php echo Mage::helper('mercadolivre')->__($invalidMessage_Str); ?></h3>
+                <br/><br/>
+                <a href="http://my.thirdlevel.com.br/"
+                   target="_self"><?php echo Mage::helper('mercadolivre')->__($invalidLinkMessage_Str); ?></a>
+            <?php
+                break;
+        case "Expired":
+            ?>
+                <div class="page-title">
+                    <h1><?php echo Mage::helper('mercadolivre')->__($expiredTitle_Str); ?></h1>
+                </div>
+                <h3><?php echo Mage::helper('mercadolivre')->__($expiredMessage_Str); ?></h3>
+                <br/><br/>
+                <a href="http://my.thirdlevel.com.br/"
+                   target="_self"><?php echo Mage::helper('mercadolivre')->__($expiredLinkMessage_Str); ?></a>
+            <?php
+                break;
+        case "Suspended":
+            ?>
+                <div class="page-title">
+                    <h1><?php echo Mage::helper('mercadolivre')->__($suspendedTitle_Str); ?></h1>
+                </div>
+                <h3><?php echo Mage::helper('mercadolivre')->__($suspendedMessage_Str); ?></h3>
+                <br/><br/>
+                <a href="http://my.thirdlevel.com.br/"
+                   target="_self"><?php echo Mage::helper('mercadolivre')->__($suspendedLinkMessage_Str); ?></a>
+            <?php
+                break;
+        default:
+            ?>
+                <div class="page-title">
+                    <h1><?php echo Mage::helper('mercadolivre')->__($defaultTitle_Str); ?></h1>
+                </div>
+                <h3><?php echo Mage::helper('mercadolivre')->__($defaultMessage_Str); ?></h3>
+                <br/><br/>
+                <a href="http://my.thirdlevel.com.br/"
+                   target="_self"><?php echo Mage::helper('mercadolivre')->__($defaultLinkMessage_Str); ?></a>
+            <?php
+                break;
+    }
+
+?>
+
+
+
+
