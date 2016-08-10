@@ -1,0 +1,30 @@
+/**
+ * Override specific classes to change colors, fonts, backgrounds etc. 
+ * which are shared in all themes and skins
+ */
+
+/* Elements with 'Open Sans' font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+h1,
+
+.page-title h2,
+
+.fieldset .legend,
+.multiple-checkout .col2-set h2.legend,
+.info-set h2.legend,
+
+#nav > li > a,
+
+.block .block-title strong,
+
+.box-account .box-head h2,
+.order-items h2.table-caption,
+.order-items h2.sub-title,
+.order-items .order-comments h2,
+
+.footer-main-bottom .heading
+{
+	font-family:'Open Sans', sans-serif;
+	font-weight:600;
+}

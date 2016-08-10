@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<!-- Ajax mailing-list form is based on: Cool And Free Launch Page With Ajax Newsletter http://www.webresourcesdepot.com/cool-and-free-launch-page-with-ajax-newsletter/ -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/mailinglist.css" />
+	<script src="scripts/cufon-yui.js" type="text/javascript"></script>
+	<script src="scripts/Aller_400-Aller_700.font.js" type="text/javascript"></script>
+	<script type="text/javascript" src="scripts/jquery-1.2.6.pack.js"></script>
+	<script type="text/javascript" src="scripts/jquery.pngFix.pack.js"></script>
+	<script type="text/javascript" src="scripts/mailinglist.js"></script>
+	<script type="text/javascript">
+				Cufon.replace('h1');
+	</script>
+	<title>Peta.cl</title>
+
+<!--[if lt IE 8]>
+<link rel="stylesheet" href="css/ie.css" type="text/css" />
+<![endif]-->
+<!--[if lt IE 7.]>
+<link rel="stylesheet" href="css/ie6.css" type="text/css" />
+<![endif]-->
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<img class="logo" src="images/logo.png" alt="My Website" />
+			<img class="note" src="images/note.png" alt="coming soon" />
+		</div><!-- end header -->
+		<div id="content">
+			<div id="mailinglist">
+				<form action="#" name="newsletterForm" id="newsletterForm">
+					<input type="text" name="email" value="Ingrese su email y le avisaremos ..." onfocus="if (this.value == 'Ingrese su email y le avisaremos') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter your e-mail and keep updated1';}" id="email" class="email" /><br />
+					<input type="submit" name="Submit" value="" class="newsletterButton" />
+					<div class="loader"><img src="images/ajax-loader.gif" alt="loading" /></div>
+				</form>
+				<div class="successBalloon"></div>
+				<div class="errorBalloon"></div>
+				<div class="resultText"></div>
+			</div><!-- end mailinglist -->
+			<div id="about" class="clear">
+				<h1>Peta.cl</h1>
+				<p>
+								</p>
+				<p>
+								</p>
+				<div id="footer">
+					<ul class="left">
+						<li><span>Fono</span> +562 23627577 </li>
+						<li><span>Email</span> ventas@peta.cl</li>
+					</ul>
+				</div><!-- end footer -->
+			</div>
+		</div><!-- end content -->
+	</div>
+	<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

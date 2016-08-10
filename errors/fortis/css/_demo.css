@@ -1,0 +1,59 @@
+/*TODO: remove before release */
+
+/* Common temporary styles for selected predefined static CMS blocks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*/
+/*my:predef-block*/
+
+/* Category */
+.category-above-collection-wrapper,
+.category-below-collection-wrapper,
+
+/* Product */
+.product-replace-upsell-wrapper,
+
+/* Cart */
+.cart-below-table-wrapper,
+.cart-above-crosssell-wrapper,
+.cart-replace-crosssell-wrapper,
+
+/* One Page Checkout */
+.opc-above-steps-wrapper,
+.opc-below-steps-wrapper,
+.opc-below-progress-wrapper,
+
+/* CMS pages */
+.cms-page-top-wrapper,
+.cms-page-bottom-wrapper
+{
+	padding:20px;
+	border:2px dashed #e5e5e5;
+	color:#999;
+	-moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;
+}
+
+/* Mini-cart */
+.mini-cart-above-products-wrapper { padding:7px 9px; background-color:#f5f5f5; color:#999; }
+
+
+/* Wrapper classes of predefined static CMS blocks, which can have shared styles */
+/*
+.category-above-collection-wrapper,
+.category-above-empty-collection-wrapper,
+.category-below-collection-wrapper,
+
+.product-replace-related-wrapper,
+.product-replace-upsell-wrapper,
+
+.cart-below-table-wrapper,
+.cart-above-crosssell-wrapper,
+.cart-replace-crosssell-wrapper,
+.cart-below-totals-wrapper,
+
+.opc-above-steps-wrapper,
+.opc-below-steps-wrapper,
+.opc-below-progress-wrapper,
+
+.cms-page-top-wrapper,
+.cms-page-bottom-wrapper
+*/

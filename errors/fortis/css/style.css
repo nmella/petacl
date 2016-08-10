@@ -1,0 +1,107 @@
+/* reset */
+
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, em, font, img, ins, kbd, q, s,
+small, strike, strong, b, u, i, center, ol, ul, li,
+fieldset, form, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+}
+
+ol, ul { list-style: none; }
+
+a img { border: none; }
+
+.clear { clear: both; }
+
+.right { float: right; }
+
+.left { float: left; }
+
+/* ----------------- */
+
+body {
+	background: #10151d url('../images/bg-x.png') repeat-x top center;
+	color: #cdcdcd;
+	font: normal 13px/1.5em verdana;
+}
+
+h1 {
+	font-size: 25px;
+	font-weight: normal;
+	color: white;
+	border-bottom: 1px solid #2b3239;
+	padding-bottom: 15px;
+}
+
+p {
+	padding: 10px 0px;
+}
+
+#wrapper {
+	background: url('../images/wallpaper.jpg') no-repeat top center;
+	margin: 0 auto;
+	width: 960px;
+}
+
+#header {
+	margin: 0 auto;
+	position: relative;
+	width: 660px;
+	height: 453px;
+}
+
+.logo {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.note {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+#content {
+	background: url('../images/light.jpg') no-repeat top left;
+	margin: 0 auto;
+	width: 780px;
+	height: 300px;
+}
+
+#about {
+	padding-top: 40px;
+}
+
+#footer {	
+	position: relative;
+	height: 29px;
+	margin-top: 30px;
+	padding: 10px 0px;
+	border-top: 1px solid #2b3239;
+}
+
+.social img {
+	padding-left: 2px;
+}
+
+#footer ul {
+	position: absolute;
+	bottom: 10px;
+}
+
+#footer li {
+	display: inline;
+	padding-right: 40px;
+}
+
+#footer ul span {
+	color: white;
+	font-weight: bold;
+}
+
